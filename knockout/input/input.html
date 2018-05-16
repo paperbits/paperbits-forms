@@ -1,0 +1,24 @@
+<div class="form-group">
+    <!--ko if: labelText && showLabel === 'before' -->
+    <label data-bind="attr: { for: labelFor }, text: labelText"></label>
+    <!--/ko-->
+    <input class="form-control" 
+           data-bind="textInput: inputValue, attr: { 
+               id: labelFor,
+               type: inputType,
+               name: inputName,
+               placeholder: placeholderText,
+               maxlength: maxLength,
+               min: minValue,
+               max: maxValue,
+               size: sizeValue,
+               step: stepValue,
+               required: isRequired,
+               readonly: isReadonly,
+               disabled: isDisabled,
+               checked: isChecked,
+               pattern: patternRegexp }"/>
+    <!--ko if: labelText && showLabel === 'after' -->
+    <label data-bind="attr: { for: labelFor }, text: labelText"></label>
+    <!--/ko-->
+</div>

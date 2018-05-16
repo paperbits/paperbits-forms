@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "noImplicitAny": false,
+        "noStrictGenericChecks": true,
+        "removeComments": true,
+        "noLib": false,
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowUnreachableCode": true,
+        "listFiles": false,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "include": [
+        "./contracts/**/*.ts",
+        "./knockout/**/*.ts",
+        "./modelBinders/**/*.ts",
+        "./models/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
