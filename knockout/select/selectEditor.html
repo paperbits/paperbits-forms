@@ -16,13 +16,36 @@
 
                 <label class="form-label">Number of visible options</label>
                 <input type="text" class="form-control" data-bind="textInput: sizeCount" maxlength="10" />
-
-                <label class="form-label">Label text</label>
-                <input type="text" class="form-control" data-bind="textInput: labelText" maxlength="1000" />
-
+                
                 <label class="form-label">Default text</label>
                 <input type="text" class="form-control" data-bind="textInput: defaultText" maxlength="1000" />
-                
+
+            </div>
+        </div>        
+
+        <div class="form-group form-group-collapsible">
+            <label class="form-label">
+                <a href="#" class="form-group-toggle" data-bind="collapse: '#labelCollapse'"></a>
+                <b>Label</b>
+            </label>
+
+            <div id="labelCollapse" class="collapse form-group-collapse">
+                <div class="form-group">
+                    <label class="form-label">
+                        <input name="showLabel" type="radio" value="none" data-bind="checked: showLabel" />None
+                    </label>
+                    <label class="form-label">
+                        <input name="showLabel" type="radio" value="before" data-bind="checked: showLabel" />Before
+                    </label>
+                    <label class="form-label">
+                        <input name="showLabel" type="radio" value="after" data-bind="checked: showLabel" />After
+                    </label>
+                </div>
+
+                <!-- ko if: showLabel() !== 'none' -->
+                <label class="form-label">Label text</label>
+                <input type="text" class="form-control" data-bind="textInput: labelText" maxlength="1000" />
+                <!-- /ko -->
             </div>
         </div>
 

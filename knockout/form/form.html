@@ -1,23 +1,30 @@
-<form data-bind="attr: { action: formAction, method: formMethod, target: formTarget, 
+<form class="container" data-bind="attr: { action: formAction, method: formMethod, target: formTarget, 
                         'accept-charset': acceptCharset, enctype: encType, name: formName }">
-    form
     <!-- ko if: isFieldset() -->
     <fieldset>
         <!-- ko if: legendText() -->
         <legend data-bind="text: legendText, attr: { align: legendAlign }"></legend>
         <!-- /ko -->
-    <!-- /ko -->    
-
-    <!-- ko foreach: { data: widgets, as: 'widget'  } -->
-        <!-- ko widget: widget -->
+        
+        <!-- ko foreach: { data: widgets, as: 'widget'  } -->
+            <!-- ko widget: widget -->
+            <!-- /ko -->
         <!-- /ko -->
-    <!-- /ko -->
 
-    <!-- ko if: widgets().length === 0 -->
-    <div class="empty-item" placeholder="Widget"></div>
-    <!-- /ko -->
-
-    <!-- ko if: isFieldset() -->
+        <!-- ko if: widgets().length === 0 -->
+        <div class="empty-item" placeholder="Widget"></div>
+        <!-- /ko -->
     </fieldset>
+    <!-- /ko -->   
+    
+    <!-- ko ifnot: isFieldset() -->
+        <!-- ko foreach: { data: widgets, as: 'widget'  } -->
+            <!-- ko widget: widget -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: widgets().length === 0 -->
+        <div class="empty-item" placeholder="Widget"></div>
+        <!-- /ko -->
     <!-- /ko -->
 </form>

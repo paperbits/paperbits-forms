@@ -1,5 +1,5 @@
 <div class="form-group">
-    <!--ko if: labelText && showLabel === 'before' -->
+    <!--ko if: labelText() && showLabel() === 'before' -->
     <label data-bind="attr: { for: labelFor }, text: labelText"></label>
     <!--/ko-->
     <textarea class="form-control" data-bind="textInput: textValue,
@@ -13,7 +13,7 @@
             required: isRequired,
             readonly: isReadonly,
             disabled: isDisabled }" ></textarea>
-    <!--ko if: labelText && showLabel === 'after' -->
+    <!--ko if: labelText() && showLabel() === 'after' -->
     <label data-bind="attr: { for: labelFor }, text: labelText"></label>
     <!--/ko-->
 </div>

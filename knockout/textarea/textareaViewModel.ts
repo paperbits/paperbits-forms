@@ -23,7 +23,8 @@ export class TextareaViewModel {
 
     constructor() {
         this.labelFor = ko.observable<string>();
-        this.showLabel = ko.observable<string>();
+        this.showLabel = ko.observable<string>("none");
+        this.labelText = ko.observable<string>();
 
         this.textareaName = ko.observable<string>();
         this.placeholderText = ko.observable<string>();

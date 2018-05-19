@@ -8,7 +8,7 @@ import { Component } from "@paperbits/knockout/decorators/component";
 })
 export class SelectViewModel {
     public labelFor: KnockoutObservable<string>;
-    public showLabel: KnockoutObservable<string>;   //"before" | "after"
+    public showLabel: KnockoutObservable<string>;   //"before" | "after | "none"
     public labelText: KnockoutObservable<string>;
     public selectName: KnockoutObservable<string>;
     public textValue?: KnockoutObservable<string>;
@@ -21,7 +21,7 @@ export class SelectViewModel {
 
     constructor() {
         this.labelFor = ko.observable<string>();
-        this.showLabel = ko.observable<string>();
+        this.showLabel = ko.observable<string>("none");
 
         this.labelText = ko.observable<string>();
         this.selectName = ko.observable<string>();

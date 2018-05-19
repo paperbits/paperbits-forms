@@ -27,18 +27,6 @@ export class FormEditor implements IWidgetEditor {
     public readonly description?:KnockoutObservable<string>;
 
     constructor(private viewManager: IViewManager) {
-
-        // this.onFormActionUpdate    = this.onFormActionUpdate.bind(this);
-        // this.onFormMethodUpdate    = this.onFormMethodUpdate.bind(this);
-        // this.onFormTargetUpdate    = this.onFormTargetUpdate.bind(this);
-        // this.onAcceptCharsetUpdate = this.onAcceptCharsetUpdate.bind(this);
-        // this.onEncTypeUpdate       = this.onEncTypeUpdate.bind(this);
-        // this.onFormNameUpdate      = this.onFormNameUpdate.bind(this);
-        // this.onIsFieldsetUpdate    = this.onIsFieldsetUpdate.bind(this);
-        // this.onLegendTextUpdate    = this.onLegendTextUpdate.bind(this);
-        // this.onLegendAlignUpdate   = this.onLegendAlignUpdate.bind(this);
-        // this.onDescriptionUpdate   = this.onDescriptionUpdate.bind(this);
-
         this.formAction    = ko.observable<string>();
         this.formMethod    = ko.observable<string>();
         this.formTarget    = ko.observable<string>();
@@ -63,21 +51,6 @@ export class FormEditor implements IWidgetEditor {
         this.legendAlign  .subscribe(((newValue) => {this.formModel.legendAlign   = newValue;this.applyChangesCallback();}).bind(this));
         this.description  .subscribe(((newValue) => {this.formModel.description   = newValue;this.applyChangesCallback();}).bind(this));
     }
-
-    // private onFormActionUpdate(formAction: string): void {
-    //     this.formModel.formAction = formAction;
-    //     this.applyChangesCallback();
-    // }
-
-    // private onFormMethodUpdate(formMethod: string): void {
-    //     this.formModel.formMethod = <any>formMethod;
-    //     this.applyChangesCallback();
-    // }
-
-    // private onFormTargetUpdate(formTarget: string): void {
-    //     this.formModel.formTarget = <any>formTarget;
-    //     this.applyChangesCallback();
-    // }
 
     public setWidgetModel(model: FormModel, applyChangesCallback?: () => void): void {
         this.formModel = model;

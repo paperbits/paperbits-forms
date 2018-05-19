@@ -1,6 +1,6 @@
 export class TextareaModel {
     textareaId?: string;
-    showLabel?: "before" | "after";
+    showLabel?: "before" | "after" | "none";
     labelText?: string;
     textareaName:string;
     placeholderText?: string;

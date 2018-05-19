@@ -15,7 +15,7 @@ export class TextareaEditor implements IWidgetEditor {
     private applyChangesCallback: () => void;
 
     public readonly labelFor: KnockoutObservable<string>;
-    public readonly showLabel: KnockoutObservable<string>;   //"before" | "after"
+    public readonly showLabel: KnockoutObservable<string>;   //"before" | "after | "none"
     public readonly labelText: KnockoutObservable<string>;
     public readonly textareaName:KnockoutObservable<string>;
     public readonly placeholderText?: KnockoutObservable<string>;
@@ -31,6 +31,7 @@ export class TextareaEditor implements IWidgetEditor {
         this.labelFor        = ko.observable<string>();
         this.showLabel       = ko.observable<string>();
         this.textareaName    = ko.observable<string>();
+        this.labelText       = ko.observable<string>();
         this.placeholderText = ko.observable<string>();
         this.textValue       = ko.observable<string>();
         this.colsCount       = ko.observable<number>();
@@ -42,6 +43,7 @@ export class TextareaEditor implements IWidgetEditor {
 
         this.labelFor       .subscribe(((newValue) => {this.model.textareaId     = newValue;this.applyChangesCallback();}).bind(this));
         this.showLabel      .subscribe(((newValue) => {this.model.showLabel      = newValue;this.applyChangesCallback();}).bind(this));
+        this.labelText      .subscribe(((newValue) => {this.model.labelText      = newValue;this.applyChangesCallback();}).bind(this));
         this.textareaName   .subscribe(((newValue) => {this.model.textareaName   = newValue;this.applyChangesCallback();}).bind(this));
         this.placeholderText.subscribe(((newValue) => {this.model.placeholderText= newValue;this.applyChangesCallback();}).bind(this));
         this.textValue      .subscribe(((newValue) => {this.model.textValue      = newValue;this.applyChangesCallback();}).bind(this));
@@ -58,7 +60,8 @@ export class TextareaEditor implements IWidgetEditor {
         this.applyChangesCallback = applyChangesCallback;
 
         this.labelFor(model.textareaId);
-        this.showLabel(model.showLabel);
+        this.labelText(model.labelText);
+        this.showLabel(model.showLabel || "none");
         this.textareaName(model.textareaName);
         this.textValue(model.textValue);
         this.colsCount(model.colsCount);

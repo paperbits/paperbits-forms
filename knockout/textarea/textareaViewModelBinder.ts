@@ -9,6 +9,7 @@ export class TextareaViewModelBinder implements IViewModelBinder<TextareaModel, 
         }
 
         viewModel.labelFor(model.textareaId);
+        viewModel.labelText(model.labelText);
         viewModel.showLabel(model.showLabel);
         viewModel.textareaName(model.textareaName);
         viewModel.textValue(model.textValue);

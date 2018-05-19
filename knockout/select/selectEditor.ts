@@ -62,7 +62,7 @@ export class SelectEditor implements IWidgetEditor {
         this.applyChangesCallback = applyChangesCallback;
 
         this.labelFor(model.selectId);
-        this.showLabel(model.showLabel);
+        this.showLabel(model.showLabel || "none");
         this.labelText(model.labelText);
         this.selectName(model.selectName);
         this.isRequired(model.isRequired);
@@ -105,8 +105,12 @@ export class SelectEditor implements IWidgetEditor {
     }
  
     public deleteItem() {
-        this.optionsList.removeAll(this.selectedItems());
-        this.selectedItems([]);
+        if (this.selectedItems().length > 0)
+        {
+            this.optionsList.removeAll(this.selectedItems());
+            this.applyChangesCallback();
+            this.selectedItems([]);
+        }
     }
 
     public closeEditor(): void {
