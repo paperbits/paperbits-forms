@@ -18,4 +18,5 @@ export interface InputContract extends Contract {
     isDisabled?: boolean;
     isChecked? : boolean;
     patternRegexp?: string;
+    accept?: string;
 }

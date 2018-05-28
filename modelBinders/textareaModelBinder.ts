@@ -8,7 +8,7 @@ export class TextareaModelBinder implements IModelBinder {
     constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
 
     public canHandleWidgetType(widgetType: string): boolean {
-        return widgetType === "input";
+        return widgetType === "textarea";
     }
 
     public canHandleModel(model): boolean {

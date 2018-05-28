@@ -16,4 +16,5 @@ export class InputModel {
     isDisabled?: boolean;
     isChecked?: boolean;
     patternRegexp?: string;
+    accept?: string;
 }

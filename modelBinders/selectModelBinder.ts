@@ -8,7 +8,7 @@ export class SelectModelBinder implements IModelBinder {
     constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
 
     public canHandleWidgetType(widgetType: string): boolean {
-        return widgetType === "input";
+        return widgetType === "select";
     }
 
     public canHandleModel(model): boolean {

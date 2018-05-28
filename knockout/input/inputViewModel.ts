@@ -8,7 +8,7 @@ import { Component } from "@paperbits/knockout/decorators/component";
 })
 export class InputViewModel {
     public labelFor: KnockoutObservable<string>;
-    public showLabel: KnockoutObservable<string>;   //"before" | "after"
+    public showLabel: KnockoutObservable<string>;   //"before" | "after" | "none"
     public labelText: KnockoutObservable<string>;
 
     public inputType: KnockoutObservable<string>;   //"text" | "password" | "submit" | "reset" | "radio" | "checkbox" | "button" | 
@@ -26,10 +26,15 @@ export class InputViewModel {
     public isDisabled?: KnockoutObservable<boolean>;
     public isChecked?: KnockoutObservable<boolean>;
     public patternRegexp?: KnockoutObservable<string>;
+    public accept?: KnockoutObservable<string>;
+    public inputTypeClass: KnockoutObservable<string>;
+    public labelTypeClass: KnockoutObservable<string>;
+    public divTypeClass: KnockoutObservable<string>;
 
     constructor() {
         this.labelFor = ko.observable<string>();
-        this.showLabel = ko.observable<string>();
+        this.showLabel = ko.observable<string>("none");
+        this.labelText = ko.observable<string>();
         this.inputType = ko.observable<string>();
         this.inputName = ko.observable<string>();
         this.placeholderText = ko.observable<string>();
@@ -45,5 +50,35 @@ export class InputViewModel {
         this.isDisabled = ko.observable<boolean>();
         this.isChecked = ko.observable<boolean>();
         this.patternRegexp = ko.observable<string>();
+        this.accept = ko.observable<string>();
+
+        this.inputTypeClass = ko.pureComputed(this.getInputClass, this);
+        this.labelTypeClass = ko.pureComputed(this.getLabelClass, this);
+        this.divTypeClass = ko.pureComputed(this.getDivClass, this);
+    }
+
+    public getLabelClass() {
+        switch(this.inputType()) {
+            case "radio": 
+            case "checkbox": return "form-check-label";
+        }
+    }
+
+    public getInputClass() {
+        switch(this.inputType()) {
+            case "radio":
+            case "checkbox": return "form-check-input";
+            case "range": return "form-control-range";
+            case "submit": return "btn";
+            default: return "form-control";
+        }
+    }
+
+    public getDivClass() {
+        switch(this.inputType()) {
+            case "radio":
+            case "checkbox": return "form-group form-check";
+            default: return "form-group";
+        }
     }
 }

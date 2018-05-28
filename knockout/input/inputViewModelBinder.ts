@@ -9,7 +9,8 @@ export class InputViewModelBinder implements IViewModelBinder<InputModel, InputV
             viewModel = new InputViewModel();
         }
 
-        viewModel.labelFor(model.inputId);
+        viewModel.labelFor(model.inputId);        
+        viewModel.labelText(model.labelText);
         viewModel.showLabel(model.showLabel);
         viewModel.inputType(model.inputType);
         viewModel.inputName(model.inputName);
@@ -26,6 +27,7 @@ export class InputViewModelBinder implements IViewModelBinder<InputModel, InputV
         viewModel.isDisabled(model.isDisabled);
         viewModel.isChecked(model.isChecked);
         viewModel.patternRegexp(model.patternRegexp);
+        viewModel.accept(model.accept);
 
         viewModel["widgetBinding"] = {
             displayName: "Input",
