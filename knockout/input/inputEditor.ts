@@ -32,6 +32,7 @@ export class InputEditor implements IWidgetEditor {
     public readonly isReadonly?: KnockoutObservable<boolean>;
     public readonly isDisabled?: KnockoutObservable<boolean>;
     public readonly isChecked?: KnockoutObservable<boolean>;
+    public readonly isInline?: KnockoutObservable<boolean>;
     public readonly patternRegexp?: KnockoutObservable<string>;
 
     constructor(private viewManager: IViewManager) {
@@ -50,6 +51,7 @@ export class InputEditor implements IWidgetEditor {
         this.isReadonly = ko.observable<boolean>();
         this.isDisabled = ko.observable<boolean>();
         this.isChecked  = ko.observable<boolean>();
+        this.isInline  = ko.observable<boolean>();
         this.placeholderText = ko.observable<string>();
         this.patternRegexp   = ko.observable<string>();
         this.onInputTypeChange = this.onInputTypeChange.bind(this);
@@ -69,6 +71,7 @@ export class InputEditor implements IWidgetEditor {
         this.isReadonly .subscribe(((newValue) => {this.model.isReadonly = newValue;this.applyChangesCallback();}).bind(this));
         this.isDisabled .subscribe(((newValue) => {this.model.isDisabled = newValue;this.applyChangesCallback();}).bind(this));
         this.isChecked  .subscribe(((newValue) => {this.model.isChecked  = newValue;this.applyChangesCallback();}).bind(this));
+        this.isInline   .subscribe(((newValue) => {this.model.isInline   = newValue;this.applyChangesCallback();}).bind(this));
         this.placeholderText.subscribe(((newValue) => {this.model.placeholderText = newValue;this.applyChangesCallback();}).bind(this));
         this.patternRegexp  .subscribe(((newValue) => {this.model.patternRegexp   = newValue;this.applyChangesCallback();}).bind(this));
 
@@ -92,6 +95,7 @@ export class InputEditor implements IWidgetEditor {
         this.isReadonly (model.isReadonly);
         this.isDisabled (model.isDisabled);
         this.isChecked  (model.isChecked );
+        this.isInline   (model.isInline );
         this.placeholderText(model.placeholderText);
         this.patternRegexp  (model.patternRegexp  );
 

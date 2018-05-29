@@ -28,6 +28,7 @@ export class InputViewModelBinder implements IViewModelBinder<InputModel, InputV
         viewModel.isChecked(model.isChecked);
         viewModel.patternRegexp(model.patternRegexp);
         viewModel.accept(model.accept);
+        viewModel.isInline(model.isInline);
 
         viewModel["widgetBinding"] = {
             displayName: "Input",

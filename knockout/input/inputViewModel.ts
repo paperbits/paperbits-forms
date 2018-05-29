@@ -27,6 +27,8 @@ export class InputViewModel {
     public isChecked?: KnockoutObservable<boolean>;
     public patternRegexp?: KnockoutObservable<string>;
     public accept?: KnockoutObservable<string>;
+    public isInline?: KnockoutObservable<boolean>;
+
     public inputTypeClass: KnockoutObservable<string>;
     public labelTypeClass: KnockoutObservable<string>;
     public divTypeClass: KnockoutObservable<string>;
@@ -51,6 +53,7 @@ export class InputViewModel {
         this.isChecked = ko.observable<boolean>();
         this.patternRegexp = ko.observable<string>();
         this.accept = ko.observable<string>();
+        this.isInline = ko.observable<boolean>();
 
         this.inputTypeClass = ko.pureComputed(this.getInputClass, this);
         this.labelTypeClass = ko.pureComputed(this.getLabelClass, this);
@@ -77,7 +80,7 @@ export class InputViewModel {
     public getDivClass() {
         switch(this.inputType()) {
             case "radio":
-            case "checkbox": return "form-group form-check";
+            case "checkbox": return this.isInline() ? "form-group form-check-inline" : "form-group form-check";
             default: return "form-group";
         }
     }

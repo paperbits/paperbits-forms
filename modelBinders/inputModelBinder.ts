@@ -34,6 +34,7 @@ export class InputModelBinder implements IModelBinder {
         model.isChecked       = node.isChecked;
         model.patternRegexp   = node.patternRegexp;
         model.placeholderText = node.placeholderText;
+        model.isInline        = node.isInline;
         
         return model;
     }
@@ -58,7 +59,8 @@ export class InputModelBinder implements IModelBinder {
             isDisabled: model.isDisabled,
             isChecked : model.isChecked,
             patternRegexp  : model.patternRegexp,
-            placeholderText: model.placeholderText
+            placeholderText: model.placeholderText,
+            isInline  : model.isInline
         };
 
         return contract;

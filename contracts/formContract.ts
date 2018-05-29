@@ -11,4 +11,5 @@ export interface FormContract extends Contract {
     legendText?: string;
     legendAlign?: string;
     description?: string;
+    isInline?: boolean;
 }

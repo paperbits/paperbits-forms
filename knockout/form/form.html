@@ -1,4 +1,5 @@
-<form class="container" data-bind="attr: { action: formAction, method: formMethod, target: formTarget, 
+<form class="container" data-bind="css: { 'form-inline': isInline() },
+                        attr: { action: formAction, method: formMethod, target: formTarget, 
                         'accept-charset': acceptCharset, enctype: encType, name: formName }">
     <!-- ko if: isFieldset() -->
     <fieldset>

@@ -17,4 +17,5 @@ export class InputModel {
     isChecked?: boolean;
     patternRegexp?: string;
     accept?: string;
+    isInline?: boolean;
 }

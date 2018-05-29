@@ -27,6 +27,7 @@ export class FormModelBinder implements IModelBinder {
         model.legendText    = node.legendText;
         model.legendAlign   = <any>node.legendAlign;
         model.description   = node.description;
+        model.isInline      = node.isInline;
 
         if (node.nodes) {
             let modelPromises = node.nodes.map(async (node) => {
@@ -56,6 +57,7 @@ export class FormModelBinder implements IModelBinder {
             legendText   : model.legendText,
             legendAlign  : model.legendAlign,
             description  : model.description,
+            isInline     : model.isInline,
             nodes: []
         };
 

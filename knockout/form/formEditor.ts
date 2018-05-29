@@ -25,6 +25,7 @@ export class FormEditor implements IWidgetEditor {
     public readonly legendText?:KnockoutObservable<string>;
     public readonly legendAlign?:KnockoutObservable<string>;
     public readonly description?:KnockoutObservable<string>;
+    public readonly isInline?:KnockoutObservable<boolean>;
 
     constructor(private viewManager: IViewManager) {
         this.formAction    = ko.observable<string>();
@@ -37,6 +38,7 @@ export class FormEditor implements IWidgetEditor {
         this.legendText    = ko.observable<string>();
         this.legendAlign   = ko.observable<string>();
         this.description   = ko.observable<string>();
+        this.isInline      = ko.observable<boolean>();
 
         this.setWidgetModel = this.setWidgetModel.bind(this);
 
@@ -50,6 +52,7 @@ export class FormEditor implements IWidgetEditor {
         this.legendText   .subscribe(((newValue) => {this.formModel.legendText    = newValue;this.applyChangesCallback();}).bind(this));
         this.legendAlign  .subscribe(((newValue) => {this.formModel.legendAlign   = newValue;this.applyChangesCallback();}).bind(this));
         this.description  .subscribe(((newValue) => {this.formModel.description   = newValue;this.applyChangesCallback();}).bind(this));
+        this.isInline     .subscribe(((newValue) => {this.formModel.isInline      = newValue;this.applyChangesCallback();}).bind(this));
     }
 
     public setWidgetModel(model: FormModel, applyChangesCallback?: () => void): void {
@@ -66,6 +69,7 @@ export class FormEditor implements IWidgetEditor {
         this.legendText(model.legendText);
         this.legendAlign(model.legendAlign || "left");
         this.description(model.description);
+        this.isInline(model.isInline);
     }
 
     public closeEditor(): void {

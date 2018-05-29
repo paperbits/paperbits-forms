@@ -41,6 +41,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
         formViewModel.legendText(model.legendText);
         formViewModel.legendAlign(model.legendAlign || "left");
         formViewModel.description(model.description);
+        formViewModel.isInline(model.isInline);
 
         const binding = {
             displayName: "Form",

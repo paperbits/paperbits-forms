@@ -18,6 +18,7 @@ export class FormViewModel {
     public legendText?:KnockoutObservable<string>;
     public legendAlign?:KnockoutObservable<string>;
     public description?:KnockoutObservable<string>;
+    public isInline?: KnockoutObservable<boolean>;
 
     constructor() {
         this.widgets = ko.observableArray<Object>();
@@ -32,5 +33,6 @@ export class FormViewModel {
         this.legendText = ko.observable<string>();
         this.legendAlign = ko.observable<string>();
         this.description = ko.observable<string>();
+        this.isInline = ko.observable<boolean>();
     }
 }

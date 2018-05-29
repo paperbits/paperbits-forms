@@ -63,6 +63,7 @@ export class TextareaEditor implements IWidgetEditor {
         this.labelText(model.labelText);
         this.showLabel(model.showLabel || "none");
         this.textareaName(model.textareaName);
+        this.placeholderText(model.placeholderText);
         this.textValue(model.textValue);
         this.colsCount(model.colsCount);
         this.rowsCount(model.rowsCount);

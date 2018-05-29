@@ -12,6 +12,7 @@ export class TextareaViewModelBinder implements IViewModelBinder<TextareaModel, 
         viewModel.labelText(model.labelText);
         viewModel.showLabel(model.showLabel);
         viewModel.textareaName(model.textareaName);
+        viewModel.placeholderText(model.placeholderText);
         viewModel.textValue(model.textValue);
         viewModel.colsCount(model.colsCount);
         viewModel.rowsCount(model.rowsCount);

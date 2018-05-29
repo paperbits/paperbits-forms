@@ -10,6 +10,7 @@ export class FormModel {
     legendText?: string;
     legendAlign?: "left" | "right" | "top" | "bottom";
     description?: string;
+    isInline?: boolean;
 
     constructor() {
         this.widgets = [];
