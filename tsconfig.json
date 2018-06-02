@@ -13,14 +13,12 @@
         "emitDecoratorMetadata": true,
         "allowUnreachableCode": true,
         "listFiles": false,
-        "sourceMap": true,
-        "allowSyntheticDefaultImports": true
+        "inlineSourceMap": true,
+        "inlineSources": true
     },
+    "compileOnSave": false,
     "include": [
-        "./contracts/**/*.ts",
-        "./knockout/**/*.ts",
-        "./modelBinders/**/*.ts",
-        "./models/**/*.ts"
+        "src/**/*.ts"
     ],
     "exclude": [
         "node_modules"

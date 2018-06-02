@@ -1,0 +1,19 @@
+<div class="form-group">
+    <!--ko if: labelText() && showLabel() === 'before' -->
+    <label data-bind="attr: { for: labelFor }, text: labelText"></label>
+    <!--/ko-->
+    <textarea class="form-control" data-bind="textInput: textValue,
+        attr: { 
+            id: labelFor,
+            name: textareaName,
+            placeholder: placeholderText,
+            cols: colsCount,
+            rows: rowsCount,
+            maxlength: maxLength,
+            required: isRequired,
+            readonly: isReadonly,
+            disabled: isDisabled }" ></textarea>
+    <!--ko if: labelText() && showLabel() === 'after' -->
+    <label data-bind="attr: { for: labelFor }, text: labelText"></label>
+    <!--/ko-->
+</div>

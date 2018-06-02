@@ -1,9 +1,9 @@
 {
     "name": "@paperbits/forms",
-    "version": "0.0.79",
+    "version": "0.0.80",
     "description": "Paperbits components for form builder.",
     "author": "Vienna LLC",
-    "license": "",
+    "license": "Commercial",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/paperbits/paperbits-forms.git"

@@ -1,0 +1,31 @@
+<form class="container" data-bind="css: { 'form-inline': isInline() },
+                        attr: { action: formAction, method: formMethod, target: formTarget, 
+                        'accept-charset': acceptCharset, enctype: encType, name: formName }">
+    <!-- ko if: isFieldset() -->
+    <fieldset>
+        <!-- ko if: legendText() -->
+        <legend data-bind="text: legendText, attr: { align: legendAlign }"></legend>
+        <!-- /ko -->
+        
+        <!-- ko foreach: { data: widgets, as: 'widget'  } -->
+            <!-- ko widget: widget -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: widgets().length === 0 -->
+        <div class="empty-item" placeholder="Widget"></div>
+        <!-- /ko -->
+    </fieldset>
+    <!-- /ko -->   
+    
+    <!-- ko ifnot: isFieldset() -->
+        <!-- ko foreach: { data: widgets, as: 'widget'  } -->
+            <!-- ko widget: widget -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko if: widgets().length === 0 -->
+        <div class="empty-item" placeholder="Form"></div>
+        <!-- /ko -->
+    <!-- /ko -->
+</form>
