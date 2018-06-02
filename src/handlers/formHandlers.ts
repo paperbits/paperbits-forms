@@ -31,7 +31,16 @@ export class FormHandlers implements IWidgetHandler {
             type: "form",
             label: "Form",
             style: "default",
-            formAction: ""
+            formAction: "",
+            nodes: [
+                {
+                    object: "block",
+                    type: "input",
+                    label: "Input",
+                    style: "default",
+                    inputType: "submit"
+                }
+            ]
         }
         return await this.prepareWidgetOrder(config);
     }

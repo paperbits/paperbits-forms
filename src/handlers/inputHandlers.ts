@@ -7,15 +7,17 @@ import { InputContract } from "../contracts/inputContract";
 
 export class InputHandlers implements IWidgetHandler {
     private readonly inputModelBinder: InputModelBinder;
+    private readonly inputType: string;
 
-    constructor(inputModelBinder: InputModelBinder) {
+    constructor(inputModelBinder: InputModelBinder, inputType: string) {
         this.inputModelBinder = inputModelBinder;
+        this.inputType = inputType;
     }
 
     private async prepareWidgetOrder(config: InputContract): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
             name: "input",
-            displayName: "Input",
+            displayName: `Input ${this.inputType}`,
             iconClass: "paperbits-form",
             createModel: async () => {
                 return await this.inputModelBinder.nodeToModel(config);
@@ -31,7 +33,7 @@ export class InputHandlers implements IWidgetHandler {
             type: "input",
             label: "Input",
             style: "default",
-            inputType: "text"
+            inputType: this.inputType
         }
         return await this.prepareWidgetOrder(config);
     }
