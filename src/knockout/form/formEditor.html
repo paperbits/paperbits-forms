@@ -68,11 +68,13 @@
                 <label class="form-label">Character encodings</label>
                 <input type="text" class="form-control" data-bind="textInput: acceptCharset" maxlength="1000" />
 
-                <label class="form-label">Is inline</label>
-                <input type="checkbox" data-bind="checked: isInline" />
+                <label class="form-label">
+                    <input class="form-check-input" type="checkbox" data-bind="checked: isInline" />Is inline
+                </label>
 
-                <label class="form-label">Fieldset</label>
-                <input type="checkbox" data-bind="checked: isFieldset" />
+                <label class="form-label">
+                    <input class="form-check-input" type="checkbox" data-bind="checked: isFieldset" />Fieldset
+                </label>
                 
                 <!-- ko if: isFieldset() -->                
                 <label class="form-label">Legend</label>                

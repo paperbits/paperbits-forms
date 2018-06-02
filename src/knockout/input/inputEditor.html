@@ -70,11 +70,13 @@
                 <label class="form-label">Control value</label>
                 <input type="text" class="form-control" data-bind="textInput: inputValue" maxlength="1000" />
 
-                <label class="form-label">Is checked</label>
-                <input type="checkbox" data-bind="checked: isChecked" />
+                <label class="form-label">
+                    <input type="checkbox" data-bind="checked: isChecked" />Is checked
+                </label>
 
-                <label class="form-label">Is inline</label>
-                <input type="checkbox" data-bind="checked: isInline" />
+                <label class="form-label">
+                    <input type="checkbox" data-bind="checked: isInline" />Is inline
+                </label>
                 <!-- /ko -->
 
                 <!-- ko if: inputType() === 'color' -->                
@@ -145,16 +147,18 @@
                 <a href="#" class="form-group-toggle" data-bind="collapse: '#miscellaneousCollapse'"></a>
                 <b>Miscellaneous</b>
             </label>
-            <div id="miscellaneousCollapse" class="collapse form-group-collapse">                
+            <div id="miscellaneousCollapse" class="collapse form-group-collapse">
+                <label class="form-label">
+                    <input type="checkbox" data-bind="checked: isRequired" />Is required
+                </label>
 
-                <label class="form-label">Is required</label>
-                <input type="checkbox" data-bind="checked: isRequired" />
+                <label class="form-label">
+                    <input type="checkbox" data-bind="checked: isReadonly" />Is read-only
+                </label>
 
-                <label class="form-label">Is read-only</label>
-                <input type="checkbox" data-bind="checked: isReadonly" />
-
-                <label class="form-label">Is disabled</label>
-                <input type="checkbox" data-bind="checked: isDisabled" />
+                <label class="form-label">
+                    <input type="checkbox" data-bind="checked: isDisabled" />Is disabled
+                </label>
             </div>
         </div>
     </fieldset>
