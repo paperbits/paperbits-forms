@@ -3,7 +3,7 @@
         "target": "es5",
         "module": "commonjs",
         "moduleResolution": "node",
-        "declaration": true,
+        "declaration": false,
         "noImplicitAny": false,
         "noStrictGenericChecks": true,
         "removeComments": true,
@@ -13,12 +13,11 @@
         "emitDecoratorMetadata": true,
         "allowUnreachableCode": true,
         "listFiles": false,
-        "inlineSourceMap": true,
-        "inlineSources": true
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true
     },
-    "compileOnSave": false,
     "include": [
-        "src/**/*.ts"
+        "./src/**/*.ts"
     ],
     "exclude": [
         "node_modules"
