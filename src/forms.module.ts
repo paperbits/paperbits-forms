@@ -55,10 +55,14 @@ export class FormsModule implements IInjectorModule {
         injector.bindSingleton("selectHandlers", SelectHandlers);
         injector.bindSingleton("textareaHandlers", TextareaHandlers);
 
-        // const widgetHandlers:Array<IWidgetHandler> = injector.resolve("widgetHandlers");        
-        // widgetHandlers.push(injector.resolve<FormHandlers>("formHandlers"));
-        // widgetHandlers.push(injector.resolve<InputHandlers>("inputHandlers"));
-        // widgetHandlers.push(injector.resolve<SelectHandlers>("selectHandlers"));
-        // widgetHandlers.push(injector.resolve<TextareaHandlers>("textareaHandlers"));
+        const widgetHandlers:Array<IWidgetHandler> = injector.resolve("widgetHandlers");        
+        widgetHandlers.push(injector.resolve<FormHandlers>("formHandlers"));
+        widgetHandlers.push(injector.resolve<SelectHandlers>("selectHandlers"));
+        widgetHandlers.push(injector.resolve<TextareaHandlers>("textareaHandlers"));
+
+        //"text" | "password" | "submit" | "reset" | "radio" | "checkbox" | "button" | "color" | "date" | "email" | "number" | "range" | "search" | "time" | "url"
+        widgetHandlers.push(new InputHandlers(injector.resolve<InputModelBinder>("inputModelBinder"), "text"));
+        widgetHandlers.push(new InputHandlers(injector.resolve<InputModelBinder>("inputModelBinder"), "submit"));
+        widgetHandlers.push(new InputHandlers(injector.resolve<InputModelBinder>("inputModelBinder"), "password"));
     }
 }
