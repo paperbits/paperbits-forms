@@ -1,0 +1,102 @@
+<div class="editor resizable-content flex-container flex-container-column">
+    <h1>Form<a href="#" class="btn pull-right" data-bind="click: closeEditor">✖</a></h1>
+    <hr />
+    <fieldset class="form" data-bind="scrollable: {}">
+        <div class="form-group form-group-collapsible">
+            <label class="form-label">
+                <a href="#" class="form-group-toggle" data-bind="collapse: '#mainCollapse'"></a>
+                <b>Main</b>
+            </label>
+            <div id="mainCollapse" class="collapse form-group-collapse">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" data-bind="textInput: formName" maxlength="1000" />
+
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" data-bind="textInput: description" maxlength="1000" />
+
+                <label class="form-label">Action</label>
+                <input type="text" class="form-control" data-bind="textInput: formAction" maxlength="1000" />
+
+                <label class="form-label">Method</label>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input name="formMethod" type="radio" value="get" data-bind="checked: formMethod" />Get
+                    </label>
+                    <label class="form-label">
+                        <input name="formMethod" type="radio" value="post" data-bind="checked: formMethod" />Post
+                    </label>
+                </div>
+                <!-- ko if: formMethod() === 'post' -->                
+                <label class="form-label">Encoding for Post</label>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input name="encType" type="radio" value="application/x-www-form-urlencoded" data-bind="checked: encType" />application/x-www-form-urlencoded
+                    </label>
+                    <label class="form-label">
+                        <input name="encType" type="radio" value="multipart/form-data" data-bind="checked: encType" />multipart/form-data
+                    </label>
+                    <label class="form-label">
+                        <input name="encType" type="radio" value="text/plain" data-bind="checked: encType" />text/plain
+                    </label>
+                </div>
+                <!-- /ko -->
+
+                <label class="form-label">Target</label>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input name="formTarget" type="radio" value="_self" data-bind="checked: formTarget" />_self
+                    </label>
+                    <label class="form-label">
+                        <input name="formTarget" type="radio" value="_blank" data-bind="checked: formTarget" />_blank
+                    </label>
+                    <label class="form-label">
+                        <input name="formTarget" type="radio" value="_parent" data-bind="checked: formTarget" />_parent
+                    </label>
+                    <label class="form-label">
+                        <input name="formTarget" type="radio" value="_top" data-bind="checked: formTarget" />_top
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-group-collapsible">
+            <label class="form-label">
+                <a href="#" class="form-group-toggle" data-bind="collapse: '#miscellaneousCollapse'"></a>
+                <b>Miscellaneous</b>
+            </label>
+            <div id="miscellaneousCollapse" class="collapse form-group-collapse">
+                <label class="form-label">Character encodings</label>
+                <input type="text" class="form-control" data-bind="textInput: acceptCharset" maxlength="1000" />
+
+                <label class="form-label">
+                    <input class="form-check-input" type="checkbox" data-bind="checked: isInline" />Is inline
+                </label>
+
+                <label class="form-label">
+                    <input class="form-check-input" type="checkbox" data-bind="checked: isFieldset" />Fieldset
+                </label>
+                
+                <!-- ko if: isFieldset() -->                
+                <label class="form-label">Legend</label>                
+                <input type="text" class="form-control" data-bind="textInput: legendText" maxlength="1000" />
+
+                <label class="form-label">Legend align</label>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input name="legendAlign" type="radio" value="left" data-bind="checked: legendAlign" />Left
+                    </label>
+                    <label class="form-label">
+                        <input name="legendAlign" type="radio" value="right" data-bind="checked: legendAlign" />Right
+                    </label>
+                    <label class="form-label">
+                        <input name="legendAlign" type="radio" value="top" data-bind="checked: legendAlign" />Top
+                    </label>
+                    <label class="form-label">
+                        <input name="legendAlign" type="radio" value="bottom" data-bind="checked: legendAlign" />Bottom
+                    </label>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </fieldset>
+</div>
