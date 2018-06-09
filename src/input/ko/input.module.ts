@@ -1,8 +1,10 @@
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { IModelBinder, IWidgetHandler } from "@paperbits/common/editing";
 import { IViewModelBinder } from "@paperbits/common/widgets";
-import { InputModelBinder, InputHandlers } from ".";
-import { InputViewModelBinder, InputEditor } from "./ko";
+import { InputModelBinder } from "../inputModelBinder";
+import { InputViewModelBinder } from "./inputViewModelBinder";
+import { InputEditor } from "./inputEditor";
+import { InputHandlers } from "../inputHandlers";
 
 export class InputModule implements IInjectorModule {
     constructor(
@@ -23,8 +25,6 @@ export class InputModule implements IInjectorModule {
         injector.bind("inputEditor", InputEditor);
 
         //handlers
-        injector.bindSingleton("inputHandlers", InputHandlers);
-
         const widgetHandlers:Array<IWidgetHandler> = injector.resolve("widgetHandlers");
         //"text" | "password" | "submit" | "reset" | "radio" | "checkbox" | "button" | "color" | "date" | "email" | "number" | "range" | "search" | "time" | "url"
         widgetHandlers.push(new InputHandlers(injector.resolve<InputModelBinder>("inputModelBinder"), "text"));

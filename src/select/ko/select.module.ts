@@ -1,8 +1,10 @@
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { IModelBinder, IWidgetHandler } from "@paperbits/common/editing";
 import { IViewModelBinder } from "@paperbits/common/widgets";
-import { SelectModelBinder, SelectHandlers } from ".";
-import { SelectViewModelBinder, SelectEditor } from "./ko";
+import { SelectModelBinder } from "../selectModelBinder";
+import { SelectViewModelBinder } from "./selectViewModelBinder";
+import { SelectEditor } from "./selectEditor";
+import { SelectHandlers } from "../selectHandlers";
 
 export class SelectModule implements IInjectorModule {
     constructor(
