@@ -20,14 +20,5 @@ export class FormModule implements IInjectorModule {
         //viewModelBinders
         injector.bind("formViewModelBinder", FormViewModelBinder);
         this.viewModelBinders.push(injector.resolve("formViewModelBinder"));
-
-        //editors
-        injector.bind("formEditor", FormEditor);
-
-        //handlers
-        injector.bindSingleton("formHandlers", FormHandlers);
-
-        const widgetHandlers:Array<IWidgetHandler> = injector.resolve("widgetHandlers");        
-        widgetHandlers.push(injector.resolve<FormHandlers>("formHandlers"));
     }
 }

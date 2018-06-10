@@ -1,5 +1,4 @@
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
-import { IModelBinder, IWidgetHandler } from "@paperbits/common/editing";
 import { IViewModelBinder } from "@paperbits/common/widgets";
 import { FormModule } from "./form/ko/form.module";
 import { InputModule } from "./input/ko/input.module";

@@ -20,14 +20,5 @@ export class SelectModule implements IInjectorModule {
         //viewModelBinders
         injector.bind("selectViewModelBinder", SelectViewModelBinder);
         this.viewModelBinders.push(injector.resolve("selectViewModelBinder"));
-
-        //editors
-        injector.bind("selectEditor", SelectEditor);
-
-        //handlers
-        injector.bindSingleton("selectHandlers", SelectHandlers);
-
-        const widgetHandlers:Array<IWidgetHandler> = injector.resolve("widgetHandlers");
-        widgetHandlers.push(injector.resolve<SelectHandlers>("selectHandlers"));
     }
 }
