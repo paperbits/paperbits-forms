@@ -20,11 +20,9 @@ export class FormEditor implements IWidgetEditor {
     public readonly formTarget?:KnockoutObservable<string>;
     public readonly acceptCharset?:KnockoutObservable<string>;
     public readonly encType?:KnockoutObservable<string>;
-    public readonly formName?:KnockoutObservable<string>;
     public readonly isFieldset?:KnockoutObservable<boolean>;
     public readonly legendText?:KnockoutObservable<string>;
     public readonly legendAlign?:KnockoutObservable<string>;
-    public readonly description?:KnockoutObservable<string>;
     public readonly isInline?:KnockoutObservable<boolean>;
 
     constructor(private viewManager: IViewManager) {
@@ -33,11 +31,9 @@ export class FormEditor implements IWidgetEditor {
         this.formTarget    = ko.observable<string>();
         this.acceptCharset = ko.observable<string>();
         this.encType       = ko.observable<string>();
-        this.formName      = ko.observable<string>();
         this.isFieldset    = ko.observable<boolean>();
         this.legendText    = ko.observable<string>();
         this.legendAlign   = ko.observable<string>();
-        this.description   = ko.observable<string>();
         this.isInline      = ko.observable<boolean>();
 
         this.setWidgetModel = this.setWidgetModel.bind(this);
@@ -47,11 +43,9 @@ export class FormEditor implements IWidgetEditor {
         this.formTarget   .subscribe(((newValue) => {this.formModel.formTarget    = newValue;this.applyChangesCallback();}).bind(this));
         this.acceptCharset.subscribe(((newValue) => {this.formModel.acceptCharset = newValue;this.applyChangesCallback();}).bind(this));
         this.encType      .subscribe(((newValue) => {this.formModel.encType       = newValue;this.applyChangesCallback();}).bind(this));
-        this.formName     .subscribe(((newValue) => {this.formModel.formName      = newValue;this.applyChangesCallback();}).bind(this));
         this.isFieldset   .subscribe(((newValue) => {this.formModel.isFieldset    = newValue;this.applyChangesCallback();}).bind(this));
         this.legendText   .subscribe(((newValue) => {this.formModel.legendText    = newValue;this.applyChangesCallback();}).bind(this));
         this.legendAlign  .subscribe(((newValue) => {this.formModel.legendAlign   = newValue;this.applyChangesCallback();}).bind(this));
-        this.description  .subscribe(((newValue) => {this.formModel.description   = newValue;this.applyChangesCallback();}).bind(this));
         this.isInline     .subscribe(((newValue) => {this.formModel.isInline      = newValue;this.applyChangesCallback();}).bind(this));
     }
 
@@ -64,11 +58,9 @@ export class FormEditor implements IWidgetEditor {
         this.formTarget(model.formTarget || "_self");
         this.acceptCharset(model.acceptCharset);
         this.encType(model.encType || "application/x-www-form-urlencoded");
-        this.formName(model.formName);
         this.isFieldset(model.isFieldset);
         this.legendText(model.legendText);
         this.legendAlign(model.legendAlign || "left");
-        this.description(model.description);
         this.isInline(model.isInline);
     }
 

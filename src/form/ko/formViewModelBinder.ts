@@ -3,12 +3,14 @@ import { FormViewModel } from "./formViewModel";
 import { ViewModelBinderSelector } from "@paperbits/knockout/widgets/viewModelBinderSelector";
 import { IViewModelBinder } from "@paperbits/common/widgets/IViewModelBinder";
 import { DragSession } from "@paperbits/common/ui/draggables/dragSession";
+import { IWidgetBinding, GridHelper } from "@paperbits/common/editing";
+import { IContextualEditor, IViewManager } from "@paperbits/common/ui";
 
 export class FormViewModelBinder implements IViewModelBinder<FormModel, FormViewModel> {
-    private readonly viewModelBinderSelector: ViewModelBinderSelector;
-
-    constructor(viewModelBinderSelector: ViewModelBinderSelector) {
-        this.viewModelBinderSelector = viewModelBinderSelector;
+    constructor(
+        private readonly viewModelBinderSelector: ViewModelBinderSelector,
+        private readonly viewManager: IViewManager
+    ) {
     }
 
     public modelToViewModel(model: FormModel, readonly: boolean, formViewModel?: FormViewModel): FormViewModel {
@@ -44,6 +46,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
         formViewModel.isInline(model.isInline);
 
         const binding = {
+            name: "form",
             displayName: "Form",
             readonly: readonly,
             model: model,
@@ -60,6 +63,65 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                     model.widgets.splice(dragSession.insertIndex, 0, dragSession.sourceModel);
                 }
                 binding.applyChanges();
+            },
+
+            getFormContextualEditor: (activeElement: HTMLElement): IContextualEditor => {
+                let contextualEditor: IContextualEditor = {
+                    element: activeElement,
+                    color: "#4c5866",
+                    hoverCommand: null,
+                    deleteCommand: {
+                        tooltip: "Delete form",
+                        color: "#4c5866",
+                        callback: () => {
+                            const rowElement = GridHelper.getParentElementWithModel(activeElement);
+                            const rowModel = GridHelper.getModel(rowElement);
+                            const rowBinding = GridHelper.getWidgetBinding(rowElement);
+                            const formModel = GridHelper.getModel(activeElement);
+
+                            rowModel.columns.remove(formModel);
+                            rowBinding.applyChanges();
+
+                            this.viewManager.clearContextualEditors();
+                        }
+                    },
+                    selectionCommands: [{
+                        tooltip: "Edit form",
+                        iconClass: "paperbits-edit-72",
+                        position: "top right",
+                        color: "#4c5866",
+                        callback: () => {
+                            const binding = GridHelper.getWidgetBinding(activeElement);
+                            this.viewManager.openWidgetEditor(binding);
+                        }
+                    }]
+                }
+
+                let attachedModel = <FormModel>GridHelper.getModel(activeElement);
+
+                if (attachedModel.widgets.length === 0) {
+                    contextualEditor.hoverCommand = {
+                        color: "#607d8b",
+                        position: "center",
+                        tooltip: "Add widget",
+                        component: {
+                            name: "widget-selector",
+                            params: {
+                                onSelect: (widgetModel: any) => {
+                                    const formModel = <FormModel>GridHelper.getModel(activeElement);
+                                    const formWidgetBinding = GridHelper.getWidgetBinding(activeElement);
+
+                                    formModel.widgets.push(widgetModel);
+                                    formWidgetBinding.applyChanges();
+
+                                    this.viewManager.clearContextualEditors();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return contextualEditor;
             }
         }
 

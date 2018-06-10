@@ -8,14 +8,8 @@
                 <b>Main</b>
             </label>
             <div id="mainCollapse" class="collapse form-group-collapse">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" data-bind="textInput: formName" maxlength="1000" />
-
-                <label class="form-label">Description</label>
-                <input type="text" class="form-control" data-bind="textInput: description" maxlength="1000" />
-
                 <label class="form-label">Action</label>
-                <input type="text" class="form-control" data-bind="textInput: formAction" maxlength="1000" />
+                <input type="text" class="form-control" data-bind="textInput: formAction" maxlength="1000" spellcheck="false" />
 
                 <label class="form-label">Method</label>
                 <div class="form-group">
@@ -44,16 +38,10 @@
                 <label class="form-label">Target</label>
                 <div class="form-group">
                     <label class="form-label">
-                        <input name="formTarget" type="radio" value="_self" data-bind="checked: formTarget" />_self
+                        <input name="formTarget" type="radio" value="_self" data-bind="checked: formTarget" />Same window
                     </label>
                     <label class="form-label">
-                        <input name="formTarget" type="radio" value="_blank" data-bind="checked: formTarget" />_blank
-                    </label>
-                    <label class="form-label">
-                        <input name="formTarget" type="radio" value="_parent" data-bind="checked: formTarget" />_parent
-                    </label>
-                    <label class="form-label">
-                        <input name="formTarget" type="radio" value="_top" data-bind="checked: formTarget" />_top
+                        <input name="formTarget" type="radio" value="_blank" data-bind="checked: formTarget" />Blank window
                     </label>
                 </div>
             </div>
