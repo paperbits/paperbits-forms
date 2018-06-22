@@ -79,7 +79,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                             const rowBinding = GridHelper.getWidgetBinding(rowElement);
                             const formModel = GridHelper.getModel(activeElement);
 
-                            rowModel.columns.remove(formModel);
+                            rowModel.widgets.remove(formModel);
                             rowBinding.applyChanges();
 
                             this.viewManager.clearContextualEditors();
