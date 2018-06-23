@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import template from "./textarea.html";
-import { Component } from "@paperbits/knockout/decorators/component";
+import { Component } from "@paperbits/core/ko/component";
 
 @Component({
     selector: "paperbits-textarea",

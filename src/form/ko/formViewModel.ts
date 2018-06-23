@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import template from "./form.html";
-import { Component } from "@paperbits/knockout/decorators/component";
+import { Component } from "@paperbits/core/ko/component";
 
 @Component({
     selector: "paperbits-form",

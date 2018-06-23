@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import template from "./textareaEditor.html";
 import { IViewManager } from '@paperbits/common/ui';
 import { IWidgetEditor } from '@paperbits/common/widgets';
-import { Component } from "@paperbits/knockout/decorators/component";
+import { Component } from "@paperbits/core/ko/component";
 import { TextareaModel } from "../textareaModel";
 
 @Component({

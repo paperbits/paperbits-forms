@@ -2,9 +2,8 @@ import * as ko from "knockout";
 import template from "./formEditor.html";
 import { IViewManager } from '@paperbits/common/ui';
 import { IWidgetEditor } from '@paperbits/common/widgets';
-import { Component } from "@paperbits/knockout/decorators/component";
+import { Component } from "@paperbits/core/ko/component";
 import { FormModel } from "../formModel";
-
 
 @Component({
     selector: "form-editor",
