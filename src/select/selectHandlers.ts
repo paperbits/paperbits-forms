@@ -15,6 +15,7 @@ export class SelectHandlers implements IWidgetHandler {
             name: "select",
             displayName: "Select",
             iconClass: "paperbits-form",
+            requires: ["form"],
             createModel: async () => {
                 return await this.selectModelBinder.nodeToModel(config);
             }

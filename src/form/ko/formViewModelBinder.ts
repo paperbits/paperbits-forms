@@ -51,6 +51,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
             readonly: readonly,
             model: model,
             editor: "form-editor",
+            provides: ["form"],
             applyChanges: () => {
                 this.modelToViewModel(model, readonly, formViewModel);
             },
@@ -65,7 +66,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                 binding.applyChanges();
             },
 
-            getFormContextualEditor: (activeElement: HTMLElement): IContextualEditor => {
+            getContextualEditor: (activeElement: HTMLElement): IContextualEditor => {
                 let contextualEditor: IContextualEditor = {
                     element: activeElement,
                     color: "#4c5866",

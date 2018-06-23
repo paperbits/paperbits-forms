@@ -15,6 +15,7 @@ export class TextareaHandlers implements IWidgetHandler {
             name: "textarea",
             displayName: "Textarea",
             iconClass: "paperbits-form",
+            requires: ["form"],
             createModel: async () => {
                 return await this.textareaModelBinder.nodeToModel(config);
             }

@@ -16,6 +16,7 @@ export class FormHandlers implements IWidgetHandler {
             name: "form",
             displayName: "Form",
             iconClass: "paperbits-form",
+            requires: ["keyboard"],
             createModel: async () => {
                 return await this.formModelBinder.nodeToModel(config);
             }
