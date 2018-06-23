@@ -1,10 +1,10 @@
 import { FormModel } from "../formModel";
 import { FormViewModel } from "./formViewModel";
-import { ViewModelBinderSelector } from "@paperbits/knockout/widgets/viewModelBinderSelector";
 import { IViewModelBinder } from "@paperbits/common/widgets/IViewModelBinder";
 import { DragSession } from "@paperbits/common/ui/draggables/dragSession";
-import { IWidgetBinding, GridHelper } from "@paperbits/common/editing";
+import { GridHelper } from "@paperbits/common/editing";
 import { IContextualEditor, IViewManager } from "@paperbits/common/ui";
+import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 
 export class FormViewModelBinder implements IViewModelBinder<FormModel, FormViewModel> {
     constructor(
