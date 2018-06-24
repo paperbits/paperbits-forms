@@ -1,17 +1,9 @@
 import { IWidgetOrder } from '@paperbits/common/editing';
 import { IWidgetHandler } from '@paperbits/common/editing';
-import { FormModelBinder } from "./formModelBinder";
-import { FormContract } from "./formContract";
 import { FormModel } from './formModel';
 import { InputModel } from '../input/inputModel';
 
 export class FormHandlers implements IWidgetHandler {
-    private readonly formModelBinder: FormModelBinder;
-
-    constructor(formModelBinder: FormModelBinder) {
-        this.formModelBinder = formModelBinder;
-    }
-
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
             name: "form",
