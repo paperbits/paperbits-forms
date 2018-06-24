@@ -21,7 +21,7 @@
     ],
     "dependencies": {
         "@paperbits/common": "0.1.12",
-        "@paperbits/knockout": "0.1.12",
+        "@paperbits/core": "0.1.12",
         "es6-shim": "^0.35.3",
         "knockout": "^3.5.0-beta",
         "knockout.validation": "^2.0.3"
