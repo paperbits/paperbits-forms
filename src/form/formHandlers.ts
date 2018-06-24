@@ -1,8 +1,9 @@
 import { IWidgetOrder } from '@paperbits/common/editing';
 import { IWidgetHandler } from '@paperbits/common/editing';
-import { IViewManager } from "@paperbits/common/ui/IViewManager";
 import { FormModelBinder } from "./formModelBinder";
 import { FormContract } from "./formContract";
+import { FormModel } from './formModel';
+import { InputModel } from '../input/inputModel';
 
 export class FormHandlers implements IWidgetHandler {
     private readonly formModelBinder: FormModelBinder;
@@ -11,41 +12,45 @@ export class FormHandlers implements IWidgetHandler {
         this.formModelBinder = formModelBinder;
     }
 
-    private async prepareWidgetOrder(config: FormContract): Promise<IWidgetOrder> {
+    public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
             name: "form",
             displayName: "Form",
             iconClass: "paperbits-form",
             requires: ["keyboard"],
             createModel: async () => {
-                return await this.formModelBinder.nodeToModel(config);
+                const firstNameModel = new InputModel();
+                firstNameModel.inputType = "text";
+                firstNameModel.labelText = "First name";
+                firstNameModel.inputName = "firstName";
+                firstNameModel.showLabel = "before";
+                firstNameModel.placeholderText = "e.g. John";
+                firstNameModel.isRequired = true;
+                
+                const lastNameModel = new InputModel();
+                lastNameModel.inputType = "text";
+                lastNameModel.labelText = "Last name";
+                lastNameModel.inputName = "firstName";
+                lastNameModel.showLabel = "before";
+                lastNameModel.placeholderText = "e.g. Doe";
+                lastNameModel.isRequired = true;
+
+                const submitModel = new InputModel();
+                submitModel.inputValue = "Register";
+                submitModel.inputType = "submit";
+
+                const formModel = new FormModel();
+                formModel.legendText = "New user";
+                formModel.legendAlign = "top";
+                formModel.isFieldset = true;
+                formModel.widgets.push(firstNameModel);
+                formModel.widgets.push(lastNameModel);
+                formModel.widgets.push(submitModel);
+
+                return formModel;
             }
         }
 
         return widgetOrder;
-    }
-
-    private async getWidgetOrderByConfig(): Promise<IWidgetOrder> {
-        let config: FormContract = {
-            object: "block",
-            type: "form",
-            label: "Form",
-            style: "default",
-            formAction: "",
-            nodes: [
-                {
-                    object: "block",
-                    type: "input",
-                    label: "Input",
-                    style: "default",
-                    inputType: "submit"
-                }
-            ]
-        }
-        return await this.prepareWidgetOrder(config);
-    }
-
-    public getWidgetOrder(): Promise<IWidgetOrder> {
-        return Promise.resolve(this.getWidgetOrderByConfig());
     }
 }

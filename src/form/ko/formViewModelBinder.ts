@@ -1,3 +1,4 @@
+import "@paperbits/common/extensions";
 import { FormModel } from "../formModel";
 import { FormViewModel } from "./formViewModel";
 import { IViewModelBinder } from "@paperbits/common/widgets/IViewModelBinder";
@@ -66,23 +67,19 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                 binding.applyChanges();
             },
 
-            getContextualEditor: (activeElement: HTMLElement): IContextualEditor => {
-                let contextualEditor: IContextualEditor = {
-                    element: activeElement,
+            getContextualEditor: (element: HTMLElement): IContextualEditor => {
+                const contextualEditor: IContextualEditor = {
+                    element: element,
                     color: "#4c5866",
                     hoverCommand: null,
                     deleteCommand: {
                         tooltip: "Delete form",
                         color: "#4c5866",
                         callback: () => {
-                            const rowElement = GridHelper.getParentElementWithModel(activeElement);
-                            const rowModel = GridHelper.getModel(rowElement);
-                            const rowBinding = GridHelper.getWidgetBinding(rowElement);
-                            const formModel = GridHelper.getModel(activeElement);
-
-                            rowModel.widgets.remove(formModel);
-                            rowBinding.applyChanges();
-
+                            const widgetModel = GridHelper.getModel(element);
+                            const parentBinding = GridHelper.getParentWidgetBinding(element);
+                            parentBinding.model.widgets.remove(widgetModel);
+                            parentBinding.applyChanges();
                             this.viewManager.clearContextualEditors();
                         }
                     },
@@ -92,13 +89,13 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                         position: "top right",
                         color: "#4c5866",
                         callback: () => {
-                            const binding = GridHelper.getWidgetBinding(activeElement);
+                            const binding = GridHelper.getWidgetBinding(element);
                             this.viewManager.openWidgetEditor(binding);
                         }
                     }]
                 }
 
-                let attachedModel = <FormModel>GridHelper.getModel(activeElement);
+                let attachedModel = <FormModel>GridHelper.getModel(element);
 
                 if (attachedModel.widgets.length === 0) {
                     contextualEditor.hoverCommand = {
@@ -108,9 +105,19 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                         component: {
                             name: "widget-selector",
                             params: {
+                                onRequest: () => {
+                                    const parentElement = GridHelper.getParentElementWithModel(element);
+                                    const bindings = GridHelper.getParentWidgetBindings(parentElement);
+                                    const provided = bindings
+                                        .filter(x => x.provides != null)
+                                        .map(x => x.provides)
+                                        .reduce((acc, val) => acc.concat(val));
+
+                                    return provided;
+                                },
                                 onSelect: (widgetModel: any) => {
-                                    const formModel = <FormModel>GridHelper.getModel(activeElement);
-                                    const formWidgetBinding = GridHelper.getWidgetBinding(activeElement);
+                                    const formModel = <FormModel>GridHelper.getModel(element);
+                                    const formWidgetBinding = GridHelper.getWidgetBinding(element);
 
                                     formModel.widgets.push(widgetModel);
                                     formWidgetBinding.applyChanges();
