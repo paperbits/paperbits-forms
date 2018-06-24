@@ -1,21 +1,10 @@
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
-import { IModelBinder, IWidgetHandler } from "@paperbits/common/editing";
-import { IViewModelBinder } from "@paperbits/common/widgets";
-import { TextareaModelBinder } from "../textareaModelBinder";
-import { TextareaViewModelBinder } from "./textareaViewModelBinder";
+import { IWidgetHandler } from "@paperbits/common/editing";
 import { TextareaEditor } from "./textareaEditor";
 import { TextareaHandlers } from "../textareaHandlers";
-import { TextareaModule } from "./textarea.module";
 
 export class TextareaEditorModule implements IInjectorModule {
-    constructor(
-        private modelBinders:any,
-        private viewModelBinders:Array<IViewModelBinder<any, any>>,
-    ) { }
-
     register(injector: IInjector): void {
-        injector.bindModule(new TextareaModule(this.modelBinders, this.viewModelBinders));
-
         //editors
         injector.bind("textareaEditor", TextareaEditor);
 
