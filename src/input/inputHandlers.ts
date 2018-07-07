@@ -1,6 +1,5 @@
-import { IWidgetOrder } from '@paperbits/common/editing';
-import { IWidgetHandler } from '@paperbits/common/editing';
-import { InputModel } from '.';
+import { IWidgetOrder, IWidgetHandler } from "@paperbits/common/editing";
+import { InputModel } from ".";
 
 export class InputHandlers implements IWidgetHandler {
     private readonly inputType: string;
@@ -26,7 +25,7 @@ export class InputHandlers implements IWidgetHandler {
 
                 return inputModel;
             }
-        }
+        };
 
         return widgetOrder;
     }

@@ -1,7 +1,6 @@
-import { IWidgetOrder } from '@paperbits/common/editing';
-import { IWidgetHandler } from '@paperbits/common/editing';
-import { FormModel } from './formModel';
-import { InputModel } from '../input/inputModel';
+import { IWidgetOrder, IWidgetHandler } from "@paperbits/common/editing";
+import { FormModel } from "./formModel";
+import { InputModel } from "../input/inputModel";
 
 export class FormHandlers implements IWidgetHandler {
     public async getWidgetOrder(): Promise<IWidgetOrder> {
@@ -18,7 +17,7 @@ export class FormHandlers implements IWidgetHandler {
                 firstNameModel.showLabel = "before";
                 firstNameModel.placeholderText = "e.g. John";
                 firstNameModel.isRequired = true;
-                
+
                 const lastNameModel = new InputModel();
                 lastNameModel.inputType = "text";
                 lastNameModel.labelText = "Last name";
