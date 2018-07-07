@@ -3,8 +3,13 @@ import template from "./inputEditor.html";
 import { IViewManager } from '@paperbits/common/ui';
 import { IWidgetEditor } from '@paperbits/common/widgets';
 import { Component } from "@paperbits/core/ko/component";
-import { InputModel } from "../inputModel";
+import { InputModel, InputProperty, InputType, OptionItem } from "../inputModel";
+import * as mapping from "knockout-mapping";
 
+type EditorSection = { 
+    sectionName:string, 
+    editors: KnockoutObservableArray<EditorItem>,
+    options?: KnockoutObservableArray<OptionItem> };
 @Component({
     selector: "input-editor",
     template: template,
@@ -13,103 +18,194 @@ import { InputModel } from "../inputModel";
 export class InputEditor implements IWidgetEditor {
     private model: InputModel;
     private applyChangesCallback: () => void;
+    public controlType: KnockoutObservable<string>;
+    public editorSections: KnockoutObservableArray<EditorSection>;
+    public optionsSection: EditorSection;
+    
+    public showOptions: KnockoutObservable<boolean>;
+    public itemNameToAdd: KnockoutObservable<string>;
+    public itemValueToAdd: KnockoutObservable<string>;
+    public selectedItems: KnockoutObservableArray<OptionItem>;
 
-    public readonly inputTypes = ko.observableArray(["text", "password", "submit", "reset", "radio", "checkbox", "color", "date", "email", "number", "range", "search", "time", "url", "hidden"]);
+    private sectionPropertyMap: { 
+        [key: string]: { name: string, label:string, inputType: InputType, options?: { label: string, value: any }[] } 
+    } = {
+        "inputId"        : { name: "Main", label: "Control ID", inputType: "text" },
+        "inputName"      : { name: "Main", label: "Name", inputType: "text"},
+        "placeholderText": { name: "Settings", label: "Placeholder text", inputType: "text"},
+        "help"           : { name: "Settings", label: "Help text", inputType: "text"},
+        "textValue"      : { name: "Settings", label: "Default text", inputType: "text"},
+        "inputValue"     : { name: "Settings", label: "Control value", inputType: "text"},
+        "isInline"       : { name: "Settings", label: "Is inline", inputType: "checkbox"},
+        "maxLength"      : { name: "Settings", label: "Max number of characters allowed", inputType: "number"},
+        "minValue"       : { name: "Settings", label: "Minimum value", inputType: "number"},
+        "maxValue"       : { name: "Settings", label: "Maximum value", inputType: "number"},
+        "sizeValue"      : { name: "Settings", label: "Size value", inputType: "number"},
+        "stepValue"      : { name: "Settings", label: "Step value", inputType: "number"},
+        "isChecked"      : { name: "Settings", label: "Is checked", inputType: "checkbox"},
+        "patternRegexp"  : { name: "Settings", label: "Pattern", inputType: "text"},
+        "accept"         : { name: "Settings", label: "Accept value", inputType: "text"},
+        "colsCount"      : { name: "Settings", label: "Visible width of characters", inputType: "number"},
+        "rowsCount"      : { name: "Settings", label: "Visible number of lines", inputType: "number"},
+        "isRequired"     : { name: "Miscellaneous", label: "Is required", inputType: "checkbox"},
+        "isReadonly"     : { name: "Miscellaneous", label: "Is read-only", inputType: "checkbox"},
+        "isDisabled"     : { name: "Miscellaneous", label: "Is disabled", inputType: "checkbox"},
+        "showLabel"      : { name: "Label", label: "", inputType: "radio", options: [{label: "None", value: "none"}, {label: "Before", value: "before"}, {label: "After", value: "after"}]},
+        "labelText"      : { name: "Label", label: "Label text", inputType: "text"},
+    };
 
-    public readonly labelFor: KnockoutObservable<string>;
-    public readonly showLabel: KnockoutObservable<string>;   //"before" | "after" | "none"
-    public readonly labelText: KnockoutObservable<string>;
-    public readonly inputType: KnockoutObservable<string>;   //"text" | "password" | "submit" | "reset" | "radio" | "checkbox" | "button" | "color" | "date" | "email" | "number" | "range" | "search" | "time" | "url"
-    public readonly inputName:KnockoutObservable<string>;
-    public readonly placeholderText?: KnockoutObservable<string>;
-    public readonly inputValue?: KnockoutObservable<string | number>;
-    public readonly maxLength?: KnockoutObservable<number>;
-    public readonly minValue?: KnockoutObservable<number>;
-    public readonly maxValue?: KnockoutObservable<number>;
-    public readonly sizeValue?: KnockoutObservable<number>;
-    public readonly stepValue?: KnockoutObservable<number>;
-    public readonly isRequired?: KnockoutObservable<boolean>;
-    public readonly isReadonly?: KnockoutObservable<boolean>;
-    public readonly isDisabled?: KnockoutObservable<boolean>;
-    public readonly isChecked?: KnockoutObservable<boolean>;
-    public readonly isInline?: KnockoutObservable<boolean>;
-    public readonly patternRegexp?: KnockoutObservable<string>;
+    private itemMapping = {
+        'copy': ["propertyName"]
+    }
 
     constructor(private viewManager: IViewManager) {
-        this.labelFor   = ko.observable<string>();
-        this.showLabel  = ko.observable<string>();
-        this.labelText  = ko.observable<string>();
-        this.inputType  = ko.observable<string>();
-        this.inputName  = ko.observable<string>();
-        this.inputValue = ko.observable<string | number>();
-        this.maxLength  = ko.observable<number>();
-        this.minValue   = ko.observable<number>();
-        this.maxValue   = ko.observable<number>();
-        this.sizeValue  = ko.observable<number>();
-        this.stepValue  = ko.observable<number>();
-        this.isRequired = ko.observable<boolean>();
-        this.isReadonly = ko.observable<boolean>();
-        this.isDisabled = ko.observable<boolean>();
-        this.isChecked  = ko.observable<boolean>();
-        this.isInline  = ko.observable<boolean>();
-        this.placeholderText = ko.observable<string>();
-        this.patternRegexp   = ko.observable<string>();
-        this.onInputTypeChange = this.onInputTypeChange.bind(this);
+        this.controlType = ko.observable<string>();
+        this.showOptions = ko.observable(false);
+        this.itemNameToAdd = ko.observable("");
+        this.itemValueToAdd = ko.observable("");
+        this.selectedItems = ko.observableArray([]);
 
-        this.labelFor   .subscribe(((newValue) => {this.model.inputId    = newValue;this.applyChangesCallback();}).bind(this));
-        this.showLabel  .subscribe(((newValue) => {this.model.showLabel  = newValue;this.applyChangesCallback();}).bind(this));
-        this.labelText  .subscribe(((newValue) => {this.model.labelText  = newValue;this.applyChangesCallback();}).bind(this));
-        this.inputType  .subscribe(this.onInputTypeChange);
-        this.inputName  .subscribe(((newValue) => {this.model.inputName  = newValue;this.applyChangesCallback();}).bind(this));
-        this.inputValue .subscribe(((newValue) => {this.model.inputValue = newValue;this.applyChangesCallback();}).bind(this));
-        this.maxLength  .subscribe(((newValue) => {this.model.maxLength  = newValue;this.applyChangesCallback();}).bind(this));
-        this.minValue   .subscribe(((newValue) => {this.model.minValue   = newValue;this.applyChangesCallback();}).bind(this));
-        this.maxValue   .subscribe(((newValue) => {this.model.maxValue   = newValue;this.applyChangesCallback();}).bind(this));
-        this.sizeValue  .subscribe(((newValue) => {this.model.sizeValue  = newValue;this.applyChangesCallback();}).bind(this));
-        this.stepValue  .subscribe(((newValue) => {this.model.stepValue  = newValue;this.applyChangesCallback();}).bind(this));
-        this.isRequired .subscribe(((newValue) => {this.model.isRequired = newValue;this.applyChangesCallback();}).bind(this));
-        this.isReadonly .subscribe(((newValue) => {this.model.isReadonly = newValue;this.applyChangesCallback();}).bind(this));
-        this.isDisabled .subscribe(((newValue) => {this.model.isDisabled = newValue;this.applyChangesCallback();}).bind(this));
-        this.isChecked  .subscribe(((newValue) => {this.model.isChecked  = newValue;this.applyChangesCallback();}).bind(this));
-        this.isInline   .subscribe(((newValue) => {this.model.isInline   = newValue;this.applyChangesCallback();}).bind(this));
-        this.placeholderText.subscribe(((newValue) => {this.model.placeholderText = newValue;this.applyChangesCallback();}).bind(this));
-        this.patternRegexp  .subscribe(((newValue) => {this.model.patternRegexp   = newValue;this.applyChangesCallback();}).bind(this));
+        this.optionsSection = { sectionName: "Options", editors: ko.observableArray<EditorItem>(), options: ko.observableArray([]) };
+        let sections: EditorSection[] = [
+            { sectionName: "Main", editors: ko.observableArray<EditorItem>() },
+            { sectionName: "Label", editors: ko.observableArray<EditorItem>() },
+            this.optionsSection,
+            { sectionName: "Settings", editors: ko.observableArray<EditorItem>() },
+            { sectionName: "Miscellaneous", editors: ko.observableArray<EditorItem>() }
+        ];
+        this.editorSections = ko.observableArray<EditorSection>();
+        this.editorSections(sections);
 
+        this.onChange = this.onChange.bind(this);
+        this.onOptionsChange = this.onOptionsChange.bind(this);
+        this.upItem = this.upItem.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this.downItem = this.downItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
     }
 
     public setWidgetModel(model: InputModel, applyChangesCallback?: () => void): void {
+        if (!this.model || (this.model && this.model.inputType != model.inputType)) {
+            this.controlType(model.inputType);
+            this.adjustControlsMetadata(model.inputType);
+        }
         this.model = model;
         this.applyChangesCallback = applyChangesCallback;
-        this.labelFor   (model.inputId);
-        this.showLabel  (model.showLabel || "none");
-        this.labelText  (model.labelText);
-        this.inputType  (model.inputType || "text");
-        this.inputName  (model.inputName );
-        this.inputValue (model.inputValue);
-        this.maxLength  (model.maxLength );
-        this.minValue   (model.minValue  );
-        this.maxValue   (model.maxValue  );
-        this.sizeValue  (model.sizeValue );
-        this.stepValue  (model.stepValue );
-        this.isRequired (model.isRequired);
-        this.isReadonly (model.isReadonly);
-        this.isDisabled (model.isDisabled);
-        this.isChecked  (model.isChecked );
-        this.isInline   (model.isInline );
-        this.placeholderText(model.placeholderText);
-        this.patternRegexp  (model.patternRegexp  );
 
+        if (this.model.inputProperties.length > 0) {
+            if (this.model.options && this.model.options.length > 0) {
+                this.optionsSection.options(this.model.options);
+                this.optionsSection.options.subscribe(this.onOptionsChange);
+                this.showOptions(true);
+            } else {
+                this.showOptions(false);
+            }
+            let defaultSection = this.editorSections()[this.editorSections().length - 1];
+            for (let i = 0; i < this.model.inputProperties.length; i++) {
+                const inputProperty = this.model.inputProperties[i];
+                let sectionMetadata = this.sectionPropertyMap[inputProperty.propertyName];
+                let edit: EditorItem = mapping.fromJS(inputProperty, this.itemMapping);
+                edit.propertyLabel = sectionMetadata.label;
+                edit.propertyType = sectionMetadata.inputType;
+                edit.propertyOptions = sectionMetadata.options || [];
+                edit.propertyValue.subscribe(this.onChange);
+                if (!sectionMetadata) {
+                    defaultSection.editors.push(edit);
+                } else {
+                    let section = this.editorSections().find((item) => item.sectionName === sectionMetadata.name);
+                    section.editors.push(edit);
+                }               
+            }
+        }        
     }
 
-    private onInputTypeChange(newValue) {
-        if(this.model && this.model.inputType !== newValue) {
-            this.model.inputType = newValue;
-            
-            this.applyChangesCallback();
+    private adjustControlsMetadata(inputType: InputType) {
+        switch (inputType) {
+            case "date":
+                this.sectionPropertyMap["inputValue"].inputType = "date";
+                this.sectionPropertyMap["minValue"].inputType = "date";
+                this.sectionPropertyMap["maxValue"].inputType = "date";
+                break;
+            case "time":
+                this.sectionPropertyMap["inputValue"].inputType = "time";
+                this.sectionPropertyMap["minValue"].inputType = "time";
+                this.sectionPropertyMap["maxValue"].inputType = "time";
+                break;
+            default:
+                this.sectionPropertyMap["inputValue"].inputType = "text";
+                this.sectionPropertyMap["minValue"].inputType = "number";
+                this.sectionPropertyMap["maxValue"].inputType = "number";
+                break;
         }
+    }
+
+    private onChange() {
+        let currentEdits: InputProperty[] = [];
+        for (let i = 0; i < this.editorSections().length; i++) {
+            const section = this.editorSections()[i];
+            currentEdits.push(...mapping.toJS(section.editors));
+        }
+        this.model.inputProperties = currentEdits;
+        this.applyChangesCallback();
+    }
+
+    private onOptionsChange() {
+        this.model.options = mapping.toJS(this.optionsSection.options);
+        this.applyChangesCallback();
     }
 
     public closeEditor(): void {
         this.viewManager.closeWidgetEditor();
     }
+
+    public addItem () {
+        if (this.itemNameToAdd() != "" && this.itemValueToAdd() != "" && 
+            !this.optionsSection.options().find((item) => item.itemValue === this.itemValueToAdd())) {
+            this.optionsSection.options.push( { itemName: this.itemNameToAdd(), itemValue: this.itemValueToAdd()});
+            this.applyChangesCallback();
+        }
+        this.itemNameToAdd("");
+        this.itemValueToAdd("");
+    }
+ 
+    public upItem() {
+        const selectedFirstValue = this.selectedItems()[0];
+        const selectedLastValue = this.selectedItems()[this.selectedItems().length-1];
+        const posFirst = this.optionsSection.options().findIndex(item => item.itemValue === selectedFirstValue);
+        const posLast = this.optionsSection.options().findIndex(item => item.itemValue === selectedLastValue);
+        if (posFirst > 0) {
+            let moveItem = this.optionsSection.options.splice(posFirst-1, 1);
+            this.optionsSection.options.splice(posLast, 0, moveItem[0]);
+            this.applyChangesCallback();
+        }
+    }
+ 
+    public downItem() {
+        const selectedFirstValue = this.selectedItems()[0];
+        const selectedLastValue = this.selectedItems()[this.selectedItems().length-1];
+        const posFirst = this.optionsSection.options().findIndex(item => item.itemValue === selectedFirstValue);
+        const posLast = this.optionsSection.options().findIndex(item => item.itemValue === selectedLastValue);
+        if (posLast < this.optionsSection.options().length - 1) {
+            let moveItem = this.optionsSection.options.splice(posLast+1, 1);
+            this.optionsSection.options.splice(posFirst, 0, moveItem[0]);
+            this.applyChangesCallback();
+        }
+    }
+ 
+    public deleteItem() {
+        if (this.selectedItems().length > 0)
+        {
+            this.optionsSection.options.remove((item) => this.selectedItems().findIndex(selectedValue => selectedValue === item.itemValue) !== -1);
+            this.applyChangesCallback();
+            this.selectedItems([]);
+        }
+    }
+}
+
+class EditorItem {    
+    public propertyLabel: string;
+    public propertyType: InputType;
+    public propertyName: string;
+    public propertyValue: KnockoutObservable<any>;
+    public propertyOptions?: { label: string, value: any }[]
 }

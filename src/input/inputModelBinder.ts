@@ -1,10 +1,9 @@
 import { IModelBinder } from "@paperbits/common/editing";
-import { ModelBinderSelector } from "@paperbits/common/widgets";
-import { Contract } from "@paperbits/common";
 import { InputModel, InputContract } from ".";
+import { InputProperty } from "./inputModel";
 
 export class InputModelBinder implements IModelBinder {
-    constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
+    private excludeNames = ["type", "object", "inputType", "inputProperties"];
 
     public canHandleWidgetType(widgetType: string): boolean {
         return widgetType === "input";
@@ -15,25 +14,27 @@ export class InputModelBinder implements IModelBinder {
     }
 
     public async nodeToModel(node: InputContract): Promise<InputModel> {
-        let model = new InputModel();
-        model.inputId         = node.inputId ;
-        model.showLabel       = <any>node.showLabel;
-        model.labelText       = node.labelText;
-        model.inputType       = <any>node.inputType;
-        model.inputName       = node.inputName;
-        model.inputValue      = node.inputValue;
-        model.maxLength       = node.maxLength;
-        model.minValue        = node.minValue;
-        model.maxValue        = node.maxValue;
-        model.sizeValue       = node.sizeValue;
-        model.stepValue       = node.stepValue;
-        model.isRequired      = node.isRequired;
-        model.isReadonly      = node.isReadonly;
-        model.isDisabled      = node.isDisabled;
-        model.isChecked       = node.isChecked;
-        model.patternRegexp   = node.patternRegexp;
-        model.placeholderText = node.placeholderText;
-        model.isInline        = node.isInline;
+        let model = new InputModel(<any>node.inputType);
+
+        if (node.inputProperties && node.inputProperties.length > 0) {
+            for (let i = 0; i < node.inputProperties.length; i++) {
+                const item = node.inputProperties[i];
+                model.setProperty(item.propertyName,item.propertyValue);                
+            }
+        }
+
+        //convert old data to a new data structure
+        for (const propertyName in node) {
+            if (this.excludeNames.indexOf(propertyName) === -1) {
+                if (node.hasOwnProperty(propertyName)) {
+                    const propertyValue = node[propertyName];
+                    if (propertyValue) {
+                        model.setProperty(propertyName, propertyValue);
+                    }                    
+                } 
+            }
+                   
+        } 
         
         return model;
     }
@@ -42,25 +43,20 @@ export class InputModelBinder implements IModelBinder {
         let contract: InputContract = {
             object: "block",
             type: "input",
-            inputId   : model.inputId, 
-            showLabel : model.showLabel,
-            labelText : model.labelText,
             inputType : model.inputType,
-            inputName : model.inputName,
-            inputValue: model.inputValue,
-            maxLength : model.maxLength,
-            minValue  : model.minValue,
-            maxValue  : model.maxValue,
-            sizeValue : model.sizeValue,
-            stepValue : model.stepValue,
-            isRequired: model.isRequired,
-            isReadonly: model.isReadonly,
-            isDisabled: model.isDisabled,
-            isChecked : model.isChecked,
-            patternRegexp  : model.patternRegexp,
-            placeholderText: model.placeholderText,
-            isInline  : model.isInline
+            inputProperties: []
         };
+
+        if (model.inputProperties && model.inputProperties.length > 0) {
+            for (let i = 0; i < model.inputProperties.length; i++) {
+                const item = model.inputProperties[i];
+                
+                contract.inputProperties.push({
+                    propertyName: item.propertyName,
+                    propertyValue: item.propertyValue
+                });
+            }
+        }
 
         return contract;
     }

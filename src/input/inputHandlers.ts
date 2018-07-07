@@ -1,10 +1,10 @@
 import { IWidgetOrder, IWidgetHandler } from "@paperbits/common/editing";
-import { InputModel } from ".";
+import { InputModel, InputType } from '.';
 
 export class InputHandlers implements IWidgetHandler {
-    private readonly inputType: string;
+    private readonly inputType: InputType;
 
-    constructor(inputType: string) {
+    constructor(inputType: InputType) {
         this.inputType = inputType;
     }
 
@@ -15,15 +15,8 @@ export class InputHandlers implements IWidgetHandler {
             iconClass: "paperbits-form",
             requires: ["form"],
             createModel: async () => {
-                const inputModel = new InputModel();
-                inputModel.inputType = "text";
-                inputModel.labelText = "Label";
-                inputModel.inputName = "input";
-                inputModel.showLabel = "before";
-                inputModel.placeholderText = "e.g. Text";
-                inputModel.isRequired = false;
-
-                return inputModel;
+                const defaultModel = new InputModel(this.inputType);
+                return defaultModel;
             }
         };
 

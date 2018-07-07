@@ -1,34 +1,17 @@
+import * as ko from "knockout";
+import * as mapping from "knockout-mapping";
 import { InputModel } from "../inputModel";
 import { InputViewModel } from "./inputViewModel";
 import { IViewModelBinder } from "@paperbits/common/widgets/IViewModelBinder";
 
-
 export class InputViewModelBinder implements IViewModelBinder<InputModel, InputViewModel>  {
     public modelToViewModel(model: InputModel, readonly: boolean, viewModel?: InputViewModel): InputViewModel {
         if (!viewModel) {
-            viewModel = new InputViewModel();
+            viewModel = new InputViewModel(model);
+        } else {
+            viewModel.inputData.controlModel = model;
+            viewModel.inputData.changed(new Date());
         }
-
-        viewModel.labelFor(model.inputId);        
-        viewModel.labelText(model.labelText);
-        viewModel.showLabel(model.showLabel);
-        viewModel.inputType(model.inputType);
-        viewModel.inputName(model.inputName);
-        viewModel.placeholderText(model.placeholderText);
-        viewModel.inputValue(model.inputValue);
-
-        viewModel.maxLength(model.maxLength);
-        viewModel.minValue(model.minValue);
-        viewModel.maxValue(model.maxValue);
-        viewModel.sizeValue(model.sizeValue);
-        viewModel.stepValue(model.stepValue);
-        viewModel.isRequired(model.isRequired);
-        viewModel.isReadonly(model.isReadonly);
-        viewModel.isDisabled(model.isDisabled);
-        viewModel.isChecked(model.isChecked);
-        viewModel.patternRegexp(model.patternRegexp);
-        viewModel.accept(model.accept);
-        viewModel.isInline(model.isInline);
 
         viewModel["widgetBinding"] = {
             displayName: "Input",

@@ -10,25 +10,21 @@ export class FormHandlers implements IWidgetHandler {
             iconClass: "paperbits-form",
             requires: ["keyboard"],
             createModel: async () => {
-                const firstNameModel = new InputModel();
-                firstNameModel.inputType = "text";
-                firstNameModel.labelText = "First name";
-                firstNameModel.inputName = "firstName";
-                firstNameModel.showLabel = "before";
-                firstNameModel.placeholderText = "e.g. John";
-                firstNameModel.isRequired = true;
+                const firstNameModel = new InputModel("text");
+                firstNameModel.setProperty("labelText", "First name");
+                firstNameModel.setProperty("inputName", "firstName");
+                firstNameModel.setProperty("placeholderText", "e.g. John");
+                firstNameModel.setProperty("isRequired", true);
 
-                const lastNameModel = new InputModel();
-                lastNameModel.inputType = "text";
-                lastNameModel.labelText = "Last name";
-                lastNameModel.inputName = "firstName";
-                lastNameModel.showLabel = "before";
-                lastNameModel.placeholderText = "e.g. Doe";
-                lastNameModel.isRequired = true;
+                const lastNameModel = new InputModel("text");
+                lastNameModel.setProperty("labelText", "Last name");
+                lastNameModel.setProperty("inputName", "firstName");
+                lastNameModel.setProperty("placeholderText", "e.g. Doe");
+                lastNameModel.setProperty("isRequired",true);
 
-                const submitModel = new InputModel();
-                submitModel.inputValue = "Register";
-                submitModel.inputType = "submit";
+                const submitModel = new InputModel("submit");
+                submitModel.setProperty("inputValue", "Register");
+                submitModel.setProperty("labelText", "Register");
 
                 const formModel = new FormModel();
                 formModel.legendText = "New user";
