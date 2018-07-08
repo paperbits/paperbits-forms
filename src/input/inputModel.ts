@@ -1,11 +1,11 @@
-export type InputType = "textarea" | "select" | "text" | "password" | "submit" | "reset" | "hidden" | "radio" | "checkbox" | "button" | "color" | "date" | "email" | "number" | "range" | "search" | "time" | "url";
+export type InputType = "textarea" | "select" | "text" | "password" | "submit" | "reset" | "hidden" | "radio" | "checkbox" | "color" | "date" | "email" | "number" | "range" | "search" | "time" | "url";
 export class InputModel {
     public inputProperties: InputProperty[];
     public options?: OptionItem[];
 
     constructor(public inputType: InputType) {
         this.inputProperties = [];
-        this.inputProperties.push( {propertyName: "inputId", propertyValue: ""});
+        //this.inputProperties.push( {propertyName: "inputId", propertyValue: ""});
         this.inputProperties.push( {propertyName: "inputName", propertyValue: ""});
 
         switch (inputType) {
@@ -14,14 +14,20 @@ export class InputModel {
                 this.inputProperties.push( {propertyName: "help", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "maxLength", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
                 break;
             case "color":
                 this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "inputValue", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
                 break;
             case "submit":
                 this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "inputValue", propertyValue: undefined});
+                //this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
+                break;
             case "reset":
             case "hidden":
                 this.inputProperties.push( {propertyName: "inputValue", propertyValue: undefined});
@@ -33,6 +39,8 @@ export class InputModel {
                 this.inputProperties.push( {propertyName: "minValue", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "maxValue", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "stepValue", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
                 break;
             case "email":
             case "password":
@@ -43,6 +51,8 @@ export class InputModel {
                 this.inputProperties.push( {propertyName: "inputValue", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "maxLength", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "patternRegexp", propertyValue: ""});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
                 break;
             case "range":
             case "number":
@@ -51,24 +61,37 @@ export class InputModel {
                 this.inputProperties.push( {propertyName: "minValue", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "maxValue", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "stepValue", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
                 break;
             case "radio":
-                this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
+                this.inputProperties.push( {propertyName: "inputValue", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "isInline", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "isChecked", propertyValue: undefined});
-                this.options = [];
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                //this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
+                this.options = [
+                    { itemName: "First option", itemValue:"optionFirst" },
+                    { itemName: "Second option", itemValue:"optionSecond" },
+                    { itemName: "Third option", itemValue:"optionThird" }
+                ];
                 break;
             case "checkbox":
-                this.inputProperties.push( {propertyName: "showLabel", propertyValue: "none"});
-                this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
+                this.inputProperties.push( {propertyName: "showLabel", propertyValue: "after"});
+                this.inputProperties.push( {propertyName: "labelText", propertyValue: "First option"});
                 this.inputProperties.push( {propertyName: "isInline", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "isChecked", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "inputValue", propertyValue: ""});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                //this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
                 break;
             case "select":
                 this.inputProperties.push( {propertyName: "placeholderText", propertyValue: "Please select item"});
+                this.inputProperties.push( {propertyName: "inputValue", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "sizeValue", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                //this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
                 this.options = [];
                 break;
             case "textarea":
@@ -78,11 +101,11 @@ export class InputModel {
                 this.inputProperties.push( {propertyName: "colsCount", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "rowsCount", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "maxLength", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
+                this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
+                //this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
                 break;
         }
-        this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
-        this.inputProperties.push( {propertyName: "isReadonly", propertyValue: undefined});
-        this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
     }
 
     public getInputProperty = (propertyName: string) => this.inputProperties.find((item) => item.propertyName === propertyName);

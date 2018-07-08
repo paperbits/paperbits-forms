@@ -4,7 +4,7 @@
     <hr />
     <fieldset class="form" data-bind="scrollable: {}">
         <!-- ko foreach: { data: editorSections, as: 'sectionItem' } -->
-            <!-- ko if: sectionItem.options === undefined -->
+            <!-- ko if: sectionItem.options === undefined && sectionItem.editors().length > 0 -->
             <div class="form-group form-group-collapsible">
                 <label class="form-label">
                     <a href="#" class="form-group-toggle" data-bind="collapse: '#'+sectionItem.sectionName"></a>
@@ -51,26 +51,20 @@
                     <label class="form-label">Add item:</label>
                     <input class="form-control" type="text" placeholder="name" data-bind='value:$parent.itemNameToAdd, valueUpdate: "afterkeydown"' />
                     <input class="form-control" type="text" placeholder="value" data-bind='value:$parent.itemValueToAdd, valueUpdate: "afterkeydown"' />
-                    <button class="btn" data-bind="click: $parent.addItem, enable: $parent.itemNameToAdd().length > 0 && $parent.itemValueToAdd().length > 0">Add</button>
+                    <button class="btn" data-bind="click: $parent.addItem, enable: $parent.itemNameToAdd().length > 0 && $parent.itemValueToAdd().length > 0">
+                       <i class="paperbits-icon paperbits-circle-add"></i> Add
+                    </button>
     
                     <label class="form-label">Options:</label>
                     <select class="form-control" multiple="multiple" height="5" 
                             data-bind="options:sectionItem.options, optionsText: function(item) { return item.itemName+ ' - ' + item.itemValue },
                             optionsValue: 'itemValue', selectedOptions: $parent.selectedItems"> </select>
     
-                    <div class="flex-item btn-group">
-                        <button class="btn" data-bind="click: $parent.upItem, visible: $parent.selectedItems().length > 0">
-                            <i class="paperbits-icon paperbits-circle-add"></i>
-                            Up
-                        </button>
-                        <button class="btn" data-bind="click: $parent.downItem, visible: $parent.selectedItems().length > 0">
-                            <i class="paperbits-icon paperbits-simple-add"></i>
-                            Down
-                        </button>
-                        <button class="btn" data-bind="click: $parent.deleteItem, visible: $parent.selectedItems().length > 0">
-                            <i class="paperbits-icon paperbits-circle-remove"></i>
-                            Delete
-                        </button>
+                    <div data-bind="visible: $parent.selectedItems().length > 0 ">
+                        <button class="btn" data-bind="click: $parent.upItem">Up</button>
+                        <button class="btn" data-bind="click: $parent.downItem">Down</button>
+                        <button class="btn" data-bind="click: $parent.deleteItem">Delete</button>
+                        <button class="btn" data-bind="click: $parent.setSelectedItemDefault">Set selected</button>
                     </div>
                 </div>
             </div>

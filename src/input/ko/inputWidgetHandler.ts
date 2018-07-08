@@ -10,10 +10,8 @@ export class InputWidgetHandler {
                 
                 let builder = new InputBuilder(inputModel);
                 builder.setControlHtml(element);
-                // element.innerHTML = builder.getControlHtml();
 
                 inputData.changed.subscribe(() => {
-                    // element.innerHTML = builder.getControlHtml();
                     builder.setControlHtml(element);
                 });
             }
@@ -65,7 +63,7 @@ class InputBuilder {
         return "";
     }
 
-    public getInput(container: HTMLElement, inputType: InputType, attributes: InputProperty[], label: string, help: string) {
+    public setInput(container: HTMLElement, inputType: InputType, attributes: InputProperty[], label: string, help: string) {
         let inputElement = <HTMLInputElement>document.createElement("input");
         inputElement.type = inputType;
         inputElement.classList.add(inputType === "range" ? "form-control-range" : "form-control");
@@ -91,13 +89,15 @@ class InputBuilder {
                 ${!!help ? `<small ${_id} class="form-text text-muted">${help}</small>` : ""}`;
     }
 
-    public getCheckbox(container: HTMLElement, showLabel: string, controlId: string, label: string, name: string, value: string, isRequired: boolean, isChecked?: boolean, isInline?: boolean) {
+    public setCheckbox(container: HTMLElement, showLabel: string, controlId: string, label: string, name: string, value: string, isRequired: boolean, 
+                       isChecked: boolean, isInline: boolean, isDisabled:boolean) {
         let inline = isInline ? " form-check-inline" : "";
         let _for = controlId ? `for="${controlId}"` : "";
         let _id = controlId ? `id="${controlId}"` : "";
         let _checked = isChecked ? "checked" : "";
         let _required = isRequired ? "required" : "";
         let _value = value ? `value="${value}"` : "";
+        let _isDisabled = isDisabled ? "disabled" : "";
 
         container.classList.add("form-check");
         if (isInline) {
@@ -106,22 +106,24 @@ class InputBuilder {
             container.classList.remove("form-check-inline");
         }
         container.innerHTML = `${(label && showLabel === "before") ? `<label class="form-check-label" ${_for}>${label}</label>` : ""}
-                <input class="form-check-input" type="checkbox" name="${name}" ${_id} ${_value} ${_checked} ${_required}>
+                <input class="form-check-input" type="checkbox" name="${name}" ${_id} ${_value} ${_checked} ${_isDisabled} ${_required}>
                 ${(label && showLabel === "after")  ? `<label class="form-check-label" ${_for}>${label}</label>` : ""}`;
     }
 
-    public getRadio(container: HTMLElement, optionItems: OptionItem[], controlId: string, name: string, isRequired: boolean, isChecked?: boolean, isInline?: boolean) {
+    public setRadio(container: HTMLElement, optionItems: OptionItem[], controlId: string, name: string, value: string, isRequired: boolean, 
+                    isInline: boolean, isDisabled:boolean) {
         let result = "";
         let inline = isInline ? " form-check-inline" : "";
         let _for = controlId ? `for="${controlId}"` : "";
         let _id = controlId ? `id="${controlId}"` : "";
-        let _checked = isChecked ? "checked" : "";
         let _required = isRequired ? "required" : "";
+        let _isDisabled = isDisabled ? "disabled" : "";
 
         for (let i = 0; i < optionItems.length; i++) {
             const item = optionItems[i];
+            const _checked = value && item.itemValue === value ? "checked" : "";
             result += `\n<div class="form-check${inline}">
-            <input class="form-check-input" type="radio" name="${name}" ${_id} value="${item.itemValue}" ${_checked} ${_required}>
+            <input class="form-check-input" type="radio" name="${name}" ${_id} value="${item.itemValue}" ${_checked} ${_isDisabled} ${_required}>
             <label class="form-check-label" ${_for}>${item.itemName}</label>
             </div>`
         }
@@ -129,33 +131,43 @@ class InputBuilder {
         container.innerHTML = result;
     }
 
-    public getSubmit(container: HTMLElement, controlId: string, name: string, value: string, label: string) {
+    public setSubmit(container: HTMLElement, controlId: string, name: string, value: string, label: string, isDisabled:boolean) {
         let _id = controlId ? `id="${controlId}"` : "";
         let _value = value ? `value="${value}"` : "";
         let _name = name ? `name="${name}"` : "";
-        container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} class="btn btn-primary">${label || "Submit"}</button>`;
+        let _isDisabled = isDisabled ? "disabled" : "";
+        container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} ${_isDisabled} class="btn btn-primary">${label || "Submit"}</button>`;
     }
 
-    public getSelect(container: HTMLElement, controlId: string, label: string, name: string, optionItems: OptionItem[], placeholder: string, isRequired: boolean, size?: string, isMultiple?: boolean) {
+    public setReset(container: HTMLElement, value: string) {
+        let _value = value ? `value="${value}"` : "";
+        container.innerHTML = `<input type="reset" ${_value} class="btn btn-primary">`;
+    }
+
+    public setSelect(container: HTMLElement, controlId: string, label: string, name: string, value: string, optionItems: OptionItem[], placeholder: string, isRequired: boolean, 
+                     size: string, isMultiple: boolean, isDisabled:boolean) {
         let options = !!placeholder ? `<option value=''>${placeholder}</option>` : "";
         for (let i = 0; i < optionItems.length; i++) {
             const item = optionItems[i];
-            options += `/n<option value="${item.itemValue || item.itemName}">${item.itemName || item.itemValue}</option>`;
+            const selected = value && item.itemValue === value ? "selected" : "";
+            options += `/n<option value="${item.itemValue || item.itemName}" ${selected}>${item.itemName || item.itemValue}</option>`;
         }
         let _for = controlId ? `for="${controlId}"` : "";
         let _id = controlId ? `id="${controlId}"` : "";
         let _required = isRequired ? "required" : "";
         let _isMultiple = isMultiple ? "multiple" : "";
         let _size = size ? `size="${size}"` : "";
+        let _isDisabled = isDisabled ? "disabled" : "";
         container.classList.add("form-group");
         container.innerHTML = 
                 `${!!label ? `<label ${_for}>${label}</label>` : ""}
-                <select class="form-control" ${_id} name="${name}" ${_size} ${_isMultiple} ${_required}>
+                <select class="form-control" ${_id} name="${name}" ${_size} ${_isMultiple} ${_required} ${_isDisabled}>
                     ${options}
                 </select>`;
     }
 
-    public getTextarea(container: HTMLElement, controlId: string, label: string, name: string, textValue: string, isRequired: boolean, rows?: string, cols?: string, maxLength?: string, placeholder?: string) {
+    public setTextarea(container: HTMLElement, controlId: string, label: string, name: string, textValue: string, isRequired: boolean, 
+                       rows: string, cols: string, maxLength: string, placeholder: string, isDisabled:boolean, isReadonly: boolean) {
         let _for = controlId ? `for="${controlId}"` : "";
         let _id = controlId ? `id="${controlId}"` : "";
         let _required = isRequired ? "required" : "";
@@ -163,10 +175,12 @@ class InputBuilder {
         let _cols = cols ? `cols="${cols}"` : "";
         let _maxlength = maxLength ? `maxlength="${maxLength}"` : "";
         let _placeholder = placeholder ? `placeholder="${placeholder}"` : "";
+        let _isDisabled = isDisabled ? "disabled" : "";
+        let _isReadonly = isReadonly ? "readonly" : "";
         container.classList.add("form-group");
         container.innerHTML = 
                 `${!!label ? `<label ${_for}>${label}</label>` : ""}
-                <textarea class="form-control" ${_id} name="${name}" ${_rows} ${_cols} ${_required} ${_maxlength} ${_placeholder}>${textValue}</textarea>`;
+                <textarea class="form-control" ${_id} name="${name}" ${_rows} ${_cols} ${_required} ${_maxlength} ${_placeholder} ${_isDisabled} ${_isReadonly}>${textValue}</textarea>`;
     }
 
     public setControlHtml(container: HTMLElement) {
@@ -177,6 +191,8 @@ class InputBuilder {
         let value: string = this.getProperty("inputValue");
         let isChecked: boolean = this.getProperty("isChecked");
         let isRequired: boolean = this.getProperty("isRequired"); 
+        let isReadonly: boolean = this.getProperty("isReadonly"); 
+        let isDisabled: boolean = this.getProperty("isDisabled"); 
         let isInline: boolean = this.getProperty("isInline");
         
         let help: string = this.getProperty("help");
@@ -188,27 +204,27 @@ class InputBuilder {
         let textValue: string = this.getProperty("textValue");
         let maxLength: string = this.getProperty("maxLength");
 
-        let formGroup = "";
-
         switch (this.inputModel.inputType) {
             case "radio":
-                this.getRadio(container, this.inputModel.options, controlId, name, isRequired, isChecked, isInline);
+                this.setRadio(container, this.inputModel.options, controlId, name, value, isRequired, isInline, isDisabled);
                 break;
             case "checkbox":
-                this.getCheckbox(container, showLabel, controlId, label, name, value, isRequired, isChecked, isInline);
+                this.setCheckbox(container, showLabel, controlId, label, name, value, isRequired, isChecked, isInline, isDisabled);
                 break;
             case "submit": 
-                this.getSubmit(container, controlId, name, value, label);
+                this.setSubmit(container, controlId, name, value, label, isDisabled);
+                break;
+            case "reset": 
+                this.setReset(container, value);
                 break;
             case "select": 
-                this.getSelect(container, controlId, label, name, this.inputModel.options, placeholder, isRequired, size, isMultiple);
+                this.setSelect(container, controlId, label, name, value, this.inputModel.options, placeholder, isRequired, size, isMultiple, isDisabled);
                 break;
             case "textarea": 
-                this.getTextarea(container, controlId, label, name, textValue, isRequired, rows, cols, maxLength, placeholder);
+                this.setTextarea(container, controlId, label, name, textValue, isRequired, rows, cols, maxLength, placeholder, isDisabled, isReadonly);
                 break;
             default: 
-                this.getInput(container, this.inputModel.inputType, this.inputModel.inputProperties, label, help);
+                this.setInput(container, this.inputModel.inputType, this.inputModel.inputProperties, label, help);
         }
-        return formGroup;
     }
 }

@@ -1,15 +1,23 @@
 import * as ko from "knockout";
+import * as mapping from "knockout-mapping";
 import template from "./inputEditor.html";
 import { IViewManager } from '@paperbits/common/ui';
 import { IWidgetEditor } from '@paperbits/common/widgets';
 import { Component } from "@paperbits/core/ko/component";
 import { InputModel, InputProperty, InputType, OptionItem } from "../inputModel";
-import * as mapping from "knockout-mapping";
 
-type EditorSection = { 
+interface EditorSection { 
     sectionName:string, 
     editors: KnockoutObservableArray<EditorItem>,
-    options?: KnockoutObservableArray<OptionItem> };
+    options?: KnockoutObservableArray<OptionItem> 
+};
+interface EditorItem {    
+    propertyLabel: string;
+    propertyType: InputType;
+    propertyName: string;
+    propertyValue: KnockoutObservable<any>;
+    propertyOptions?: { label: string, value: any }[]
+}
 @Component({
     selector: "input-editor",
     template: template,
@@ -47,11 +55,11 @@ export class InputEditor implements IWidgetEditor {
         "accept"         : { name: "Settings", label: "Accept value", inputType: "text"},
         "colsCount"      : { name: "Settings", label: "Visible width of characters", inputType: "number"},
         "rowsCount"      : { name: "Settings", label: "Visible number of lines", inputType: "number"},
-        "isRequired"     : { name: "Miscellaneous", label: "Is required", inputType: "checkbox"},
+        "isRequired"     : { name: "Settings", label: "Is required", inputType: "checkbox"},
         "isReadonly"     : { name: "Miscellaneous", label: "Is read-only", inputType: "checkbox"},
         "isDisabled"     : { name: "Miscellaneous", label: "Is disabled", inputType: "checkbox"},
-        "showLabel"      : { name: "Label", label: "", inputType: "radio", options: [{label: "None", value: "none"}, {label: "Before", value: "before"}, {label: "After", value: "after"}]},
-        "labelText"      : { name: "Label", label: "Label text", inputType: "text"},
+        "showLabel"      : { name: "Settings", label: "", inputType: "radio", options: [{label: "None", value: "none"}, {label: "Before", value: "before"}, {label: "After", value: "after"}]},
+        "labelText"      : { name: "Settings", label: "Label text", inputType: "text"},
     };
 
     private itemMapping = {
@@ -82,6 +90,9 @@ export class InputEditor implements IWidgetEditor {
         this.addItem = this.addItem.bind(this);
         this.downItem = this.downItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.setSelectedItemDefault = this.setSelectedItemDefault.bind(this);
+        this.copyNameToValue = this.copyNameToValue.bind(this);
+        this.itemNameToAdd.subscribe(this.copyNameToValue, null, "beforeChange");
     }
 
     public setWidgetModel(model: InputModel, applyChangesCallback?: () => void): void {
@@ -93,7 +104,7 @@ export class InputEditor implements IWidgetEditor {
         this.applyChangesCallback = applyChangesCallback;
 
         if (this.model.inputProperties.length > 0) {
-            if (this.model.options && this.model.options.length > 0) {
+            if (this.model.options) {
                 this.optionsSection.options(this.model.options);
                 this.optionsSection.options.subscribe(this.onOptionsChange);
                 this.showOptions(true);
@@ -108,6 +119,7 @@ export class InputEditor implements IWidgetEditor {
                 edit.propertyLabel = sectionMetadata.label;
                 edit.propertyType = sectionMetadata.inputType;
                 edit.propertyOptions = sectionMetadata.options || [];
+                edit.propertyValue.extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
                 edit.propertyValue.subscribe(this.onChange);
                 if (!sectionMetadata) {
                     defaultSection.editors.push(edit);
@@ -200,12 +212,28 @@ export class InputEditor implements IWidgetEditor {
             this.selectedItems([]);
         }
     }
-}
+ 
+    public setSelectedItemDefault() {
+        if (this.selectedItems().length > 0)
+        {
+            const selectedValue = this.selectedItems()[0];
+            this.model.setProperty("inputValue", selectedValue);
+            for (let i = 0; i < this.editorSections().length; i++) {
+                const section = this.editorSections()[i];
+                const editor = section.editors().find( edit => edit.propertyName === "inputValue" );
+                if (editor) {
+                    editor.propertyValue(selectedValue);
+                    return;
+                }
+            }
+        }
+    }
 
-class EditorItem {    
-    public propertyLabel: string;
-    public propertyType: InputType;
-    public propertyName: string;
-    public propertyValue: KnockoutObservable<any>;
-    public propertyOptions?: { label: string, value: any }[]
+    private copyNameToValue(newValue) {
+        if (this.itemValueToAdd() === this.itemNameToAdd()) {
+            setTimeout(() => {                
+                this.itemValueToAdd(this.itemNameToAdd());
+            }, 100);
+        }
+    }
 }
