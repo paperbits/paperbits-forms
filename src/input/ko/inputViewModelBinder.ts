@@ -1,8 +1,6 @@
-import * as ko from "knockout";
-import * as mapping from "knockout-mapping";
 import { InputModel } from "../inputModel";
 import { InputViewModel } from "./inputViewModel";
-import { IViewModelBinder } from "@paperbits/common/widgets/IViewModelBinder";
+import { IViewModelBinder } from "@paperbits/common/widgets";
 
 export class InputViewModelBinder implements IViewModelBinder<InputModel, InputViewModel>  {
     public modelToViewModel(model: InputModel, readonly: boolean, viewModel?: InputViewModel): InputViewModel {
