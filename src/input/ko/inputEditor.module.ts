@@ -26,5 +26,6 @@ export class InputEditorModule implements IInjectorModule {
         widgetHandlers.push(new InputHandlers("range"));
         widgetHandlers.push(new InputHandlers("search"));
         widgetHandlers.push(new InputHandlers("url"));
+        widgetHandlers.push(new InputHandlers("hidden"));
     }
 }

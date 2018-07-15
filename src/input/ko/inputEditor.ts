@@ -33,7 +33,7 @@ export class InputEditor implements IWidgetEditor {
     public showOptions: KnockoutObservable<boolean>;
     public itemNameToAdd: KnockoutObservable<string>;
     public itemValueToAdd: KnockoutObservable<string>;
-    public selectedItems: KnockoutObservableArray<OptionItem>;
+    public selectedItems: KnockoutObservableArray<string>;
 
     private sectionPropertyMap: { 
         [key: string]: { name: string, label:string, inputType: InputType, options?: { label: string, value: any }[] } 

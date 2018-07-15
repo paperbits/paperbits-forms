@@ -139,6 +139,13 @@ class InputBuilder {
         container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} ${_isDisabled} class="btn btn-primary">${label || "Submit"}</button>`;
     }
 
+    public setHidden(container: HTMLElement, controlId: string, name: string, value: string) {
+        let _id = controlId ? `id="${controlId}"` : "";
+        let _value = value ? `value="${value}"` : "";
+        let _name = name ? `name="${name}"` : "";
+        container.innerHTML = `<input type="hidden" ${_id} ${_name} ${_value}>`;
+    }
+
     public setReset(container: HTMLElement, value: string) {
         let _value = value ? `value="${value}"` : "";
         container.innerHTML = `<input type="reset" ${_value} class="btn btn-primary">`;
@@ -146,7 +153,7 @@ class InputBuilder {
 
     public setSelect(container: HTMLElement, controlId: string, label: string, name: string, value: string, optionItems: OptionItem[], placeholder: string, isRequired: boolean, 
                      size: string, isMultiple: boolean, isDisabled:boolean) {
-        let options = !!placeholder ? `<option value=''>${placeholder}</option>` : "";
+        let options = !!placeholder ? `<option selected disabled>${placeholder}</option>` : "";
         for (let i = 0; i < optionItems.length; i++) {
             const item = optionItems[i];
             const selected = value && item.itemValue === value ? "selected" : "";
@@ -222,6 +229,9 @@ class InputBuilder {
                 break;
             case "textarea": 
                 this.setTextarea(container, controlId, label, name, textValue, isRequired, rows, cols, maxLength, placeholder, isDisabled, isReadonly);
+                break;
+            case "hidden": 
+                this.setHidden(container, controlId, name, value);
                 break;
             default: 
                 this.setInput(container, this.inputModel.inputType, this.inputModel.inputProperties, label, help);

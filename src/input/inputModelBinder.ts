@@ -3,7 +3,7 @@ import { InputModel, InputContract } from ".";
 import { InputProperty } from "./inputModel";
 
 export class InputModelBinder implements IModelBinder {
-    private excludeNames = ["type", "object", "inputType", "inputProperties"];
+    private excludeNames = ["type", "object", "inputType", "inputProperties", "options"];
 
     public canHandleWidgetType(widgetType: string): boolean {
         return widgetType === "input";
@@ -20,6 +20,16 @@ export class InputModelBinder implements IModelBinder {
             for (let i = 0; i < node.inputProperties.length; i++) {
                 const item = node.inputProperties[i];
                 model.setProperty(item.propertyName,item.propertyValue);                
+            }
+        }
+
+        if (node.options && node.options.length > 0) {
+            for (let i = 0; i < node.options.length; i++) {
+                const item = node.options[i];
+                model.options.push({
+                    itemName: item.itemName,
+                    itemValue: item.itemValue
+                });                
             }
         }
 
@@ -54,6 +64,18 @@ export class InputModelBinder implements IModelBinder {
                 contract.inputProperties.push({
                     propertyName: item.propertyName,
                     propertyValue: item.propertyValue
+                });
+            }
+        }
+
+        if (model.options && model.options.length > 0) {
+            contract.options = [];
+            for (let i = 0; i < model.options.length; i++) {
+                const item = model.options[i];
+                
+                contract.options.push({
+                    itemName: item.itemName,
+                    itemValue: item.itemValue
                 });
             }
         }

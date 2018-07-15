@@ -86,5 +86,30 @@
                 <!-- /ko -->
             </div>
         </div>
+
+        <div class="form-group form-group-collapsible">
+            <label class="form-label">
+                <a href="#" class="form-group-toggle" data-bind="collapse: '#optionsCollapse'"></a>
+                <b>Hidden inputs</b>
+            </label>
+            <div id="optionsCollapse" class="collapse form-group-collapse">
+
+                <label class="form-label">Add item:</label>
+                <input class="form-control" type="text" placeholder="name" data-bind='value:itemNameToAdd, valueUpdate: "afterkeydown"' />
+                <input class="form-control" type="text" placeholder="value" data-bind='value:itemValueToAdd, valueUpdate: "afterkeydown"' />
+                <button class="btn" data-bind="click: addItem, enable: itemNameToAdd().length > 0 && itemValueToAdd().length > 0">
+                   <i class="paperbits-icon paperbits-circle-add"></i> Add
+                </button>
+
+                <label class="form-label">Name - Value:</label>
+                <select class="form-control" multiple="multiple" height="5" 
+                        data-bind="options:hiddenInputs, optionsText: function(item) { return item.itemName+ ' - ' + item.itemValue },
+                        optionsValue: 'itemName', selectedOptions: selectedItems"> </select>
+
+                <div data-bind="visible: selectedItems().length > 0 ">
+                    <button class="btn" data-bind="click: deleteItem">Delete</button>
+                </div>
+            </div>
+        </div>
     </fieldset>
 </div>

@@ -58,6 +58,7 @@ export class InputModel {
             case "number":
                 this.inputProperties.push( {propertyName: "labelText", propertyValue: ""});
                 this.inputProperties.push( {propertyName: "inputValue", propertyValue: ""});
+                this.inputProperties.push( {propertyName: "maxLength", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "minValue", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "maxValue", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "stepValue", propertyValue: undefined});
@@ -70,11 +71,7 @@ export class InputModel {
                 this.inputProperties.push( {propertyName: "isChecked", propertyValue: undefined});
                 this.inputProperties.push( {propertyName: "isRequired", propertyValue: undefined});
                 //this.inputProperties.push( {propertyName: "isDisabled", propertyValue: undefined});
-                this.options = [
-                    { itemName: "First option", itemValue:"optionFirst" },
-                    { itemName: "Second option", itemValue:"optionSecond" },
-                    { itemName: "Third option", itemValue:"optionThird" }
-                ];
+                this.options = [];
                 break;
             case "checkbox":
                 this.inputProperties.push( {propertyName: "showLabel", propertyValue: "after"});
