@@ -20,7 +20,7 @@ export class FormHandlers implements IWidgetHandler {
                 lastNameModel.setProperty("labelText", "Last name");
                 lastNameModel.setProperty("inputName", "lastName");
                 lastNameModel.setProperty("placeholderText", "e.g. Doe");
-                lastNameModel.setProperty("isRequired",true);
+                lastNameModel.setProperty("isRequired", true);
 
                 const submitModel = new InputModel("submit");
                 submitModel.setProperty("inputValue", "Register");

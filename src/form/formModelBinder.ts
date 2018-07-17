@@ -15,7 +15,7 @@ export class FormModelBinder implements IModelBinder {
         return model instanceof FormModel;
     }
 
-    public async nodeToModel(node: FormContract): Promise<FormModel> {
+    public async contractToModel(node: FormContract): Promise<FormModel> {
         let model = new FormModel();
         model.formAction    = node.formAction;
         model.formMethod    = <any>node.formMethod;
@@ -32,7 +32,7 @@ export class FormModelBinder implements IModelBinder {
         if (node.nodes) {
             let modelPromises = node.nodes.map(async (node) => {
                 let modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByNodeType(node.type);
-                return await modelBinder.nodeToModel(node);
+                return await modelBinder.contractToModel(node);
             });
     
             model.widgets = await Promise.all<any>(modelPromises);
@@ -43,7 +43,7 @@ export class FormModelBinder implements IModelBinder {
         return model;
     }
 
-    public getConfig(model: FormModel): FormContract {
+    public modelToContract(model: FormModel): FormContract {
         let contract: FormContract = {
             object: "block",
             type: "form",
@@ -63,7 +63,7 @@ export class FormModelBinder implements IModelBinder {
 
         model.widgets.forEach(widgetModel => {
             let modelBinder = this.modelBinderSelector.getModelBinderByModel(widgetModel);
-            contract.nodes.push(modelBinder.getConfig(widgetModel));
+            contract.nodes.push(modelBinder.modelToContract(widgetModel));
         });
 
         return contract;
