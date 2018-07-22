@@ -6,6 +6,7 @@ import { IWidgetEditor } from "@paperbits/common/widgets";
 import { Component } from "@paperbits/core/ko/component";
 import { InputModel, InputType, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
+import { changeRateLimit } from "@paperbits/core/ko/consts";
 
 interface EditorSection {
     sectionName: string;
@@ -121,7 +122,7 @@ export class InputEditor implements IWidgetEditor {
                 edit.propertyLabel = sectionMetadata.label;
                 edit.propertyType = sectionMetadata.inputType;
                 edit.propertyOptions = sectionMetadata.options || [];
-                edit.propertyValue.extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
+                edit.propertyValue.extend(changeRateLimit);
                 edit.propertyValue.subscribe(this.onChange);
 
                 if (!sectionMetadata) {

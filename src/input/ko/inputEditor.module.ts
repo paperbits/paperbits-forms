@@ -4,11 +4,11 @@ import { InputEditor } from "./inputEditor";
 import { InputHandlers } from "../inputHandlers";
 
 export class InputEditorModule implements IInjectorModule {
-    register(injector: IInjector): void {
-        //editors
+    public register(injector: IInjector): void {
+        // editors
         injector.bind("inputEditor", InputEditor);
 
-        //handlers
+        // handlers
         const widgetHandlers: Array<IWidgetHandler> = injector.resolve("widgetHandlers");
         widgetHandlers.push(new InputHandlers("text"));
         widgetHandlers.push(new InputHandlers("submit"));
@@ -26,6 +26,5 @@ export class InputEditorModule implements IInjectorModule {
         widgetHandlers.push(new InputHandlers("range"));
         widgetHandlers.push(new InputHandlers("search"));
         widgetHandlers.push(new InputHandlers("url"));
-        widgetHandlers.push(new InputHandlers("hidden"));
     }
 }
