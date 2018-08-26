@@ -1,5 +1,5 @@
 <div class="editor resizable-content flex-container flex-container-column">
-    <h1>Input control <span data-bind="text: controlType"></span>
+    <h1>Form input "<span data-bind="text: controlType"></span>"
         <a href="#" class="btn pull-right" data-bind="click: closeEditor">✖</a></h1>
     <hr />
     <fieldset class="form" data-bind="scrollable: {}">
@@ -32,7 +32,7 @@
 
                     <!-- ko ifnot: editor.propertyType === "checkbox" || editor.propertyType === "radio" -->
                     <label class="form-label" data-bind="text: editor.propertyLabel"></label>
-                    <input class="form-control" data-bind="textInput: editor.propertyValue, attr: { type: editor.propertyType }" maxlength="500" />
+                    <input class="form-control" data-bind="textInput: editor.propertyValue, attr: { type: editor.propertyType, placeholder: editor.placeholder }" maxlength="500" />
                     <!-- /ko -->
 
                 <!-- /ko -->
@@ -58,7 +58,8 @@
                     <label class="form-label">Options:</label>
                     <select class="form-control" multiple="multiple" height="5" 
                             data-bind="options:sectionItem.options, optionsText: function(item) { return item.itemName+ ' - ' + item.itemValue },
-                            optionsValue: 'itemValue', selectedOptions: $parent.selectedItems"> </select>
+                            optionsValue: 'itemValue', selectedOptions: $parent.selectedItems">
+                    </select>
     
                     <div data-bind="visible: $parent.selectedItems().length > 0 ">
                         <button class="btn" data-bind="click: $parent.upItem">Up</button>

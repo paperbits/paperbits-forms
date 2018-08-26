@@ -12,17 +12,17 @@ export class InputModelBinder implements IModelBinder {
         return model instanceof InputModel;
     }
 
-    public async contractToModel(node: InputContract): Promise<InputModel> {
-        const model = new InputModel(<any>node.inputType);
+    public async contractToModel(contract: InputContract): Promise<InputModel> {
+        const model = new InputModel(<any>contract.inputType);
 
-        if (node.inputProperties && node.inputProperties.length > 0) {
-            for (const item of node.inputProperties) {
+        if (contract.inputProperties && contract.inputProperties.length > 0) {
+            for (const item of contract.inputProperties) {
                 model.setProperty(item.propertyName, item.propertyValue);
             }
         }
 
-        if (node.options && node.options.length > 0) {
-            for (const item of node.options) {
+        if (contract.options && contract.options.length > 0) {
+            for (const item of contract.options) {
                 model.options.push({
                     itemName: item.itemName,
                     itemValue: item.itemValue
@@ -31,10 +31,11 @@ export class InputModelBinder implements IModelBinder {
         }
 
         // convert old data to a new data structure
-        for (const propertyName in node) {
+        for (const propertyName in contract) {
             if (this.excludeNames.indexOf(propertyName) === -1) {
-                if (node.hasOwnProperty(propertyName)) {
-                    const propertyValue = node[propertyName];
+                if (contract.hasOwnProperty(propertyName)) {
+                    const propertyValue = contract[propertyName];
+                    
                     if (propertyValue) {
                         model.setProperty(propertyName, propertyValue);
                     }
@@ -54,8 +55,8 @@ export class InputModelBinder implements IModelBinder {
             inputProperties: []
         };
 
-        if (model.inputProperties && model.inputProperties.length > 0) {
-            for (const item of model.inputProperties) {
+        if (model.properties && model.properties.length > 0) {
+            for (const item of model.properties) {
                 contract.inputProperties.push({
                     propertyName: item.propertyName,
                     propertyValue: item.propertyValue

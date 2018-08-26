@@ -1,7 +1,6 @@
 import { FormModel } from "./formModel";
 import { IModelBinder } from "@paperbits/common/editing";
 import { ModelBinderSelector } from "@paperbits/common/widgets";
-import { Contract } from "@paperbits/common";
 import { FormContract } from "./formContract";
 
 export class FormModelBinder implements IModelBinder {
@@ -16,7 +15,7 @@ export class FormModelBinder implements IModelBinder {
     }
 
     public async contractToModel(node: FormContract): Promise<FormModel> {
-        let model = new FormModel();
+        const model = new FormModel();
         model.formAction    = node.formAction;
         model.formMethod    = <any>node.formMethod;
         model.formTarget    = <any>node.formTarget;
@@ -30,8 +29,8 @@ export class FormModelBinder implements IModelBinder {
         model.isInline      = node.isInline;
 
         if (node.nodes) {
-            let modelPromises = node.nodes.map(async (node) => {
-                let modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByNodeType(node.type);
+            const modelPromises = node.nodes.map(async (node) => {
+                const modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByNodeType(node.type);
                 return await modelBinder.contractToModel(node);
             });
     
@@ -44,7 +43,7 @@ export class FormModelBinder implements IModelBinder {
     }
 
     public modelToContract(model: FormModel): FormContract {
-        let contract: FormContract = {
+        const contract: FormContract = {
             object: "block",
             type: "form",
             formAction   : model.formAction,
@@ -62,7 +61,7 @@ export class FormModelBinder implements IModelBinder {
         };
 
         model.widgets.forEach(widgetModel => {
-            let modelBinder = this.modelBinderSelector.getModelBinderByModel(widgetModel);
+            const modelBinder = this.modelBinderSelector.getModelBinderByModel(widgetModel);
             contract.nodes.push(modelBinder.modelToContract(widgetModel));
         });
 

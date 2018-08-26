@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import template from "./formEditor.html";
-import { IViewManager } from '@paperbits/common/ui';
-import { IWidgetEditor } from '@paperbits/common/widgets';
+import { IViewManager } from "@paperbits/common/ui";
+import { IWidgetEditor } from "@paperbits/common/widgets";
 import { Component } from "@paperbits/core/ko/component";
 import { FormModel } from "../formModel";
 import { OptionItem, InputModel } from "../../input";
@@ -15,15 +15,15 @@ export class FormEditor implements IWidgetEditor {
     private formModel: FormModel;
     private applyChangesCallback: () => void;
 
-    public readonly formAction:KnockoutObservable<string>;
-    public readonly formMethod?:KnockoutObservable<string>;
-    public readonly formTarget?:KnockoutObservable<string>;
-    public readonly acceptCharset?:KnockoutObservable<string>;
-    public readonly encType?:KnockoutObservable<string>;
-    public readonly isFieldset?:KnockoutObservable<boolean>;
-    public readonly legendText?:KnockoutObservable<string>;
-    public readonly legendAlign?:KnockoutObservable<string>;
-    public readonly isInline?:KnockoutObservable<boolean>;
+    public readonly formAction: KnockoutObservable<string>;
+    public readonly formMethod?: KnockoutObservable<string>;
+    public readonly formTarget?: KnockoutObservable<string>;
+    public readonly acceptCharset?: KnockoutObservable<string>;
+    public readonly encType?: KnockoutObservable<string>;
+    public readonly isFieldset?: KnockoutObservable<boolean>;
+    public readonly legendText?: KnockoutObservable<string>;
+    public readonly legendAlign?: KnockoutObservable<string>;
+    public readonly isInline?: KnockoutObservable<boolean>;
     
     public itemNameToAdd: KnockoutObservable<string>;
     public itemValueToAdd: KnockoutObservable<string>;
@@ -73,7 +73,7 @@ export class FormEditor implements IWidgetEditor {
         this.legendAlign(model.legendAlign || "left");
         this.isInline(model.isInline);
 
-        if(model.widgets && model.widgets.length > 0) {
+        if (model.widgets && model.widgets.length > 0) {
             const hiddens = model.widgets.filter(widget => widget.inputType === "hidden");
             if (hiddens.length > 0) {
                 this.hiddenInputs(
@@ -91,7 +91,7 @@ export class FormEditor implements IWidgetEditor {
     }
 
     public addItem () {
-        if (this.itemNameToAdd() != "" && this.itemValueToAdd() != "" && 
+        if (this.itemNameToAdd() !== "" && this.itemValueToAdd() !== "" && 
             !this.hiddenInputs().find((item) => item.itemName === this.itemNameToAdd())) {
             
                 const newItem = { itemName: this.itemNameToAdd(), itemValue: this.itemValueToAdd()};

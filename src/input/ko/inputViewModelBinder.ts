@@ -11,14 +11,16 @@ export class InputViewModelBinder implements IViewModelBinder<InputModel, InputV
             viewModel.inputData.changed(new Date());
         }
 
-        viewModel["widgetBinding"] = {
+        const binding = {
             displayName: "Input",
             model: model,
             editor: "input-editor",
             applyChanges: () => {
                 this.modelToViewModel(model, readonly, viewModel);
             }
-        }
+        };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }
