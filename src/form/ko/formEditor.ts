@@ -20,9 +20,6 @@ export class FormEditor implements IWidgetEditor {
     public readonly formTarget?: KnockoutObservable<string>;
     public readonly acceptCharset?: KnockoutObservable<string>;
     public readonly encType?: KnockoutObservable<string>;
-    public readonly isFieldset?: KnockoutObservable<boolean>;
-    public readonly legendText?: KnockoutObservable<string>;
-    public readonly legendAlign?: KnockoutObservable<string>;
     public readonly isInline?: KnockoutObservable<boolean>;
     
     public itemNameToAdd: KnockoutObservable<string>;
@@ -36,9 +33,6 @@ export class FormEditor implements IWidgetEditor {
         this.formTarget    = ko.observable<string>();
         this.acceptCharset = ko.observable<string>();
         this.encType       = ko.observable<string>();
-        this.isFieldset    = ko.observable<boolean>();
-        this.legendText    = ko.observable<string>();
-        this.legendAlign   = ko.observable<string>();
         this.isInline      = ko.observable<boolean>();
 
         this.setWidgetModel = this.setWidgetModel.bind(this);
@@ -48,9 +42,6 @@ export class FormEditor implements IWidgetEditor {
         this.formTarget   .subscribe(((newValue) => {this.formModel.formTarget    = newValue;this.applyChangesCallback();}).bind(this));
         this.acceptCharset.subscribe(((newValue) => {this.formModel.acceptCharset = newValue;this.applyChangesCallback();}).bind(this));
         this.encType      .subscribe(((newValue) => {this.formModel.encType       = newValue;this.applyChangesCallback();}).bind(this));
-        this.isFieldset   .subscribe(((newValue) => {this.formModel.isFieldset    = newValue;this.applyChangesCallback();}).bind(this));
-        this.legendText   .subscribe(((newValue) => {this.formModel.legendText    = newValue;this.applyChangesCallback();}).bind(this));
-        this.legendAlign  .subscribe(((newValue) => {this.formModel.legendAlign   = newValue;this.applyChangesCallback();}).bind(this));
         this.isInline     .subscribe(((newValue) => {this.formModel.isInline      = newValue;this.applyChangesCallback();}).bind(this));
         
         this.itemNameToAdd = ko.observable("");
@@ -68,9 +59,6 @@ export class FormEditor implements IWidgetEditor {
         this.formTarget(model.formTarget || "_self");
         this.acceptCharset(model.acceptCharset);
         this.encType(model.encType || "application/x-www-form-urlencoded");
-        this.isFieldset(model.isFieldset);
-        this.legendText(model.legendText);
-        this.legendAlign(model.legendAlign || "left");
         this.isInline(model.isInline);
 
         if (model.widgets && model.widgets.length > 0) {

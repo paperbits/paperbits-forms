@@ -2,6 +2,12 @@ import { InputProperty } from "./inputProperty";
 import { WidgetModel } from "@paperbits/common/widgets";
 
 export class InputModel { // implements WidgetModel {
+    // Base properties for all inputs:
+    // public name: string;
+    // public value: string;
+    // public assignErrors(error) - for future server side validation
+    // public getErrors() - for validation summary
+
     public properties: InputProperty[];
     public options?: OptionItem[];
 

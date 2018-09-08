@@ -1,21 +1,16 @@
 import * as ko from "knockout";
 import { InputModel, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
+import { IBag } from "@paperbits/common";
 
 
 export class InputBindingHandler {
     constructor() {
         ko.bindingHandlers.inputWidget = {
-            init: (element: HTMLElement, valueAccessor) => {
-                const inputData = valueAccessor();
-                const inputModel = inputData.controlModel;
-
-                const builder = new InputBuilder(inputModel);
+            update: (element: HTMLElement, valueAccessor) => {
+                const controlModel = valueAccessor()();
+                const builder = new InputBuilder(controlModel);
                 builder.setControlHtml(element);
-
-                inputData.changed.subscribe(() => {
-                    builder.setControlHtml(element);
-                });
             }
         };
     }
@@ -57,7 +52,12 @@ class InputBuilder {
     public setInput(container: HTMLElement, inputType: string, attributes: InputProperty[], label: string, help: string): void {
         const inputElement = <HTMLInputElement>document.createElement("input");
         inputElement.type = inputType;
-        inputElement.classList.add(inputType === "range" ? "form-control-range" : "form-control");
+
+        inputElement.classList.add("form-control");
+
+        if (inputType === "range") {
+            inputElement.classList.add("form-control-range");
+        }
 
         if (attributes.length > 0) {
             for (const attribute of attributes) {
@@ -68,13 +68,14 @@ class InputBuilder {
             }
         }
         const controlId: string = inputElement.id;
+
         if (help) {
             inputElement.setAttribute("aria-describedby", `${controlId}Help`);
         }
+        
         const _for = controlId && `for="${controlId}"`;
         let _id = controlId && `id="${controlId}Help"`;
 
-        container.classList.add("form-group");
         container.innerHTML = `${!!label ? `<label ${_for}>${label}</label>` : ""}
                 ${inputElement.outerHTML.trim()}
                 ${!!help ? `<small ${_id} class="form-text text-muted">${help}</small>` : ""}`;
@@ -91,9 +92,11 @@ class InputBuilder {
         const _isDisabled = isDisabled ? "disabled" : "";
 
         container.classList.add("form-check");
+
         if (isInline) {
             container.classList.add("form-check-inline");
-        } else {
+        }
+        else {
             container.classList.remove("form-check-inline");
         }
         container.innerHTML = `${(label && showLabel === "before") ? `<label class="form-check-label" ${_for}>${label}</label>` : ""}
@@ -191,7 +194,6 @@ class InputBuilder {
         const isReadonly: boolean = this.getProperty("isReadonly");
         const isDisabled: boolean = this.getProperty("isDisabled");
         const isInline: boolean = this.getProperty("isInline");
-
         const help: string = this.getProperty("help");
         const placeholder: string = this.getProperty("placeholderText");
         const size: string = this.getProperty("sizeValue");

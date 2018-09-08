@@ -7,9 +7,6 @@ export interface FormContract extends Contract {
     acceptCharset?: string;
     encType?: string;
     formName?: string;
-    isFieldset?: boolean;
-    legendText?: string;
-    legendAlign?: string;
     description?: string;
     isInline?: boolean;
 }

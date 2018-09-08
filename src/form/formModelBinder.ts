@@ -22,9 +22,6 @@ export class FormModelBinder implements IModelBinder {
         model.acceptCharset = node.acceptCharset;
         model.encType       = <any>node.encType;
         model.formName      = node.formName;
-        model.isFieldset    = node.isFieldset;
-        model.legendText    = node.legendText;
-        model.legendAlign   = <any>node.legendAlign;
         model.description   = node.description;
         model.isInline      = node.isInline;
 
@@ -52,9 +49,6 @@ export class FormModelBinder implements IModelBinder {
             acceptCharset: model.acceptCharset,
             encType      : model.encType,
             formName     : model.formName,
-            isFieldset   : model.isFieldset,
-            legendText   : model.legendText,
-            legendAlign  : model.legendAlign,
             description  : model.description,
             isInline     : model.isInline,
             nodes: []

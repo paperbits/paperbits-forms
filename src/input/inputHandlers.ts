@@ -2,11 +2,7 @@ import { IWidgetOrder, IWidgetHandler } from "@paperbits/common/editing";
 import { InputModel } from ".";
 
 export class InputHandlers implements IWidgetHandler {
-    private readonly input: InputModel;
-
-    constructor(input: InputModel) {
-        this.input = input;
-    }
+    constructor(private readonly input: InputModel) { }
 
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {

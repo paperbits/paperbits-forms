@@ -1,77 +1,76 @@
-<div class="editor resizable-content flex-container flex-container-column">
-    <h1>Form input "<span data-bind="text: controlType"></span>"
-        <a href="#" class="btn pull-right" data-bind="click: closeEditor">✖</a></h1>
-    <hr />
-    <fieldset class="form" data-bind="scrollable: {}">
-        <!-- ko foreach: { data: editorSections, as: 'sectionItem' } -->
-            <!-- ko if: sectionItem.options === undefined && sectionItem.editors().length > 0 -->
-            <div class="form-group form-group-collapsible">
+<fieldset class="form flex-item flex-item-grow" data-bind="scrollable: {}">
+    <!-- ko foreach: { data: editorSections, as: 'sectionItem' } -->
+    
+    <!-- ko if: sectionItem.options === undefined && sectionItem.editors().length > 0 -->
+    <div class="form-group form-group-collapsible">
+        <label class="form-label">
+            <a href="#" class="form-group-toggle" data-bind="collapse: '#'+sectionItem.sectionName"></a>
+            <b data-bind="text: sectionItem.sectionName"></b>
+        </label>
+
+        <div class="collapse form-group-collapse" data-bind="attr: { id: sectionItem.sectionName }">
+            <!-- ko foreach: { data: sectionItem.editors, as: 'editor'  } -->
+
+            <!-- ko if: editor.propertyType === "checkbox" -->
+            <label class="form-label">
+                <input type="checkbox" data-bind="checked: editor.propertyValue" /><span data-bind="text: editor.propertyLabel"></span>
+            </label>
+            <!-- /ko -->
+
+            <!-- ko if: editor.propertyType === "radio" -->
+            <div class="form-group">
+                <!-- ko foreach: { data: editor.propertyOptions, as: 'prop'  } -->
                 <label class="form-label">
-                    <a href="#" class="form-group-toggle" data-bind="collapse: '#'+sectionItem.sectionName"></a>
-                    <b data-bind="text: sectionItem.sectionName"></b>
+                    <input type="radio" data-bind="checked: editor.propertyValue, attr: { value: prop.value, name: editor.propertyName }" /><span
+                        data-bind="text: prop.label"></span>
                 </label>
-
-                <div class="collapse form-group-collapse" data-bind="attr: { id: sectionItem.sectionName }" >
-                <!-- ko foreach: { data: sectionItem.editors, as: 'editor'  } -->
-
-                    <!-- ko if: editor.propertyType === "checkbox" -->
-                    <label class="form-label">
-                        <input type="checkbox" data-bind="checked: editor.propertyValue" /><span data-bind="text: editor.propertyLabel"></span>
-                    </label>
-                    <!-- /ko -->
-
-                    <!-- ko if: editor.propertyType === "radio" -->
-                    <div class="form-group">
-                        <!-- ko foreach: { data: editor.propertyOptions, as: 'prop'  } -->
-                        <label class="form-label">
-                            <input type="radio" data-bind="checked: editor.propertyValue, attr: { value: prop.value, name: editor.propertyName }" /><span data-bind="text: prop.label"></span>
-                        </label>
-                        <!-- /ko -->
-                    </div>
-                    <!-- /ko -->
-
-                    <!-- ko ifnot: editor.propertyType === "checkbox" || editor.propertyType === "radio" -->
-                    <label class="form-label" data-bind="text: editor.propertyLabel"></label>
-                    <input class="form-control" data-bind="textInput: editor.propertyValue, attr: { type: editor.propertyType, placeholder: editor.placeholder }" maxlength="500" />
-                    <!-- /ko -->
-
                 <!-- /ko -->
-                </div>
             </div>
             <!-- /ko -->
 
-            <!-- ko if: sectionItem.options !== undefined -->
-            <div class="form-group form-group-collapsible" data-bind="visible: $parent.showOptions ">
-                <label class="form-label">
-                    <a href="#" class="form-group-toggle" data-bind="collapse: '#optionsCollapse'"></a>
-                    <b>Options/Values</b>
-                </label>
-                <div id="optionsCollapse" class="collapse form-group-collapse">
-    
-                    <label class="form-label">Add item:</label>
-                    <input class="form-control" type="text" placeholder="name" data-bind='value:$parent.itemNameToAdd, valueUpdate: "afterkeydown"' />
-                    <input class="form-control" type="text" placeholder="value" data-bind='value:$parent.itemValueToAdd, valueUpdate: "afterkeydown"' />
-                    <button class="btn" data-bind="click: $parent.addItem, enable: $parent.itemNameToAdd().length > 0 && $parent.itemValueToAdd().length > 0">
-                       <i class="paperbits-icon paperbits-circle-add"></i> Add
-                    </button>
-    
-                    <label class="form-label">Options:</label>
-                    <select class="form-control" multiple="multiple" height="5" 
-                            data-bind="options:sectionItem.options, optionsText: function(item) { return item.itemName+ ' - ' + item.itemValue },
+            <!-- ko ifnot: editor.propertyType === "checkbox" || editor.propertyType === "radio" -->
+            <label class="form-label" data-bind="text: editor.propertyLabel"></label>
+            <input class="form-control" data-bind="textInput: editor.propertyValue, attr: { type: editor.propertyType, placeholder: editor.placeholder }"
+                maxlength="500" />
+            <!-- /ko -->
+
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: sectionItem.options !== undefined -->
+    <div class="form-group form-group-collapsible" data-bind="visible: $parent.showOptions ">
+        <label class="form-label">
+            <a href="#" class="form-group-toggle" data-bind="collapse: '#optionsCollapse'"></a>
+            <b>Options/Values</b>
+        </label>
+        <div id="optionsCollapse" class="collapse form-group-collapse">
+
+            <label class="form-label">Add item:</label>
+            <input class="form-control" type="text" placeholder="name" data-bind='value:$parent.itemNameToAdd, valueUpdate: "afterkeydown"'
+            />
+            <input class="form-control" type="text" placeholder="value" data-bind='value:$parent.itemValueToAdd, valueUpdate: "afterkeydown"'
+            />
+            <button class="btn" data-bind="click: $parent.addItem, enable: $parent.itemNameToAdd().length > 0 && $parent.itemValueToAdd().length > 0">
+                <i class="paperbits-icon paperbits-circle-add"></i> Add
+            </button>
+
+            <label class="form-label">Options:</label>
+            <select class="form-control" multiple="multiple" height="5" data-bind="options:sectionItem.options, optionsText: function(item) { return item.itemName+ ' - ' + item.itemValue },
                             optionsValue: 'itemValue', selectedOptions: $parent.selectedItems">
-                    </select>
-    
-                    <div data-bind="visible: $parent.selectedItems().length > 0 ">
-                        <button class="btn" data-bind="click: $parent.upItem">Up</button>
-                        <button class="btn" data-bind="click: $parent.downItem">Down</button>
-                        <button class="btn" data-bind="click: $parent.deleteItem">Delete</button>
-                        <button class="btn" data-bind="click: $parent.setSelectedItemDefault">Set selected</button>
-                    </div>
-                </div>
+            </select>
+
+            <div data-bind="visible: $parent.selectedItems().length > 0 ">
+                <button class="btn" data-bind="click: $parent.upItem">Up</button>
+                <button class="btn" data-bind="click: $parent.downItem">Down</button>
+                <button class="btn" data-bind="click: $parent.deleteItem">Delete</button>
+                <button class="btn" data-bind="click: $parent.setSelectedItemDefault">Set selected</button>
             </div>
-            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
 
-        <!-- /ko -->
+    <!-- /ko -->
 
-    </fieldset>
-</div>
+</fieldset>

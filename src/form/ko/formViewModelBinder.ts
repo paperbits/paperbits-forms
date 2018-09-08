@@ -1,8 +1,8 @@
 import "@paperbits/common/extensions";
 import { FormModel } from "../formModel";
 import { FormViewModel } from "./formViewModel";
-import { IViewModelBinder } from "@paperbits/common/widgets/IViewModelBinder";
-import { DragSession } from "@paperbits/common/ui/draggables/dragSession";
+import { IViewModelBinder } from "@paperbits/common/widgets";
+import { DragSession } from "@paperbits/common/ui/draggables";
 import { GridHelper } from "@paperbits/common/editing";
 import { IContextualEditor, IViewManager } from "@paperbits/common/ui";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
@@ -19,9 +19,9 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
             formViewModel = new FormViewModel();
         }
 
-        let widgetViewModels = model.widgets
+        const widgetViewModels = model.widgets
             .map(widgetModel => {
-                let widgetViewModelBinder = this.viewModelBinderSelector.getViewModelBinderByModel(widgetModel);
+                const widgetViewModelBinder = this.viewModelBinderSelector.getViewModelBinderByModel(widgetModel);
 
                 if (!widgetViewModelBinder) {
                     return null;
@@ -31,7 +31,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
 
                 return widgetViewModel;
             })
-            .filter(x => x != null);
+            .filter(x => x !== null);
 
         formViewModel.widgets(widgetViewModels);
         formViewModel.formAction(model.formAction);
@@ -40,9 +40,6 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
         formViewModel.acceptCharset(model.acceptCharset);
         formViewModel.encType(model.encType || "application/x-www-form-urlencoded");
         formViewModel.formName(model.formName);
-        formViewModel.isFieldset(model.isFieldset);
-        formViewModel.legendText(model.legendText);
-        formViewModel.legendAlign(model.legendAlign || "left");
         formViewModel.description(model.description);
         formViewModel.isInline(model.isInline);
 
@@ -61,7 +58,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                 return canAccept;
             },
             onDragDrop: (dragSession: DragSession): void => {
-                if (dragSession.type == "widget") {
+                if (dragSession.type === "widget") {
                     model.widgets.splice(dragSession.insertIndex, 0, dragSession.sourceModel);
                 }
                 binding.applyChanges();
@@ -93,9 +90,9 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                             this.viewManager.openWidgetEditor(binding);
                         }
                     }]
-                }
+                };
 
-                let attachedModel = <FormModel>GridHelper.getModel(element);
+                const attachedModel = <FormModel>GridHelper.getModel(element);
 
                 if (attachedModel.widgets.length === 0) {
                     contextualEditor.hoverCommand = {
@@ -109,7 +106,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                                     const parentElement = GridHelper.getParentElementWithModel(element);
                                     const bindings = GridHelper.getParentWidgetBindings(parentElement);
                                     const provided = bindings
-                                        .filter(x => x.provides != null)
+                                        .filter(x => x.provides !== null)
                                         .map(x => x.provides)
                                         .reduce((acc, val) => acc.concat(val));
 
@@ -126,12 +123,12 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
                                 }
                             }
                         }
-                    }
+                    };
                 }
 
                 return contextualEditor;
             }
-        }
+        };
 
         formViewModel["widgetBinding"] = binding;
 

@@ -3,7 +3,7 @@ import { FormEditorModule } from "./form/ko/formEditor.module";
 import { InputEditorModule } from "./input/ko/inputEditor.module";
 
 export class FormsEditModule implements IInjectorModule {
-    register(injector: IInjector): void {
+    public register(injector: IInjector): void {
         injector.bindModule(new FormEditorModule());
         injector.bindModule(new InputEditorModule());
     }

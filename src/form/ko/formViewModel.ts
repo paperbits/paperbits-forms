@@ -8,16 +8,13 @@ import { Component } from "@paperbits/core/ko/component";
 })
 export class FormViewModel {
     public widgets: KnockoutObservableArray<Object>;
-    public formAction:KnockoutObservable<string>;
-    public formMethod?:KnockoutObservable<string>;
-    public formTarget?:KnockoutObservable<string>;
-    public acceptCharset?:KnockoutObservable<string>;
-    public encType?:KnockoutObservable<string>;
-    public formName?:KnockoutObservable<string>;
-    public isFieldset?:KnockoutObservable<boolean>;
-    public legendText?:KnockoutObservable<string>;
-    public legendAlign?:KnockoutObservable<string>;
-    public description?:KnockoutObservable<string>;
+    public formAction: KnockoutObservable<string>;
+    public formMethod?: KnockoutObservable<string>;
+    public formTarget?: KnockoutObservable<string>;
+    public acceptCharset?: KnockoutObservable<string>;
+    public encType?: KnockoutObservable<string>;
+    public formName?: KnockoutObservable<string>;
+    public description?: KnockoutObservable<string>;
     public isInline?: KnockoutObservable<boolean>;
 
     constructor() {
@@ -29,9 +26,6 @@ export class FormViewModel {
         this.acceptCharset = ko.observable<string>();
         this.encType = ko.observable<string>();
         this.formName = ko.observable<string>();
-        this.isFieldset = ko.observable<boolean>();
-        this.legendText = ko.observable<string>();
-        this.legendAlign = ko.observable<string>();
         this.description = ko.observable<string>();
         this.isInline = ko.observable<boolean>();
     }

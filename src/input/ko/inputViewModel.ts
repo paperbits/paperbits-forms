@@ -8,13 +8,9 @@ import { InputModel } from "../inputModel";
     template: template
 })
 export class InputViewModel {
+    public inputData: KnockoutObservable<any>;
 
-    public inputData;
-    
     constructor(inputModel: InputModel) {
-        this.inputData = {
-            changed: ko.observable(),
-            controlModel: inputModel
-        }
+        this.inputData = ko.observable(inputModel);
     }
 }

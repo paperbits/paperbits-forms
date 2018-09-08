@@ -5,15 +5,15 @@ import { FormModelBinder } from "../formModelBinder";
 import { FormViewModelBinder } from "./formViewModelBinder";
 
 export class FormModule implements IInjectorModule {
-    register(injector: IInjector): void {
-        //modelBinders
+    public register(injector: IInjector): void {
+        // modelBinders
         injector.bind("formModelBinder", FormModelBinder);
-        const modelBinders = injector.resolve<Array<IModelBinder>>("modelBinders");        
+        const modelBinders = injector.resolve<IModelBinder[]>("modelBinders");        
         modelBinders.push(injector.resolve("formModelBinder"));
 
-        //viewModelBinders
+        // viewModelBinders
         injector.bind("formViewModelBinder", FormViewModelBinder);
-        const viewModelBinders = injector.resolve<Array<IViewModelBinder<any, any>>>("viewModelBinders");
+        const viewModelBinders = injector.resolve<IViewModelBinder<any, any>[]>("viewModelBinders");
         viewModelBinders.push(injector.resolve("formViewModelBinder"));
     }
 }
