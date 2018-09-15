@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Paperbits. All Rights Reserved.
+ *
+ * Use of this source code is governed by a Commercial license that can be found in the LICENSE file and at https://paperbits.io/license.
+ */
+
 import { FormModel } from "./formModel";
 import { IModelBinder } from "@paperbits/common/editing";
 import { ModelBinderSelector } from "@paperbits/common/widgets";
