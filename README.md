@@ -19,4 +19,4 @@ Paperbits is a library of reusable tools and components helping you build web ap
 ## License
 Use of this source code is governed by a Commercial license that can be found at https://paperbits.io/license/commercial.
 
-2018 (c) Copyright Vienna LLC. All Rights Reserved.
+2018 (c) Copyright Paperbits. All Rights Reserved.
