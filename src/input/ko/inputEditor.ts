@@ -94,7 +94,7 @@ export class InputEditor implements IWidgetEditor {
         copy: ["propertyName"]
     };
 
-    constructor(private viewManager: IViewManager) {
+    constructor() {
         this.controlType = ko.observable<string>();
         this.showOptions = ko.observable(false);
         this.itemNameToAdd = ko.observable("");
@@ -202,10 +202,6 @@ export class InputEditor implements IWidgetEditor {
     private onOptionsChange(): void {
         this.model.options = mapping.toJS(this.optionsSection.options);
         this.applyChangesCallback();
-    }
-
-    public closeEditor(): void {
-        this.viewManager.closeWidgetEditor();
     }
 
     public addItem(): void {
