@@ -25,7 +25,7 @@ export class GenericInputViewModelBinder implements IViewModelBinder<InputModel,
         this.inputs.push({ displayName: displayName, inputClass: inputModelClass });
     }
 
-    public modelToViewModel(model: InputModel, readonly: boolean, viewModel?: InputViewModel): InputViewModel {
+    public modelToViewModel(model: InputModel, viewModel?: InputViewModel): InputViewModel {
         if (!viewModel) {
             viewModel = new InputViewModel(model);
         }
@@ -40,7 +40,7 @@ export class GenericInputViewModelBinder implements IViewModelBinder<InputModel,
             model: model,
             editor: "input-editor",
             applyChanges: () => {
-                this.modelToViewModel(model, readonly, viewModel);
+                this.modelToViewModel(model, viewModel);
             }
         };
 

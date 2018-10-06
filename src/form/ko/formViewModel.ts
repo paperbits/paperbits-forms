@@ -7,7 +7,7 @@
 
 import * as ko from "knockout";
 import template from "./form.html";
-import { Component } from "@paperbits/core/ko/component";
+import { Component } from "@paperbits/core/ko/decorators/component.decorator";
 
 @Component({
     selector: "paperbits-form",

@@ -8,7 +8,7 @@
 import * as ko from "knockout";
 import template from "./formEditor.html";
 import { IWidgetEditor } from "@paperbits/common/widgets";
-import { Component } from "@paperbits/core/ko/component";
+import { Component } from "@paperbits/core/ko/decorators/component.decorator";
 import { FormModel } from "../formModel";
 import { OptionItem, InputModel } from "../../input";
 

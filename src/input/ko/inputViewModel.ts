@@ -7,7 +7,7 @@
 
 import * as ko from "knockout";
 import template from "./input.html";
-import { Component } from "@paperbits/core/ko/component";
+import { Component } from "@paperbits/core/ko/decorators/component.decorator";
 import { InputModel } from "../inputModel";
 
 @Component({

@@ -10,7 +10,7 @@ import * as mapping from "knockout-mapping";
 import template from "./inputEditor.html";
 import { IViewManager } from "@paperbits/common/ui";
 import { IWidgetEditor } from "@paperbits/common/widgets";
-import { Component } from "@paperbits/core/ko/component";
+import { Component } from "@paperbits/core/ko/decorators";
 import { InputModel, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
 import { changeRateLimit } from "@paperbits/core/ko/consts";
