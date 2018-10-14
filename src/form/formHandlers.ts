@@ -5,11 +5,12 @@
  * Use of this source code is governed by a Commercial license that can be found in the LICENSE file and at https://paperbits.io/license.
  */
 
-import { IWidgetOrder, IWidgetHandler, GridHelper } from "@paperbits/common/editing";
+import { IWidgetOrder, IWidgetHandler, WidgetContext } from "@paperbits/common/editing";
 import { FormModel } from "./formModel";
 import { TextInputModel, SubmitInputModel } from "../input";
 import { IViewManager, IContextualEditor } from "@paperbits/common/ui";
 import { DragSession } from "@paperbits/common/ui/draggables";
+import { WidgetModel } from "@paperbits/common/widgets";
 
 
 export class FormHandlers implements IWidgetHandler {
@@ -61,19 +62,16 @@ export class FormHandlers implements IWidgetHandler {
         }
     }
 
-    public getContextualEditor(element: HTMLElement): IContextualEditor {
+    public getContextualEditor(context: WidgetContext): IContextualEditor {
         const contextualEditor: IContextualEditor = {
-            element: element,
             color: "#4c5866",
             hoverCommand: null,
             deleteCommand: {
                 tooltip: "Delete form",
                 color: "#4c5866",
                 callback: () => {
-                    const widgetModel = GridHelper.getModel(element);
-                    const parentBinding = GridHelper.getParentWidgetBinding(element);
-                    parentBinding.model.widgets.remove(widgetModel);
-                    parentBinding.applyChanges();
+                    context.parentModel.widgets.remove(context.model);
+                    context.parentBinding.applyChanges();
                     this.viewManager.clearContextualEditors();
                 }
             },
@@ -83,15 +81,12 @@ export class FormHandlers implements IWidgetHandler {
                 position: "top right",
                 color: "#4c5866",
                 callback: () => {
-                    const binding = GridHelper.getWidgetBinding(element);
-                    this.viewManager.openWidgetEditor(binding);
+                    this.viewManager.openWidgetEditor(context.binding);
                 }
             }]
         };
 
-        const attachedModel = <FormModel>GridHelper.getModel(element);
-
-        if (attachedModel.widgets.length === 0) {
+        if (context.model.widgets.length === 0) {
             contextualEditor.hoverCommand = {
                 color: "#607d8b",
                 position: "center",
@@ -99,23 +94,10 @@ export class FormHandlers implements IWidgetHandler {
                 component: {
                     name: "widget-selector",
                     params: {
-                        onRequest: () => {
-                            const parentElement = GridHelper.getParentElementWithModel(element);
-                            const bindings = GridHelper.getParentWidgetBindings(parentElement);
-                            const provided = bindings
-                                .filter(x => x.provides !== null)
-                                .map(x => x.provides)
-                                .reduce((acc, val) => acc.concat(val));
-
-                            return provided;
-                        },
-                        onSelect: (widgetModel: any) => {
-                            const formModel = <FormModel>GridHelper.getModel(element);
-                            const formWidgetBinding = GridHelper.getWidgetBinding(element);
-
-                            formModel.widgets.push(widgetModel);
-                            formWidgetBinding.applyChanges();
-
+                        onRequest: () => context.providers,
+                        onSelect: (widgetModel: WidgetModel) => {
+                            context.model.widgets.push(widgetModel);
+                            context.binding.applyChanges();
                             this.viewManager.clearContextualEditors();
                         }
                     }
