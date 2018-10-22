@@ -11,11 +11,13 @@ import { FormViewModel } from "./formViewModel";
 import { IViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
+import { IEventManager } from "@paperbits/common/events";
 
 export class FormViewModelBinder implements IViewModelBinder<FormModel, FormViewModel> {
     constructor(
-        private readonly viewModelBinderSelector: ViewModelBinderSelector) {
-    }
+        private readonly viewModelBinderSelector: ViewModelBinderSelector,
+        private readonly eventManager: IEventManager
+    ) { }
 
     public modelToViewModel(model: FormModel, formViewModel?: FormViewModel): FormViewModel {
         if (!formViewModel) {
@@ -55,6 +57,7 @@ export class FormViewModelBinder implements IViewModelBinder<FormModel, FormView
             provides: ["form"],
             applyChanges: () => {
                 this.modelToViewModel(model, formViewModel);
+                this.eventManager.dispatchEvent("onContentUpdate");
             }
         };
 

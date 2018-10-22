@@ -58,7 +58,7 @@ export class InputModule implements IInjectorModule {
         const modelBinders = injector.resolve<IModelBinder[]>("modelBinders");
         modelBinders.push(injector.resolve("inputModelBinder"));
 
-        const inputViewModelBinder = new GenericInputViewModelBinder();
+        const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
         inputViewModelBinder.registerInput("Text input", TextInputModel);
         inputViewModelBinder.registerInput("Submit form button", SubmitInputModel);
         inputViewModelBinder.registerInput("Password input", PasswordInputModel);

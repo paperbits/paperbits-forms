@@ -8,6 +8,7 @@
 import { InputModel } from "../inputModel";
 import { InputViewModel } from "./inputViewModel";
 import { IViewModelBinder } from "@paperbits/common/widgets";
+import { IEventManager } from "@paperbits/common/events";
 
 interface InputModelRegistration {
     displayName: string;
@@ -17,7 +18,7 @@ interface InputModelRegistration {
 export class GenericInputViewModelBinder implements IViewModelBinder<InputModel, InputViewModel>  {
     private inputs: InputModelRegistration[];
 
-    constructor() {
+    constructor(private readonly eventManager: IEventManager) {
         this.inputs = [];
     }
 
@@ -41,6 +42,7 @@ export class GenericInputViewModelBinder implements IViewModelBinder<InputModel,
             editor: "input-editor",
             applyChanges: () => {
                 this.modelToViewModel(model, viewModel);
+                this.eventManager.dispatchEvent("onContentUpdate");
             }
         };
 
