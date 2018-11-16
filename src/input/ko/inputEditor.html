@@ -1,6 +1,6 @@
 <fieldset class="form flex-item flex-item-grow" data-bind="scrollable: {}">
     <!-- ko foreach: { data: editorSections, as: 'sectionItem' } -->
-    
+
     <!-- ko if: sectionItem.options === undefined && sectionItem.editors().length > 0 -->
     <div class="form-group form-group-collapsible">
         <label class="form-label">
@@ -12,9 +12,11 @@
             <!-- ko foreach: { data: sectionItem.editors, as: 'editor'  } -->
 
             <!-- ko if: editor.propertyType === "checkbox" -->
-            <label class="form-label">
-                <input type="checkbox" data-bind="checked: editor.propertyValue" /><span data-bind="text: editor.propertyLabel"></span>
-            </label>
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" data-bind="checked: editor.propertyValue" /><span data-bind="text: editor.propertyLabel"></span>
+                </label>
+            </div>
             <!-- /ko -->
 
             <!-- ko if: editor.propertyType === "radio" -->
@@ -29,9 +31,11 @@
             <!-- /ko -->
 
             <!-- ko ifnot: editor.propertyType === "checkbox" || editor.propertyType === "radio" -->
-            <label class="form-label" data-bind="text: editor.propertyLabel"></label>
-            <input class="form-control" data-bind="textInput: editor.propertyValue, attr: { type: editor.propertyType, placeholder: editor.placeholder }"
-                maxlength="500" />
+            <div class="form-group">
+                <label class="form-label" data-bind="text: editor.propertyLabel"></label>
+                <input class="form-control" data-bind="textInput: editor.propertyValue, attr: { type: editor.propertyType, placeholder: editor.placeholder }"
+                    maxlength="500" />
+            </div>
             <!-- /ko -->
 
             <!-- /ko -->
@@ -48,10 +52,8 @@
         <div id="optionsCollapse" class="collapse form-group-collapse">
 
             <label class="form-label">Add item:</label>
-            <input class="form-control" type="text" placeholder="name" data-bind='value:$parent.itemNameToAdd, valueUpdate: "afterkeydown"'
-            />
-            <input class="form-control" type="text" placeholder="value" data-bind='value:$parent.itemValueToAdd, valueUpdate: "afterkeydown"'
-            />
+            <input class="form-control" type="text" placeholder="name" data-bind='value:$parent.itemNameToAdd, valueUpdate: "afterkeydown"' />
+            <input class="form-control" type="text" placeholder="value" data-bind='value:$parent.itemValueToAdd, valueUpdate: "afterkeydown"' />
             <button class="btn" data-bind="click: $parent.addItem, enable: $parent.itemNameToAdd().length > 0 && $parent.itemValueToAdd().length > 0">
                 <i class="paperbits-icon paperbits-circle-add"></i> Add
             </button>
