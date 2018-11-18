@@ -8,7 +8,7 @@
 import * as ko from "knockout";
 import { InputModel, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
-import { IBag } from "@paperbits/common";
+import { Bag } from "@paperbits/common";
 
 
 export class InputBindingHandler {
@@ -79,7 +79,7 @@ class InputBuilder {
         if (help) {
             inputElement.setAttribute("aria-describedby", `${controlId}Help`);
         }
-        
+
         const _for = controlId && `for="${controlId}"`;
         let _id = controlId && `id="${controlId}Help"`;
 
@@ -136,7 +136,7 @@ class InputBuilder {
         const _value = value ? `value="${value}"` : "";
         const _name = name ? `name="${name}"` : "";
         const _isDisabled = isDisabled ? "disabled" : "";
-        container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} ${_isDisabled} class="btn btn-primary">${label || "Submit"}</button>`;
+        container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} ${_isDisabled} class="button-primary">${label || "Submit"}</button>`;
     }
 
     public setHidden(container: HTMLElement, controlId: string, name: string, value: string): void {
@@ -148,7 +148,7 @@ class InputBuilder {
 
     public setReset(container: HTMLElement, value: string): void {
         const _value = value ? `value="${value}"` : "";
-        container.innerHTML = `<input type="reset" ${_value} class="btn btn-primary">`;
+        container.innerHTML = `<input type="reset" ${_value} class="button-primary">`;
     }
 
     public setSelect(container: HTMLElement, controlId: string, label: string, name: string, value: string, optionItems: OptionItem[], placeholder: string, isRequired: boolean,

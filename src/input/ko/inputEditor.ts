@@ -8,13 +8,12 @@
 import * as ko from "knockout";
 import * as mapping from "knockout-mapping";
 import template from "./inputEditor.html";
-import { IViewManager } from "@paperbits/common/ui";
 import { IWidgetEditor } from "@paperbits/common/widgets";
-import { Component } from "@paperbits/core/ko/decorators";
+import { Component } from "@paperbits/common/ko/decorators";
 import { InputModel, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
 import { changeRateLimit } from "@paperbits/core/ko/consts";
-import { IBag } from "@paperbits/common";
+import { Bag } from "@paperbits/common";
 
 interface EditorSection {
     sectionName: string;
@@ -60,7 +59,7 @@ export class InputEditor implements IWidgetEditor {
     public itemValueToAdd: KnockoutObservable<string>;
     public selectedItems: KnockoutObservableArray<string>;
 
-    private sectionPropertyMap: IBag<EditableProperty> = {
+    private sectionPropertyMap: Bag<EditableProperty> = {
         inputName: { name: "Main", label: "Name", inputType: "text" },
         placeholderText: { name: "Settings", label: "Placeholder text", inputType: "text" },
         help: { name: "Settings", label: "Help text", inputType: "text" },
