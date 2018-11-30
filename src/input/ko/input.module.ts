@@ -33,8 +33,6 @@ import {
 
 export class InputModule implements IInjectorModule {
     public register(injector: IInjector): void {
-        // modelBinders
-
         const inputModelBinder = new GenericInputModelBinder();
         inputModelBinder.registerInput("input:text", TextInputModel);
         inputModelBinder.registerInput("input:submit", SubmitInputModel);
@@ -52,11 +50,7 @@ export class InputModule implements IInjectorModule {
         inputModelBinder.registerInput("input:range", RangeInputModel);
         inputModelBinder.registerInput("input:search", SearchInputModel);
         inputModelBinder.registerInput("input:url", UrlInputModel);
-
-        injector.bindInstance("inputModelBinder", inputModelBinder);
-
-        const modelBinders = injector.resolve<IModelBinder[]>("modelBinders");
-        modelBinders.push(injector.resolve("inputModelBinder"));
+        injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
         inputViewModelBinder.registerInput("Text input", TextInputModel);
@@ -75,11 +69,7 @@ export class InputModule implements IInjectorModule {
         inputViewModelBinder.registerInput("Range picker", RangeInputModel);
         inputViewModelBinder.registerInput("Search input", SearchInputModel);
         inputViewModelBinder.registerInput("URL input", UrlInputModel);
-
-        injector.bindInstance("inputViewModelBinder", inputViewModelBinder);
-
-        const viewModelBinders = injector.resolve<IViewModelBinder<any, any>[]>("viewModelBinders");
-        viewModelBinders.push(injector.resolve("inputViewModelBinder"));
+        injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 
         injector.bindSingleton("inputBindingHandler", InputBindingHandler);
     }
