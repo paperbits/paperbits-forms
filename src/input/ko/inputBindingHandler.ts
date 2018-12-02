@@ -136,7 +136,7 @@ class InputBuilder {
         const _value = value ? `value="${value}"` : "";
         const _name = name ? `name="${name}"` : "";
         const _isDisabled = isDisabled ? "disabled" : "";
-        container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} ${_isDisabled} class="button-primary">${label || "Submit"}</button>`;
+        container.innerHTML = `<button type="submit" ${_id} ${_name} ${_value} ${_isDisabled} class="button button-primary">${label || "Submit"}</button>`;
     }
 
     public setHidden(container: HTMLElement, controlId: string, name: string, value: string): void {
