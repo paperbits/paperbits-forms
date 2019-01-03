@@ -22,12 +22,10 @@
     "dependencies": {
         "@paperbits/common": "0.1.32",
         "@paperbits/core": "0.1.32",
-        "es6-shim": "^0.35.3",
         "knockout": "^3.5.0-beta",
         "knockout.validation": "^2.0.3"
     },
     "devDependencies": {
-        "@types/es6-shim": "^0.31.36",
         "@types/knockout": "^3.4.53",
         "@types/knockout.mapping": "^2.0.33",
         "@types/knockout.validation": "0.0.36",
