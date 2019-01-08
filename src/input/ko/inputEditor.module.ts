@@ -6,7 +6,6 @@
  */
 
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
-import { IWidgetHandler } from "@paperbits/common/editing";
 import { InputEditor } from "./inputEditor";
 import { InputHandlers } from "../inputHandlers";
 import {
@@ -30,26 +29,22 @@ import {
 
 export class InputEditorModule implements IInjectorModule {
     public register(injector: IInjector): void {
-        // editors
         injector.bind("inputEditor", InputEditor);
-
-        // handlers
-        const widgetHandlers: IWidgetHandler[] = injector.resolve("widgetHandlers");
-        widgetHandlers.push(new InputHandlers(new TextInputModel()));
-        widgetHandlers.push(new InputHandlers(new SubmitInputModel()));
-        widgetHandlers.push(new InputHandlers(new PasswordInputModel()));
-        widgetHandlers.push(new InputHandlers(new ResetInputModel()));
-        widgetHandlers.push(new InputHandlers(new SelectInputModel()));
-        widgetHandlers.push(new InputHandlers(new RadioInputModel()));
-        widgetHandlers.push(new InputHandlers(new CheckboxInputModel()));
-        widgetHandlers.push(new InputHandlers(new TextareaInputModel()));
-        widgetHandlers.push(new InputHandlers(new ColorInputModel()));
-        widgetHandlers.push(new InputHandlers(new DateInputModel()));
-        widgetHandlers.push(new InputHandlers(new TimeInputModel()));
-        widgetHandlers.push(new InputHandlers(new EmailInputModel()));
-        widgetHandlers.push(new InputHandlers(new NumberInputModel()));
-        widgetHandlers.push(new InputHandlers(new RangeInputModel()));
-        widgetHandlers.push(new InputHandlers(new SearchInputModel()));
-        widgetHandlers.push(new InputHandlers(new UrlInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TextInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SubmitInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new PasswordInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ResetInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SelectInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RadioInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new CheckboxInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TextareaInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ColorInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new DateInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TimeInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new EmailInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new NumberInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RangeInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SearchInputModel()));
+        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new UrlInputModel()));
     }
 }
