@@ -71,6 +71,6 @@ export class InputModule implements IInjectorModule {
         inputViewModelBinder.registerInput("URL input", UrlInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 
-        injector.bindSingleton("inputBindingHandler", InputBindingHandler);
+        injector.bindToCollection("autostart", InputBindingHandler);
     }
 }
