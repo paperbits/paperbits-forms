@@ -21,17 +21,17 @@ export class FormEditor implements IWidgetEditor {
     private formModel: FormModel;
     private applyChangesCallback: () => void;
 
-    public readonly formAction: KnockoutObservable<string>;
-    public readonly formMethod?: KnockoutObservable<string>;
-    public readonly formTarget?: KnockoutObservable<string>;
-    public readonly acceptCharset?: KnockoutObservable<string>;
-    public readonly encType?: KnockoutObservable<string>;
-    public readonly isInline?: KnockoutObservable<boolean>;
+    public readonly formAction: ko.Observable<string>;
+    public readonly formMethod?: ko.Observable<string>;
+    public readonly formTarget?: ko.Observable<string>;
+    public readonly acceptCharset?: ko.Observable<string>;
+    public readonly encType?: ko.Observable<string>;
+    public readonly isInline?: ko.Observable<boolean>;
 
-    public itemNameToAdd: KnockoutObservable<string>;
-    public itemValueToAdd: KnockoutObservable<string>;
-    public selectedItems: KnockoutObservableArray<string>;
-    public hiddenInputs: KnockoutObservableArray<OptionItem>;
+    public itemNameToAdd: ko.Observable<string>;
+    public itemValueToAdd: ko.Observable<string>;
+    public selectedItems: ko.ObservableArray<string>;
+    public hiddenInputs: ko.ObservableArray<OptionItem>;
 
     constructor() {
         this.formAction = ko.observable<string>();

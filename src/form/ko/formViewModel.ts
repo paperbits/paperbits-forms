@@ -14,15 +14,15 @@ import { Component } from "@paperbits/common/ko/decorators";
     template: template
 })
 export class FormViewModel {
-    public widgets: KnockoutObservableArray<Object>;
-    public formAction: KnockoutObservable<string>;
-    public formMethod?: KnockoutObservable<string>;
-    public formTarget?: KnockoutObservable<string>;
-    public acceptCharset?: KnockoutObservable<string>;
-    public encType?: KnockoutObservable<string>;
-    public formName?: KnockoutObservable<string>;
-    public description?: KnockoutObservable<string>;
-    public isInline?: KnockoutObservable<boolean>;
+    public widgets: ko.ObservableArray<Object>;
+    public formAction: ko.Observable<string>;
+    public formMethod?: ko.Observable<string>;
+    public formTarget?: ko.Observable<string>;
+    public acceptCharset?: ko.Observable<string>;
+    public encType?: ko.Observable<string>;
+    public formName?: ko.Observable<string>;
+    public description?: ko.Observable<string>;
+    public isInline?: ko.Observable<boolean>;
 
     constructor() {
         this.widgets = ko.observableArray<Object>();

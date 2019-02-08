@@ -15,7 +15,7 @@ import { InputModel } from "../inputModel";
     template: template
 })
 export class InputViewModel {
-    public inputData: KnockoutObservable<any>;
+    public inputData: ko.Observable<any>;
 
     constructor(inputModel: InputModel) {
         this.inputData = ko.observable(inputModel);

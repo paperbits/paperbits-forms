@@ -17,8 +17,8 @@ import { Bag } from "@paperbits/common";
 
 interface EditorSection {
     sectionName: string;
-    editors: KnockoutObservableArray<EditorItem>;
-    options?: KnockoutObservableArray<OptionItem>;
+    editors: ko.ObservableArray<EditorItem>;
+    options?: ko.ObservableArray<OptionItem>;
 }
 
 interface EditablePropertyOption {
@@ -38,7 +38,7 @@ interface EditorItem {
     propertyLabel: string;
     propertyType: string;
     propertyName: string;
-    propertyValue: KnockoutObservable<any>;
+    propertyValue: ko.Observable<any>;
     propertyOptions?: { label: string, value: any }[];
     placeholder: string;
 }
@@ -50,14 +50,14 @@ interface EditorItem {
 export class InputEditor implements IWidgetEditor {
     private model: InputModel;
     private applyChangesCallback: () => void;
-    public controlType: KnockoutObservable<string>;
-    public editorSections: KnockoutObservableArray<EditorSection>;
+    public controlType: ko.Observable<string>;
+    public editorSections: ko.ObservableArray<EditorSection>;
     public optionsSection: EditorSection;
 
-    public showOptions: KnockoutObservable<boolean>;
-    public itemNameToAdd: KnockoutObservable<string>;
-    public itemValueToAdd: KnockoutObservable<string>;
-    public selectedItems: KnockoutObservableArray<string>;
+    public showOptions: ko.Observable<boolean>;
+    public itemNameToAdd: ko.Observable<string>;
+    public itemValueToAdd: ko.Observable<string>;
+    public selectedItems: ko.ObservableArray<string>;
 
     private sectionPropertyMap: Bag<EditableProperty> = {
         inputName: { name: "Main", label: "Name", inputType: "text" },
