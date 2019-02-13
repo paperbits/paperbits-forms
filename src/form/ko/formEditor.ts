@@ -7,8 +7,7 @@
 
 import * as ko from "knockout";
 import template from "./formEditor.html";
-import { IWidgetEditor } from "@paperbits/common/widgets";
-import { Component } from "@paperbits/common/ko/decorators";
+import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
 import { FormModel } from "../formModel";
 import { OptionItem, InputModel } from "../../input";
 
@@ -17,10 +16,7 @@ import { OptionItem, InputModel } from "../../input";
     template: template,
     injectable: "formEditor"
 })
-export class FormEditor implements IWidgetEditor {
-    private formModel: FormModel;
-    private applyChangesCallback: () => void;
-
+export class FormEditor {
     public readonly formAction: ko.Observable<string>;
     public readonly formMethod?: ko.Observable<string>;
     public readonly formTarget?: ko.Observable<string>;
@@ -41,14 +37,12 @@ export class FormEditor implements IWidgetEditor {
         this.encType = ko.observable<string>();
         this.isInline = ko.observable<boolean>();
 
-        this.setWidgetModel = this.setWidgetModel.bind(this);
-
-        this.formAction.subscribe(((newValue) => { this.formModel.formAction = newValue; this.applyChangesCallback(); }).bind(this));
-        this.formMethod.subscribe(((newValue) => { this.formModel.formMethod = newValue; this.applyChangesCallback(); }).bind(this));
-        this.formTarget.subscribe(((newValue) => { this.formModel.formTarget = newValue; this.applyChangesCallback(); }).bind(this));
-        this.acceptCharset.subscribe(((newValue) => { this.formModel.acceptCharset = newValue; this.applyChangesCallback(); }).bind(this));
-        this.encType.subscribe(((newValue) => { this.formModel.encType = newValue; this.applyChangesCallback(); }).bind(this));
-        this.isInline.subscribe(((newValue) => { this.formModel.isInline = newValue; this.applyChangesCallback(); }).bind(this));
+        this.formAction.subscribe(((newValue) => { this.model.formAction = newValue; this.onChange(this.model); }).bind(this));
+        this.formMethod.subscribe(((newValue) => { this.model.formMethod = newValue; this.onChange(this.model); }).bind(this));
+        this.formTarget.subscribe(((newValue) => { this.model.formTarget = newValue; this.onChange(this.model); }).bind(this));
+        this.acceptCharset.subscribe(((newValue) => { this.model.acceptCharset = newValue; this.onChange(this.model); }).bind(this));
+        this.encType.subscribe(((newValue) => { this.model.encType = newValue; this.onChange(this.model); }).bind(this));
+        this.isInline.subscribe(((newValue) => { this.model.isInline = newValue; this.onChange(this.model); }).bind(this));
 
         this.itemNameToAdd = ko.observable("");
         this.itemValueToAdd = ko.observable("");
@@ -56,27 +50,30 @@ export class FormEditor implements IWidgetEditor {
         this.hiddenInputs = ko.observableArray([]);
     }
 
-    public setWidgetModel(model: FormModel, applyChangesCallback?: () => void): void {
-        this.formModel = model;
-        this.applyChangesCallback = applyChangesCallback;
+    @Param()
+    public model: FormModel;
 
-        this.formAction(model.formAction);
-        this.formMethod(model.formMethod || "get");
-        this.formTarget(model.formTarget || "_self");
-        this.acceptCharset(model.acceptCharset);
-        this.encType(model.encType || "application/x-www-form-urlencoded");
-        this.isInline(model.isInline);
+    @Event()
+    public onChange: (model: FormModel) => void;
 
-        if (model.widgets && model.widgets.length > 0) {
-            const hiddens = model.widgets.filter(widget => widget.inputType === "hidden");
+    @OnMounted()
+    public initialize(): void {
+        this.formAction(this.model.formAction);
+        this.formMethod(this.model.formMethod || "get");
+        this.formTarget(this.model.formTarget || "_self");
+        this.acceptCharset(this.model.acceptCharset);
+        this.encType(this.model.encType || "application/x-www-form-urlencoded");
+        this.isInline(this.model.isInline);
+
+        if (this.model.widgets && this.model.widgets.length > 0) {
+            const hiddens = this.model.widgets.filter(widget => widget.inputType === "hidden");
             if (hiddens.length > 0) {
                 this.hiddenInputs(
                     hiddens.map<OptionItem>(input => {
                         return { itemName: <string>input.getInputProperty("inputName").propertyValue, itemValue: input.getInputProperty("inputValue").propertyValue };
                     })
-                )
+                );
             }
-
         }
     }
 
@@ -88,9 +85,9 @@ export class FormEditor implements IWidgetEditor {
             const hiddenInputModel = new InputModel("hidden");
             hiddenInputModel.setProperty("inputName", newItem.itemName);
             hiddenInputModel.setProperty("inputValue", newItem.itemValue);
-            this.formModel.widgets.push(hiddenInputModel);
+            this.model.widgets.push(hiddenInputModel);
             this.hiddenInputs.push(newItem);
-            this.applyChangesCallback();
+            this.onChange(this.model);
         }
         this.itemNameToAdd("");
         this.itemValueToAdd("");
@@ -100,10 +97,10 @@ export class FormEditor implements IWidgetEditor {
         if (this.selectedItems().length > 0) {
             const removed = this.hiddenInputs.remove((item) => this.selectedItems().findIndex(selectedName => selectedName === item.itemName) !== -1);
             removed.map(item => {
-                const modelToRemove = this.formModel.widgets.find(hidden => item.itemName === hidden.getInputProperty("inputName").propertyValue);
-                this.formModel.widgets.remove(modelToRemove);
+                const modelToRemove = this.model.widgets.find(hidden => item.itemName === hidden.getInputProperty("inputName").propertyValue);
+                this.model.widgets.remove(modelToRemove);
             });
-            this.applyChangesCallback();
+            this.onChange(this.model);
             this.selectedItems([]);
         }
     }

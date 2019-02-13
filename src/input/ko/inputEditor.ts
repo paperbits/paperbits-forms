@@ -8,8 +8,7 @@
 import * as ko from "knockout";
 import * as mapping from "knockout-mapping";
 import template from "./inputEditor.html";
-import { IWidgetEditor } from "@paperbits/common/widgets";
-import { Component } from "@paperbits/common/ko/decorators";
+import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
 import { InputModel, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
 import { changeRateLimit } from "@paperbits/core/ko/consts";
@@ -47,13 +46,10 @@ interface EditorItem {
     template: template,
     injectable: "inputEditor"
 })
-export class InputEditor implements IWidgetEditor {
-    private model: InputModel;
-    private applyChangesCallback: () => void;
+export class InputEditor {
     public controlType: ko.Observable<string>;
     public editorSections: ko.ObservableArray<EditorSection>;
     public optionsSection: EditorSection;
-
     public showOptions: ko.Observable<boolean>;
     public itemNameToAdd: ko.Observable<string>;
     public itemValueToAdd: ko.Observable<string>;
@@ -116,25 +112,20 @@ export class InputEditor implements IWidgetEditor {
 
         this.editorSections = ko.observableArray<EditorSection>();
         this.editorSections(sections);
-
-        this.onChange = this.onChange.bind(this);
-        this.onOptionsChange = this.onOptionsChange.bind(this);
-        this.upItem = this.upItem.bind(this);
-        this.addItem = this.addItem.bind(this);
-        this.downItem = this.downItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
-        this.setSelectedItemDefault = this.setSelectedItemDefault.bind(this);
-        this.copyNameToValue = this.copyNameToValue.bind(this);
-        this.itemNameToAdd.subscribe(this.copyNameToValue, null, "beforeChange");
     }
 
-    public setWidgetModel(model: InputModel, applyChangesCallback?: () => void): void {
-        if (!this.model || (this.model && this.model.inputType !== model.inputType)) {
-            this.controlType(model.inputType);
-            this.adjustControlsMetadata(model.inputType);
+    @Param()
+    public model: InputModel;
+
+    @Event()
+    public onChange: (model: InputModel) => void;
+
+    @OnMounted()
+    public initialize(): void {
+        if (!this.model || (this.model && this.model.inputType !== this.model.inputType)) {
+            this.controlType(this.model.inputType);
+            this.adjustControlsMetadata(this.model.inputType);
         }
-        this.model = model;
-        this.applyChangesCallback = applyChangesCallback;
 
         if (this.model.properties.length > 0) {
             if (this.model.options) {
@@ -156,7 +147,7 @@ export class InputEditor implements IWidgetEditor {
                 edit.propertyOptions = sectionMetadata.options || [];
                 edit.placeholder = sectionMetadata.placeholder;
                 edit.propertyValue.extend(changeRateLimit);
-                edit.propertyValue.subscribe(this.onChange);
+                edit.propertyValue.subscribe(this.applyChanges);
 
                 if (!sectionMetadata) {
                     defaultSection.editors.push(edit);
@@ -167,6 +158,8 @@ export class InputEditor implements IWidgetEditor {
                 }
             }
         }
+
+        this.itemNameToAdd.subscribe(this.copyNameToValue, null, "beforeChange");
     }
 
     private adjustControlsMetadata(inputType: string): void {
@@ -189,25 +182,25 @@ export class InputEditor implements IWidgetEditor {
         }
     }
 
-    private onChange(): void {
+    private applyChanges(): void {
         const currentEdits: InputProperty[] = [];
         for (const section of this.editorSections()) {
             currentEdits.push(...mapping.toJS(section.editors));
         }
         this.model.properties = currentEdits;
-        this.applyChangesCallback();
+        this.onChange(this.model);
     }
 
     private onOptionsChange(): void {
         this.model.options = mapping.toJS(this.optionsSection.options);
-        this.applyChangesCallback();
+        this.onChange(this.model);
     }
 
     public addItem(): void {
         if (this.itemNameToAdd() !== "" && this.itemValueToAdd() !== "" &&
             !this.optionsSection.options().find((item) => item.itemValue === this.itemValueToAdd())) {
             this.optionsSection.options.push({ itemName: this.itemNameToAdd(), itemValue: this.itemValueToAdd() });
-            this.applyChangesCallback();
+            this.onChange(this.model);
         }
         this.itemNameToAdd("");
         this.itemValueToAdd("");
@@ -223,7 +216,7 @@ export class InputEditor implements IWidgetEditor {
             const moveItem = this.optionsSection.options.splice(posFirst - 1, 1);
 
             this.optionsSection.options.splice(posLast, 0, moveItem[0]);
-            this.applyChangesCallback();
+            this.onChange(this.model);
         }
     }
 
@@ -236,14 +229,14 @@ export class InputEditor implements IWidgetEditor {
         if (posLast < this.optionsSection.options().length - 1) {
             const moveItem = this.optionsSection.options.splice(posLast + 1, 1);
             this.optionsSection.options.splice(posFirst, 0, moveItem[0]);
-            this.applyChangesCallback();
+            this.onChange(this.model);
         }
     }
 
     public deleteItem(): void {
         if (this.selectedItems().length > 0) {
             this.optionsSection.options.remove((item) => this.selectedItems().findIndex(selectedValue => selectedValue === item.itemValue) !== -1);
-            this.applyChangesCallback();
+            this.onChange(this.model);
             this.selectedItems([]);
         }
     }
