@@ -9,12 +9,13 @@ import { FormModel } from "./formModel";
 import { IModelBinder } from "@paperbits/common/editing";
 import { ModelBinderSelector } from "@paperbits/common/widgets";
 import { FormContract } from "./formContract";
+import { Contract } from "@paperbits/common";
 
 export class FormModelBinder implements IModelBinder {
     constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
 
-    public canHandleWidgetType(widgetType: string): boolean {
-        return widgetType === "form";
+    public canHandleContract(contract: Contract): boolean {
+        return contract.type === "form";
     }
 
     public canHandleModel(model): boolean {
@@ -33,9 +34,9 @@ export class FormModelBinder implements IModelBinder {
         model.isInline      = node.isInline;
 
         if (node.nodes) {
-            const modelPromises = node.nodes.map(async (node) => {
-                const modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByNodeType(node.type);
-                return await modelBinder.contractToModel(node);
+            const modelPromises = node.nodes.map(async (contract: Contract) => {
+                const modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByContract(contract);
+                return await modelBinder.contractToModel(contract);
             });
     
             model.widgets = await Promise.all<any>(modelPromises);
@@ -48,7 +49,6 @@ export class FormModelBinder implements IModelBinder {
 
     public modelToContract(model: FormModel): FormContract {
         const contract: FormContract = {
-            object: "block",
             type: "form",
             formAction   : model.formAction,
             formMethod   : model.formMethod,

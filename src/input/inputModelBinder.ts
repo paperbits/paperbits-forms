@@ -7,6 +7,7 @@
 
 import { IModelBinder } from "@paperbits/common/editing";
 import { InputModel, InputContract } from ".";
+import { Contract } from "@paperbits/common";
 
 
 interface InputModelRegistration {
@@ -26,8 +27,8 @@ export class GenericInputModelBinder implements IModelBinder {
         this.inputs.push({ inputType: inputType, inputClass: inputModelClass });
     }
 
-    public canHandleWidgetType(inputType: string): boolean {
-        return this.inputs.some(x => x.inputType === inputType);
+    public canHandleContract(contract: Contract): boolean {
+        return this.inputs.some(x => x.inputType === contract.type);
     }
 
     public canHandleModel(model: InputModel): boolean {
@@ -74,7 +75,6 @@ export class GenericInputModelBinder implements IModelBinder {
         const registration = this.inputs.find(x => model instanceof x.inputClass);
 
         const contract: InputContract = {
-            object: "block",
             type: registration.inputType,
             inputProperties: []
         };
