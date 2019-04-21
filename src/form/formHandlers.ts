@@ -59,6 +59,7 @@ export class FormHandlers implements IWidgetHandler {
         if (dragSession.type === "widget") {
             dragSession.targetBinding.model.widgets.splice(dragSession.insertIndex, 0, dragSession.sourceModel);
             dragSession.targetBinding.applyChanges();
+            dragSession.sourceParentBinding.applyChanges();
         }
     }
 
