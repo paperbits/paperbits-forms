@@ -7,7 +7,7 @@
 
 import { InputModel } from "../inputModel";
 import { InputViewModel } from "./inputViewModel";
-import { IViewModelBinder } from "@paperbits/common/widgets";
+import { ViewModelBinder } from "@paperbits/common/widgets";
 import { IEventManager } from "@paperbits/common/events";
 
 interface InputModelRegistration {
@@ -15,7 +15,7 @@ interface InputModelRegistration {
     inputClass: new () => InputModel;
 }
 
-export class GenericInputViewModelBinder implements IViewModelBinder<InputModel, InputViewModel>  {
+export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, InputViewModel>  {
     private inputs: InputModelRegistration[];
 
     constructor(private readonly eventManager: IEventManager) {

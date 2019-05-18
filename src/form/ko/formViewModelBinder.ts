@@ -8,12 +8,12 @@
 import "@paperbits/common/extensions";
 import { FormModel } from "../formModel";
 import { FormViewModel } from "./formViewModel";
-import { IViewModelBinder } from "@paperbits/common/widgets";
+import { ViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
 import { IEventManager } from "@paperbits/common/events";
 
-export class FormViewModelBinder implements IViewModelBinder<FormModel, FormViewModel> {
+export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
         private readonly viewModelBinderSelector: ViewModelBinderSelector,
         private readonly eventManager: IEventManager

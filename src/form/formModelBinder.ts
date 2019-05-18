@@ -9,7 +9,7 @@ import { FormModel } from "./formModel";
 import { IModelBinder } from "@paperbits/common/editing";
 import { ModelBinderSelector } from "@paperbits/common/widgets";
 import { FormContract } from "./formContract";
-import { Contract } from "@paperbits/common";
+import { Contract, Bag } from "@paperbits/common";
 
 export class FormModelBinder implements IModelBinder {
     constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
@@ -22,7 +22,7 @@ export class FormModelBinder implements IModelBinder {
         return model instanceof FormModel;
     }
 
-    public async contractToModel(node: FormContract): Promise<FormModel> {
+    public async contractToModel(node: FormContract, bindingContext?: Bag<any>): Promise<FormModel> {
         const model = new FormModel();
         model.formAction    = node.formAction;
         model.formMethod    = <any>node.formMethod;
@@ -36,7 +36,7 @@ export class FormModelBinder implements IModelBinder {
         if (node.nodes) {
             const modelPromises = node.nodes.map(async (contract: Contract) => {
                 const modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByContract(contract);
-                return await modelBinder.contractToModel(contract);
+                return await modelBinder.contractToModel(contract, bindingContext);
             });
     
             model.widgets = await Promise.all<any>(modelPromises);

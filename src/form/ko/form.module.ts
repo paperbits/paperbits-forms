@@ -7,7 +7,7 @@
 
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { IModelBinder } from "@paperbits/common/editing";
-import { IViewModelBinder } from "@paperbits/common/widgets";
+import { ViewModelBinder } from "@paperbits/common/widgets";
 import { FormModelBinder } from "../formModelBinder";
 import { FormViewModelBinder } from "./formViewModelBinder";
 
