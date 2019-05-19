@@ -26,7 +26,7 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
         this.inputs.push({ displayName: displayName, inputClass: inputModelClass });
     }
 
-    public modelToViewModel(model: InputModel, viewModel?: InputViewModel): InputViewModel {
+    public async modelToViewModel(model: InputModel, viewModel?: InputViewModel): Promise<InputViewModel> {
         if (!viewModel) {
             viewModel = new InputViewModel(model);
         }
