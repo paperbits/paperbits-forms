@@ -7,7 +7,7 @@
 
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { IModelBinder } from "@paperbits/common/editing";
-import { IViewModelBinder } from "@paperbits/common/widgets";
+import { ViewModelBinder } from "@paperbits/common/widgets";
 import { GenericInputModelBinder } from "../inputModelBinder";
 import { GenericInputViewModelBinder } from "./inputViewModelBinder";
 import { InputBindingHandler } from "./inputBindingHandler";

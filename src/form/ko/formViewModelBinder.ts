@@ -8,37 +8,32 @@
 import "@paperbits/common/extensions";
 import { FormModel } from "../formModel";
 import { FormViewModel } from "./formViewModel";
-import { IViewModelBinder } from "@paperbits/common/widgets";
+import { ViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
 import { IEventManager } from "@paperbits/common/events";
 
-export class FormViewModelBinder implements IViewModelBinder<FormModel, FormViewModel> {
+export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
         private readonly viewModelBinderSelector: ViewModelBinderSelector,
         private readonly eventManager: IEventManager
     ) { }
 
-    public modelToViewModel(model: FormModel, formViewModel?: FormViewModel): FormViewModel {
+    public async modelToViewModel(model: FormModel, formViewModel?: FormViewModel): Promise<FormViewModel> {
         if (!formViewModel) {
             formViewModel = new FormViewModel();
         }
 
-        const widgetViewModels = model.widgets
-            .map(widgetModel => {
-                const widgetViewModelBinder = this.viewModelBinderSelector.getViewModelBinderByModel(widgetModel);
+        const viewModels = [];
 
-                if (!widgetViewModelBinder) {
-                    return null;
-                }
+        for (const widgetModel of model.widgets) {
+            const widgetViewModelBinder = this.viewModelBinderSelector.getViewModelBinderByModel(widgetModel);
+            const widgetViewModel = await widgetViewModelBinder.modelToViewModel(widgetModel);
 
-                const widgetViewModel = widgetViewModelBinder.modelToViewModel(widgetModel);
+            viewModels.push(widgetViewModel);
+        }
 
-                return widgetViewModel;
-            })
-            .filter(x => x !== null);
-
-        formViewModel.widgets(widgetViewModels);
+        formViewModel.widgets(viewModels);
         formViewModel.formAction(model.formAction);
         formViewModel.formMethod(model.formMethod || "get");
         formViewModel.formTarget(model.formTarget || "_self");
