@@ -12,6 +12,7 @@ import { ViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
 import { IEventManager } from "@paperbits/common/events";
+import { Bag } from "@paperbits/common";
 
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
@@ -19,7 +20,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
         private readonly eventManager: IEventManager
     ) { }
 
-    public async modelToViewModel(model: FormModel, formViewModel?: FormViewModel): Promise<FormViewModel> {
+    public async modelToViewModel(model: FormModel, formViewModel?: FormViewModel, bindingContext?: Bag<any>): Promise<FormViewModel> {
         if (!formViewModel) {
             formViewModel = new FormViewModel();
         }
@@ -28,7 +29,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
 
         for (const widgetModel of model.widgets) {
             const widgetViewModelBinder = this.viewModelBinderSelector.getViewModelBinderByModel(widgetModel);
-            const widgetViewModel = await widgetViewModelBinder.modelToViewModel(widgetModel);
+            const widgetViewModel = await widgetViewModelBinder.modelToViewModel(widgetModel, null, bindingContext);
 
             viewModels.push(widgetViewModel);
         }
