@@ -9,6 +9,7 @@ import { InputModel } from "../inputModel";
 import { InputViewModel } from "./inputViewModel";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { IEventManager } from "@paperbits/common/events";
+import { Bag } from "@paperbits/common";
 
 interface InputModelRegistration {
     displayName: string;
@@ -26,7 +27,7 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
         this.inputs.push({ displayName: displayName, inputClass: inputModelClass });
     }
 
-    public async modelToViewModel(model: InputModel, viewModel?: InputViewModel): Promise<InputViewModel> {
+    public async modelToViewModel(model: InputModel, viewModel?: InputViewModel, bindingContext?: Bag<any>): Promise<InputViewModel> {
         if (!viewModel) {
             viewModel = new InputViewModel(model);
         }
@@ -38,6 +39,7 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
 
         const binding = {
             displayName: registration.displayName,
+            readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             editor: "input-editor",
             applyChanges: () => {
