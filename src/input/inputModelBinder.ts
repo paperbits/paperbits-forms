@@ -15,7 +15,7 @@ interface InputModelRegistration {
     inputClass: new () => InputModel;
 }
 
-export class GenericInputModelBinder implements IModelBinder {
+export class GenericInputModelBinder implements IModelBinder<InputModel> {
     private excludeNames = ["type", "object", "inputType", "inputProperties", "options"];
     private inputs: InputModelRegistration[];
 
