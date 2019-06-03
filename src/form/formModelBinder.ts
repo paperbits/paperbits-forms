@@ -11,7 +11,7 @@ import { ModelBinderSelector } from "@paperbits/common/widgets";
 import { FormContract } from "./formContract";
 import { Contract, Bag } from "@paperbits/common";
 
-export class FormModelBinder implements IModelBinder {
+export class FormModelBinder implements IModelBinder<FormModel> {
     constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
 
     public canHandleContract(contract: Contract): boolean {
@@ -35,7 +35,7 @@ export class FormModelBinder implements IModelBinder {
 
         if (node.nodes) {
             const modelPromises = node.nodes.map(async (contract: Contract) => {
-                const modelBinder: IModelBinder = this.modelBinderSelector.getModelBinderByContract(contract);
+                const modelBinder = this.modelBinderSelector.getModelBinderByContract<any>(contract);
                 return await modelBinder.contractToModel(contract, bindingContext);
             });
     
