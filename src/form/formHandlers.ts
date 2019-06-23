@@ -20,6 +20,7 @@ export class FormHandlers implements IWidgetHandler {
         const widgetOrder: IWidgetOrder = {
             name: "form",
             displayName: "Form",
+            category: "Forms",
             iconClass: "paperbits-form",
             requires: ["keyboard"],
             createModel: async () => {

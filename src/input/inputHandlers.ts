@@ -15,6 +15,7 @@ export class InputHandlers implements IWidgetHandler {
         const widgetOrder: IWidgetOrder = {
             name: "input",
             displayName: `Input ${this.input.inputType}`,
+            category: "Forms",
             iconClass: "paperbits-form",
             requires: ["form"],
             createModel: async () => {
