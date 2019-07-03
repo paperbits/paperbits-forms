@@ -5,8 +5,8 @@
             <b>Main</b>
         </label>
         <div id="mainCollapse" class="collapse form-group-collapse">
-            <label class="form-label">Submit URL</label>
-            <input type="text" class="form-control" placeholder="e.g. /submit" data-bind="textInput: formAction" maxlength="1000" spellcheck="false" />
+            <label for="formAction" class="form-label">Submit URL</label>
+            <input type="text" id="formAction" class="form-control" placeholder="e.g. /submit" data-bind="textInput: formAction" maxlength="1000" spellcheck="false" />
 
             <label class="form-label">Method</label>
             <div class="form-group">
@@ -50,8 +50,8 @@
             <b>Miscellaneous</b>
         </label>
         <div id="miscellaneousCollapse" class="collapse form-group-collapse">
-            <label class="form-label">Character encodings</label>
-            <input type="text" class="form-control" data-bind="textInput: acceptCharset" maxlength="1000" />
+            <label for="acceptCharset" class="form-label">Character encodings</label>
+            <input type="text" id="acceptCharset" class="form-control" data-bind="textInput: acceptCharset" maxlength="1000" />
 
             <label class="form-label">
                 <input class="form-check-input" type="checkbox" data-bind="checked: isInline" />Is inline
@@ -65,7 +65,6 @@
             <b>Hidden inputs</b>
         </label>
         <div id="optionsCollapse" class="collapse form-group-collapse">
-
             <label class="form-label">Add item:</label>
             <input class="form-control" type="text" placeholder="name" data-bind='value:itemNameToAdd, valueUpdate: "afterkeydown"' />
             <input class="form-control" type="text" placeholder="value" data-bind='value:itemValueToAdd, valueUpdate: "afterkeydown"'
@@ -76,7 +75,8 @@
 
             <label class="form-label">Name - Value:</label>
             <select class="form-control" multiple="multiple" height="5" data-bind="options:hiddenInputs, optionsText: function(item) { return item.itemName+ ' - ' + item.itemValue },
-                        optionsValue: 'itemName', selectedOptions: selectedItems"> </select>
+                        optionsValue: 'itemName', selectedOptions: selectedItems">
+            </select>
 
             <div data-bind="visible: selectedItems().length > 0 ">
                 <button class="btn" data-bind="click: deleteItem">Delete</button>
