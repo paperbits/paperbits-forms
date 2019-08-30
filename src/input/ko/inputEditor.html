@@ -4,7 +4,7 @@
     <!-- ko if: sectionItem.options === undefined && sectionItem.editors().length > 0 -->
     <div class="form-group form-group-collapsible">
         <label class="form-label">
-            <a href="#" class="form-group-toggle" data-bind="collapse: '#'+sectionItem.sectionName"></a>
+            <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#'+sectionItem.sectionName"></a>
             <b data-bind="text: sectionItem.sectionName"></b>
         </label>
 
@@ -46,7 +46,7 @@
     <!-- ko if: sectionItem.options !== undefined -->
     <div class="form-group form-group-collapsible" data-bind="visible: $parent.showOptions ">
         <label class="form-label">
-            <a href="#" class="form-group-toggle" data-bind="collapse: '#optionsCollapse'"></a>
+            <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#optionsCollapse'"></a>
             <b>Options/Values</b>
         </label>
         <div id="optionsCollapse" class="collapse form-group-collapse">
