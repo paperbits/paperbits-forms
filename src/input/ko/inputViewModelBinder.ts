@@ -43,7 +43,7 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
             model: model,
             editor: "input-editor",
             applyChanges: () => {
-                this.modelToViewModel(model, viewModel);
+                this.modelToViewModel(model, viewModel, bindingContext);
                 this.eventManager.dispatchEvent("onContentUpdate");
             }
         };
