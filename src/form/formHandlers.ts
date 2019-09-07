@@ -77,7 +77,7 @@ export class FormHandlers implements IWidgetHandler {
                     this.viewManager.clearContextualEditors();
                 }
             },
-            selectionCommands: [{
+            selectCommands: [{
                 tooltip: "Edit form",
                 iconClass: "paperbits-edit-72",
                 position: "top right",
