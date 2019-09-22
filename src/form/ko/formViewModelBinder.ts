@@ -52,8 +52,8 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
             editor: "form-editor",
             handler: FormHandlers,
             provides: ["form"],
-            applyChanges: () => {
-                this.modelToViewModel(model, formViewModel, bindingContext);
+            applyChanges: async () => {
+                await this.modelToViewModel(model, formViewModel, bindingContext);
                 this.eventManager.dispatchEvent("onContentUpdate");
             }
         };

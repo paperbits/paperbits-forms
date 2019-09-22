@@ -42,8 +42,8 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             editor: "input-editor",
-            applyChanges: () => {
-                this.modelToViewModel(model, viewModel, bindingContext);
+            applyChanges: async () => {
+                await this.modelToViewModel(model, viewModel, bindingContext);
                 this.eventManager.dispatchEvent("onContentUpdate");
             }
         };
