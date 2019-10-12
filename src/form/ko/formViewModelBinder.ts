@@ -11,13 +11,13 @@ import { FormViewModel } from "./formViewModel";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
-import { EventManager } from "@paperbits/common/events";
+import { IEventManager } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
 
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
         private readonly viewModelBinderSelector: ViewModelBinderSelector,
-        private readonly eventManager: EventManager
+        private readonly eventManager: IEventManager
     ) { }
 
     public async modelToViewModel(model: FormModel, formViewModel?: FormViewModel, bindingContext?: Bag<any>): Promise<FormViewModel> {
