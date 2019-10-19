@@ -8,13 +8,13 @@
 import { IWidgetOrder, IWidgetHandler, WidgetContext } from "@paperbits/common/editing";
 import { FormModel } from "./formModel";
 import { TextInputModel, SubmitInputModel } from "../input";
-import { IViewManager, IContextCommandSet } from "@paperbits/common/ui";
+import { ViewManager, IContextCommandSet } from "@paperbits/common/ui";
 import { DragSession } from "@paperbits/common/ui/draggables";
 import { WidgetModel } from "@paperbits/common/widgets";
 
 
 export class FormHandlers implements IWidgetHandler {
-    constructor(private readonly viewManager: IViewManager) { }
+    constructor(private readonly viewManager: ViewManager) { }
 
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
