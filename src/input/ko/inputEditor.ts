@@ -11,7 +11,7 @@ import template from "./inputEditor.html";
 import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
 import { InputModel, OptionItem } from "../inputModel";
 import { InputProperty } from "../inputProperty";
-import { changeRateLimit } from "@paperbits/core/ko/consts";
+import { ChangeRateLimit } from "@paperbits/common/ko/consts";
 import { Bag } from "@paperbits/common";
 
 interface EditorSection {
@@ -146,7 +146,7 @@ export class InputEditor {
                 edit.propertyType = sectionMetadata.inputType;
                 edit.propertyOptions = sectionMetadata.options || [];
                 edit.placeholder = sectionMetadata.placeholder;
-                edit.propertyValue.extend(changeRateLimit);
+                edit.propertyValue.extend(ChangeRateLimit);
                 edit.propertyValue.subscribe(this.applyChanges);
 
                 if (!sectionMetadata) {
