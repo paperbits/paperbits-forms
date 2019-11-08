@@ -22,13 +22,13 @@
     "dependencies": {
         "@paperbits/common": "0.1.169",
         "@paperbits/core": "0.1.169",
-        "knockout": "^3.5.0-beta",
-        "knockout.validation": "^2.0.3"
+        "knockout": "^3.5.1",
+        "knockout.validation": "^2.0.4"
     },
     "devDependencies": {
-        "@types/knockout": "^3.4.53",
-        "@types/knockout.mapping": "^2.0.33",
-        "@types/knockout.validation": "0.0.36",
-        "@types/node": "8.5.5"
+        "@types/knockout": "^3.4.66",
+        "@types/knockout.mapping": "^2.0.35",
+        "@types/knockout.validation": "0.0.37",
+        "@types/node": "12.12.6"
     }
 }
