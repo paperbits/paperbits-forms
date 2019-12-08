@@ -52,16 +52,8 @@ export class FormHandlers implements IWidgetHandler {
         return widgetOrder;
     }
 
-    public onDragOver(dragSession: DragSession): boolean {
-        return dragSession.type === "widget";
-    }
-
-    public onDragDrop(dragSession: DragSession): void {
-        if (dragSession.type === "widget") {
-            dragSession.targetBinding.model.widgets.splice(dragSession.insertIndex, 0, dragSession.sourceModel);
-            dragSession.targetBinding.applyChanges();
-            dragSession.sourceParentBinding.applyChanges();
-        }
+    public canAccept(dragSession: DragSession): boolean {
+        return !["section", "row", "column", "form"].includes(dragSession.sourceBinding.name);
     }
 
     public getContextualEditor(context: WidgetContext): IContextCommandSet {
