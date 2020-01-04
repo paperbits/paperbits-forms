@@ -43,8 +43,7 @@ interface EditorItem {
 }
 @Component({
     selector: "input-editor",
-    template: template,
-    injectable: "inputEditor"
+    template: template
 })
 export class InputEditor {
     public controlType: ko.Observable<string>;

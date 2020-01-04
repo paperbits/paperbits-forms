@@ -13,8 +13,7 @@ import { OptionItem, InputModel } from "../../input";
 
 @Component({
     selector: "form-editor",
-    template: template,
-    injectable: "formEditor"
+    template: template
 })
 export class FormEditor {
     public readonly formAction: ko.Observable<string>;
