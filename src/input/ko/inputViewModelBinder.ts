@@ -56,4 +56,8 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
     public canHandleModel(model: InputModel): boolean {
         return this.inputs.some(x => model instanceof x.inputClass);
     }
+
+    public canHandleViewModel(viewModel: InputViewModel): boolean {
+        return viewModel instanceof InputViewModel;
+    }
 }

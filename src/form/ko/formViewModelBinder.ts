@@ -66,4 +66,8 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
     public canHandleModel(model: FormModel): boolean {
         return model instanceof FormModel;
     }
+
+    public canHandleViewModel(viewModel: FormViewModel): boolean {
+        return viewModel instanceof FormViewModel;
+    }
 }
