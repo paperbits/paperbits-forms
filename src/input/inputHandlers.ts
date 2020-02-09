@@ -17,7 +17,7 @@ export class InputHandlers implements IWidgetHandler {
             displayName: `Input ${this.input.inputType}`,
             category: "Forms",
             iconClass: "paperbits-form",
-            requires: ["form"],
+            requires: ["form", "html", "js"],
             createModel: async () => {
                 return this.input;
             }

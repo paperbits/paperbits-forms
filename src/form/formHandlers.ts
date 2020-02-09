@@ -22,7 +22,7 @@ export class FormHandlers implements IWidgetHandler {
             displayName: "Form",
             category: "Forms",
             iconClass: "paperbits-form",
-            requires: ["keyboard"],
+            requires: ["html", "js", "interaction"],
             createModel: async () => {
                 const firstNameModel = new TextInputModel();
                 firstNameModel.setProperty("labelText", "First name");
