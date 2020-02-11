@@ -41,6 +41,7 @@ export class GenericInputViewModelBinder implements ViewModelBinder<InputModel, 
             displayName: registration.displayName,
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
+            draggable: true,
             editor: "input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
