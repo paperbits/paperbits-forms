@@ -13,6 +13,7 @@ export interface FormContract extends Contract {
     formTarget?: string;
     acceptCharset?: string;
     encType?: string;
+    identifier?: string;
     formName?: string;
     description?: string;
     isInline?: boolean;

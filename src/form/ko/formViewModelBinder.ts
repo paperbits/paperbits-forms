@@ -40,6 +40,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
         formViewModel.formTarget(model.formTarget || "_self");
         formViewModel.acceptCharset(model.acceptCharset);
         formViewModel.encType(model.encType || "application/x-www-form-urlencoded");
+        formViewModel.identifier(model.identifier);
         formViewModel.formName(model.formName);
         formViewModel.description(model.description);
         formViewModel.isInline(model.isInline);

@@ -21,6 +21,7 @@ export class FormEditor {
     public readonly formTarget?: ko.Observable<string>;
     public readonly acceptCharset?: ko.Observable<string>;
     public readonly encType?: ko.Observable<string>;
+    public readonly identifier?: ko.Observable<string>;
     public readonly isInline?: ko.Observable<boolean>;
 
     public itemNameToAdd: ko.Observable<string>;
@@ -34,6 +35,7 @@ export class FormEditor {
         this.formTarget = ko.observable<string>();
         this.acceptCharset = ko.observable<string>();
         this.encType = ko.observable<string>();
+        this.identifier = ko.observable<string>();
         this.isInline = ko.observable<boolean>();
 
         this.formAction.subscribe(((newValue) => { this.model.formAction = newValue; this.onChange(this.model); }).bind(this));
@@ -41,6 +43,7 @@ export class FormEditor {
         this.formTarget.subscribe(((newValue) => { this.model.formTarget = newValue; this.onChange(this.model); }).bind(this));
         this.acceptCharset.subscribe(((newValue) => { this.model.acceptCharset = newValue; this.onChange(this.model); }).bind(this));
         this.encType.subscribe(((newValue) => { this.model.encType = newValue; this.onChange(this.model); }).bind(this));
+        this.identifier.subscribe(((newValue) => { this.model.identifier = newValue; this.onChange(this.model); }).bind(this));
         this.isInline.subscribe(((newValue) => { this.model.isInline = newValue; this.onChange(this.model); }).bind(this));
 
         this.itemNameToAdd = ko.observable("");
@@ -62,6 +65,7 @@ export class FormEditor {
         this.formTarget(this.model.formTarget || "_self");
         this.acceptCharset(this.model.acceptCharset);
         this.encType(this.model.encType || "application/x-www-form-urlencoded");
+        this.identifier(this.model.identifier);
         this.isInline(this.model.isInline);
 
         if (this.model.widgets && this.model.widgets.length > 0) {

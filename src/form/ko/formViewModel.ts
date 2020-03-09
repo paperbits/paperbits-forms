@@ -20,6 +20,7 @@ export class FormViewModel {
     public formTarget?: ko.Observable<string>;
     public acceptCharset?: ko.Observable<string>;
     public encType?: ko.Observable<string>;
+    public identifier: ko.Observable<string>;
     public formName?: ko.Observable<string>;
     public description?: ko.Observable<string>;
     public isInline?: ko.Observable<boolean>;
@@ -32,6 +33,7 @@ export class FormViewModel {
         this.formTarget = ko.observable<string>();
         this.acceptCharset = ko.observable<string>();
         this.encType = ko.observable<string>();
+        this.identifier = ko.observable<string>();
         this.formName = ko.observable<string>();
         this.description = ko.observable<string>();
         this.isInline = ko.observable<boolean>();

@@ -12,6 +12,7 @@ export class FormModel {
     public formTarget?: "_self" | "_blank" | "_parent" | "_top";
     public acceptCharset?: string;
     public encType?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
+    public identifier: string;
     public formName?: string;
     public description?: string;
     public isInline?: boolean;

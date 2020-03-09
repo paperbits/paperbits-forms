@@ -29,6 +29,7 @@ export class FormModelBinder implements IModelBinder<FormModel> {
         model.formTarget    = <any>node.formTarget;
         model.acceptCharset = node.acceptCharset;
         model.encType       = <any>node.encType;
+        model.identifier    = node.identifier;
         model.formName      = node.formName;
         model.description   = node.description;
         model.isInline      = node.isInline;
@@ -55,6 +56,7 @@ export class FormModelBinder implements IModelBinder<FormModel> {
             formTarget   : model.formTarget,
             acceptCharset: model.acceptCharset,
             encType      : model.encType,
+            identifier   : model.identifier,
             formName     : model.formName,
             description  : model.description,
             isInline     : model.isInline,
