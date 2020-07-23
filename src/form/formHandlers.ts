@@ -7,10 +7,11 @@
 
 import { IWidgetOrder, IWidgetHandler, WidgetContext } from "@paperbits/common/editing";
 import { FormModel } from "./formModel";
-import { TextInputModel, SubmitInputModel } from "../input";
+import { TextInputModel } from "../input";
 import { ViewManager, IContextCommandSet } from "@paperbits/common/ui";
 import { DragSession } from "@paperbits/common/ui/draggables";
 import { WidgetModel } from "@paperbits/common/widgets";
+import { SubmitModel } from "../submit/submitModel";
 
 
 export class FormHandlers implements IWidgetHandler {
@@ -36,14 +37,10 @@ export class FormHandlers implements IWidgetHandler {
                 lastNameModel.setProperty("placeholderText", "e.g. Doe");
                 lastNameModel.setProperty("isRequired", true);
 
-                const submitModel = new SubmitInputModel();
-                submitModel.setProperty("inputValue", "Register");
-                submitModel.setProperty("labelText", "Register");
-
                 const formModel = new FormModel();
                 formModel.widgets.push(firstNameModel);
                 formModel.widgets.push(lastNameModel);
-                formModel.widgets.push(submitModel);
+                formModel.widgets.push(new SubmitModel());
 
                 return formModel;
             }

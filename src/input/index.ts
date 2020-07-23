@@ -9,7 +9,6 @@ export * from "./inputContract";
 export * from "./inputHandlers";
 export * from "./inputModel";
 export * from "./textInput";
-export * from "./submitInput";
 export * from "./passwordInput";
 export * from "./resetInput";
 export * from "./selectInput";
