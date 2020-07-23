@@ -35,7 +35,6 @@ export class InputModule implements IInjectorModule {
     public register(injector: IInjector): void {
         const inputModelBinder = new GenericInputModelBinder();
         inputModelBinder.registerInput("input:text", TextInputModel);
-        inputModelBinder.registerInput("input:submit", SubmitInputModel);
         inputModelBinder.registerInput("input:password", PasswordInputModel);
         inputModelBinder.registerInput("input:reset", ResetInputModel);
         inputModelBinder.registerInput("input:select", SelectInputModel);
@@ -54,7 +53,6 @@ export class InputModule implements IInjectorModule {
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
         inputViewModelBinder.registerInput("Text input", TextInputModel);
-        inputViewModelBinder.registerInput("Submit form button", SubmitInputModel);
         inputViewModelBinder.registerInput("Password input", PasswordInputModel);
         inputViewModelBinder.registerInput("Reset", ResetInputModel);
         inputViewModelBinder.registerInput("Select", SelectInputModel);
