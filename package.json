@@ -26,7 +26,6 @@
         "knockout.validation": "^2.0.4"
     },
     "devDependencies": {
-        "@types/knockout": "^3.4.66",
         "@types/knockout.mapping": "^2.0.35",
         "@types/knockout.validation": "0.0.37",
         "@types/node": "12.12.6"
