@@ -13,18 +13,11 @@ export class TextInput {
     public readonly value: ko.Observable<string>;
     public readonly placeholder: ko.Observable<string>;
     public readonly styles: ko.Observable<StyleModel>;
-    public readonly readonly: ko.Observable<boolean>;
-    public readonly required: ko.Observable<boolean>;
-    public readonly maxLength: ko.Observable<number>;
-
 
     constructor() {
         this.label = ko.observable<string>("Text input");
         this.value = ko.observable<string>();
         this.placeholder = ko.observable<string>("Text input");
-        this.readonly = ko.observable<boolean>();
-        this.required = ko.observable<boolean>();
-        this.maxLength = ko.observable<number>();
         this.styles = ko.observable<StyleModel>();
     }
 }

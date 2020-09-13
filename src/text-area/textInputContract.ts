@@ -22,21 +22,6 @@ export interface TextInputContract extends Contract {
     value: string;
 
     /**
-     * Indicates that field is readonly.
-     */
-    readonly: boolean;
-
-    /**
-     * Indicates that field is required.
-     */
-    required: boolean;
-
-    /**
-     * Maximum allowed number of characters.
-     */
-    maxLength: number;
-
-    /**
      * TextInput local styles.
      */
     styles?: any;

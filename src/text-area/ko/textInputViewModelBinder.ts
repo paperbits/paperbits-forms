@@ -19,9 +19,6 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
 
         viewModel.label(model.label);
         viewModel.value(model.value);
-        viewModel.readonly(model.readonly);
-        viewModel.required(model.required);
-        viewModel.maxLength(model.maxLength);
         viewModel.placeholder(model.placeholder);
 
         if (model.styles) {

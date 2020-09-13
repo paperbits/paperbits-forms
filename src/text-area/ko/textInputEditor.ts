@@ -13,20 +13,12 @@ export class TextInputEditor {
     public readonly label: ko.Observable<string>;
     public readonly value: ko.Observable<string>;
     public readonly placeholder: ko.Observable<string>;
-
-    public readonly required: ko.Observable<boolean>;
-    public readonly readonly: ko.Observable<boolean>;
-    public readonly maxLength: ko.Observable<number>;
-
     public readonly appearanceStyle: ko.Observable<string>;
     public readonly appearanceStyles: ko.ObservableArray<any>;
 
     constructor(private readonly styleService: StyleService) {
         this.label = ko.observable<string>();
         this.value = ko.observable<string>();
-        this.required = ko.observable<boolean>();
-        this.readonly = ko.observable<boolean>();
-        this.maxLength = ko.observable<number>();
         this.placeholder = ko.observable<string>();
         this.appearanceStyles = ko.observableArray();
         this.appearanceStyle = ko.observable();
@@ -42,10 +34,6 @@ export class TextInputEditor {
     public async initialize(): Promise<void> {
         this.label(this.model.label);
         this.value(this.model.value);
-        this.placeholder(this.model.placeholder);
-        this.required(this.model.required);
-        this.readonly(this.model.readonly);
-        this.maxLength(this.model.maxLength);
 
         if (this.model.styles) {
             const variations = await this.styleService.getComponentVariations("formControl");
@@ -56,19 +44,13 @@ export class TextInputEditor {
         this.appearanceStyle.subscribe(this.applyChanges);
         this.label.subscribe(this.applyChanges);
         this.value.subscribe(this.applyChanges);
-        this.required.subscribe(this.applyChanges);
-        this.readonly.subscribe(this.applyChanges);
-        this.maxLength.subscribe(this.applyChanges);
         this.placeholder.subscribe(this.applyChanges);
     }
 
     private applyChanges(): void {
         this.model.label = this.label();
         this.model.value = this.value();
-        this.model.readonly = this.readonly();
-        this.model.required = this.required();
-        this.model.maxLength = this.maxLength();
-        this.model.placeholder = this.placeholder();
+        this.model.placeholder =this.placeholder();
 
         this.model.styles = {
             appearance: this.appearanceStyle()

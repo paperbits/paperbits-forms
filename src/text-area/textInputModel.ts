@@ -20,21 +20,6 @@ export class TextInputModel {
     public placeholder: string;
 
     /**
-     * Indicates that field is readonly.
-     */
-    public readonly: boolean;
-
-    /**
-     * Indicates that field is required.
-     */
-    public required: boolean;
-
-    /**
-     * Maximum allowed number of characters.
-     */
-    public maxLength: number;
-
-    /**
      * Text input local styles.
      */
     public styles: LocalStyles;
