@@ -15,7 +15,6 @@ export class TextInputModelBinder implements IModelBinder<TextInputModel>  {
     }
 
     public async contractToModel(contract: TextInputContract): Promise<TextInputModel> {
-        debugger;
         const model = new TextInputModel();
         model.label = contract.label;
         model.placeholder = contract.placeholder;
