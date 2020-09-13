@@ -5,7 +5,7 @@ import { StyleModel } from "@paperbits/common/styles";
 
 
 @Component({
-    selector: "paperbits-textInput",
+    selector: "text-input",
     template: template
 })
 export class TextInput {

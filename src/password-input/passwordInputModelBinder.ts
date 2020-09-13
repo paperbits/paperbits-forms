@@ -7,7 +7,7 @@ import { PasswordInputContract } from "./passwordInputContract";
 export class PasswordInputModelBinder implements IModelBinder<PasswordInputModel>  {
     public canHandleContract(contract: Contract): boolean {
         console.log(contract.type);
-        return contract.type === "input:text";
+        return contract.type === "input:password";
     }
 
     public canHandleModel(model: Object): boolean {
@@ -30,7 +30,7 @@ export class PasswordInputModelBinder implements IModelBinder<PasswordInputModel
 
     public modelToContract(model: PasswordInputModel): Contract {
         const contract: PasswordInputContract = {
-            type: "input:text",
+            type: "input:password",
             label: model.label,
             name: model.name,
             value: model.value,

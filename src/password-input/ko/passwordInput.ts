@@ -5,7 +5,7 @@ import { StyleModel } from "@paperbits/common/styles";
 
 
 @Component({
-    selector: "paperbits-passwordInput",
+    selector: "password-input",
     template: template
 })
 export class PasswordInput {
@@ -20,10 +20,10 @@ export class PasswordInput {
 
 
     constructor() {
-        this.label = ko.observable<string>("Text input");
+        this.label = ko.observable<string>("Password input");
         this.name = ko.observable<string>();
         this.value = ko.observable<string>();
-        this.placeholder = ko.observable<string>("Text input");
+        this.placeholder = ko.observable<string>("Password input");
         this.readonly = ko.observable<boolean>();
         this.required = ko.observable<boolean>();
         this.maxLength = ko.observable<number>();
