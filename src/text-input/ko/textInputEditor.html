@@ -17,18 +17,10 @@
 
     <div class="form-group">
         <label class="form-label">
-            Make required
-            <button class="btn btn-info" type="button" data-bind="tooltip: 'Make required'"></button>
+            Placeholder
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Placeholder'"></button>
         </label>
-        <input type="checkbox" class="form-control" data-bind="checked: required" />
-    </div>
-
-    <div class="form-group">
-        <label class="form-label">
-            Make readonly
-            <button class="btn btn-info" type="button" data-bind="tooltip: 'Make readonly'"></button>
-        </label>
-        <input type="checkbox" class="form-control" data-bind="checked: readonly" />
+        <input type="text" class="form-control" placeholder="e.g. First name" data-bind="textInput: placeholder" maxlength="256" />
     </div>
 
     <div class="form-group">
@@ -41,10 +33,14 @@
 
     <div class="form-group">
         <label class="form-label">
-            Placeholder
-            <button class="btn btn-info" type="button" data-bind="tooltip: 'Placeholder'"></button>
+            <input name="required" type="checkbox" data-bind="checked: required" />Make required
         </label>
-        <input type="text" class="form-control" placeholder="e.g. First name" data-bind="textInput: placeholder" maxlength="256" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            <input name="required" type="checkbox" data-bind="checked: readonly" />Make readonly
+        </label>
     </div>
 
     <div class="form-group">
