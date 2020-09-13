@@ -10,6 +10,11 @@ export class TextInputModel {
     public label: string;
 
     /**
+     * Field name.
+     */
+    public name: string;
+
+    /**
      * Text input initial value.
      */
     public value: string;
@@ -41,6 +46,7 @@ export class TextInputModel {
 
     constructor() {
         this.label = "Label";
+        this.name = "firsName";
         this.value = "";
         this.placeholder = "e.g. First name";
         this.styles = { appearance: "components/formControl/default" };

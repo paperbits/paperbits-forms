@@ -7,11 +7,11 @@
 
 import { IWidgetOrder, IWidgetHandler, WidgetContext } from "@paperbits/common/editing";
 import { FormModel } from "./formModel";
-import { TextInputModel } from "../input";
 import { ViewManager, IContextCommandSet } from "@paperbits/common/ui";
 import { DragSession } from "@paperbits/common/ui/draggables";
 import { WidgetModel } from "@paperbits/common/widgets";
 import { SubmitModel } from "../submit/submitModel";
+import { TextInputModel } from "../text-input";
 
 
 export class FormHandlers implements IWidgetHandler {
@@ -26,16 +26,16 @@ export class FormHandlers implements IWidgetHandler {
             requires: ["html", "js", "interaction"],
             createModel: async () => {
                 const firstNameModel = new TextInputModel();
-                firstNameModel.setProperty("labelText", "First name");
-                firstNameModel.setProperty("inputName", "firstName");
-                firstNameModel.setProperty("placeholderText", "e.g. John");
-                firstNameModel.setProperty("isRequired", true);
+                firstNameModel.label = "First name";
+                firstNameModel.name = "firstName";
+                firstNameModel.placeholder = "e.g. John";
+                firstNameModel.required = true;
 
                 const lastNameModel = new TextInputModel();
-                lastNameModel.setProperty("labelText", "Last name");
-                lastNameModel.setProperty("inputName", "lastName");
-                lastNameModel.setProperty("placeholderText", "e.g. Doe");
-                lastNameModel.setProperty("isRequired", true);
+                lastNameModel.label = "Last name";
+                lastNameModel.name = "lastName";
+                lastNameModel.placeholder = "e.g. Doe";
+                lastNameModel.required = true;
 
                 const formModel = new FormModel();
                 formModel.widgets.push(firstNameModel);

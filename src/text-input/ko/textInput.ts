@@ -10,6 +10,7 @@ import { StyleModel } from "@paperbits/common/styles";
 })
 export class TextInput {
     public readonly label: ko.Observable<string>;
+    public readonly name: ko.Observable<string>;
     public readonly value: ko.Observable<string>;
     public readonly placeholder: ko.Observable<string>;
     public readonly styles: ko.Observable<StyleModel>;
@@ -20,6 +21,7 @@ export class TextInput {
 
     constructor() {
         this.label = ko.observable<string>("Text input");
+        this.name = ko.observable<string>();
         this.value = ko.observable<string>();
         this.placeholder = ko.observable<string>("Text input");
         this.readonly = ko.observable<boolean>();

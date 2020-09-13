@@ -9,9 +9,7 @@ import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { InputEditor } from "./inputEditor";
 import { InputHandlers } from "../inputHandlers";
 import {
-    PasswordInputModel,
     ResetInputModel,
-    TextInputModel,
     SelectInputModel,
     RadioInputModel,
     CheckboxInputModel,
@@ -29,8 +27,6 @@ import {
 export class InputEditorModule implements IInjectorModule {
     public register(injector: IInjector): void {
         injector.bind("inputEditor", InputEditor);
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TextInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new PasswordInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ResetInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SelectInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RadioInputModel()));

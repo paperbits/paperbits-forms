@@ -11,7 +11,6 @@ import { GenericInputViewModelBinder } from "./inputViewModelBinder";
 import { InputBindingHandler } from "./inputBindingHandler";
 
 import {
-    PasswordInputModel,
     ResetInputModel,
     SelectInputModel,
     RadioInputModel,
@@ -30,7 +29,6 @@ import {
 export class InputModule implements IInjectorModule {
     public register(injector: IInjector): void {
         const inputModelBinder = new GenericInputModelBinder();
-        inputModelBinder.registerInput("input:password", PasswordInputModel);
         inputModelBinder.registerInput("input:reset", ResetInputModel);
         inputModelBinder.registerInput("input:select", SelectInputModel);
         inputModelBinder.registerInput("input:radio", RadioInputModel);
@@ -47,7 +45,6 @@ export class InputModule implements IInjectorModule {
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
-        inputViewModelBinder.registerInput("Password input", PasswordInputModel);
         inputViewModelBinder.registerInput("Reset", ResetInputModel);
         inputViewModelBinder.registerInput("Select", SelectInputModel);
         inputViewModelBinder.registerInput("Radio group", RadioInputModel);

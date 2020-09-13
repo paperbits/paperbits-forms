@@ -1,16 +1,16 @@
 ﻿import { IWidgetOrder, IWidgetHandler } from "@paperbits/common/editing";
-import { TextInputModel } from "./textInputModel";
+import { PasswordInputModel } from "./passwordInputModel";
 
 
-export class TextInputHandlers implements IWidgetHandler {
+export class PasswordInputHandlers implements IWidgetHandler {
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
-            name: "input:text",
-            displayName: "Text input",
-            iconClass: "paperbits-textInput-2",
+            name: "input:password",
+            displayName: "Password input",
+            iconClass: "paperbits-passwordInput-2",
             requires: ["form", "html", "js"],
             createModel: async () => {
-                return new TextInputModel();
+                return new PasswordInputModel();
             }
         };
 

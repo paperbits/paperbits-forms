@@ -9,6 +9,14 @@
 
     <div class="form-group">
         <label class="form-label">
+            Field name
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Field name'"></button>
+        </label>
+        <input type="text" class="form-control" placeholder="e.g. firstName"  data-bind="textInput: name" maxlength="256" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
             Initial value
             <button class="btn btn-info" type="button" data-bind="tooltip: 'Initial value'"></button>
         </label>

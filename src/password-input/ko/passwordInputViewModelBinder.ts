@@ -1,24 +1,28 @@
-import { TextInput } from "./textInput";
+import { PasswordInput } from "./passwordInput";
 import { ViewModelBinder } from "@paperbits/common/widgets";
-import { TextInputModel } from "../textInputModel";
+import { PasswordInputModel } from "../passwordInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
 
 
-export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel, TextInput>  {
+export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInputModel, PasswordInput>  {
     constructor(
         private readonly eventManager: EventManager,
         private readonly styleCompiler: StyleCompiler
     ) { }
 
-    public async modelToViewModel(model: TextInputModel, viewModel?: TextInput, bindingContext?: Bag<any>): Promise<TextInput> {
+    public async modelToViewModel(model: PasswordInputModel, viewModel?: PasswordInput, bindingContext?: Bag<any>): Promise<PasswordInput> {
         if (!viewModel) {
-            viewModel = new TextInput();
+            viewModel = new PasswordInput();
         }
 
         viewModel.label(model.label);
+        viewModel.name(model.name);
         viewModel.value(model.value);
+        viewModel.readonly(model.readonly);
+        viewModel.required(model.required);
+        viewModel.maxLength(model.maxLength);
         viewModel.placeholder(model.placeholder);
 
         if (model.styles) {
@@ -26,12 +30,12 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
         }
 
         viewModel["widgetBinding"] = {
-            displayName: "Text input",
+            displayName: "Password input",
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
             flow: "inline",
-            editor: "text-input-editor",
+            editor: "password-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
                 this.eventManager.dispatchEvent("onContentUpdate");
@@ -41,7 +45,7 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
         return viewModel;
     }
 
-    public canHandleModel(model: TextInputModel): boolean {
-        return model instanceof TextInputModel;
+    public canHandleModel(model: PasswordInputModel): boolean {
+        return model instanceof PasswordInputModel;
     }
 }
