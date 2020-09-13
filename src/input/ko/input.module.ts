@@ -13,7 +13,6 @@ import { InputBindingHandler } from "./inputBindingHandler";
 import {
     PasswordInputModel,
     ResetInputModel,
-    TextInputModel,
     SelectInputModel,
     RadioInputModel,
     CheckboxInputModel,
@@ -31,7 +30,6 @@ import {
 export class InputModule implements IInjectorModule {
     public register(injector: IInjector): void {
         const inputModelBinder = new GenericInputModelBinder();
-        inputModelBinder.registerInput("input:text", TextInputModel);
         inputModelBinder.registerInput("input:password", PasswordInputModel);
         inputModelBinder.registerInput("input:reset", ResetInputModel);
         inputModelBinder.registerInput("input:select", SelectInputModel);
@@ -49,7 +47,6 @@ export class InputModule implements IInjectorModule {
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
-        inputViewModelBinder.registerInput("Text input", TextInputModel);
         inputViewModelBinder.registerInput("Password input", PasswordInputModel);
         inputViewModelBinder.registerInput("Reset", ResetInputModel);
         inputViewModelBinder.registerInput("Select", SelectInputModel);

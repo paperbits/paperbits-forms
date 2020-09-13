@@ -11,6 +11,7 @@ import { FormsModule } from "./forms.module";
 import { FormEditorModule } from "./form/ko/formEditor.module";
 import { InputEditorModule } from "./input/ko/inputEditor.module";
 import { SubmitEditorModule } from "./submit/ko/submitEditor.module";
+import { TextInputEditorModule } from "./text-input/ko";
 
 export class FormsDesignModule implements IInjectorModule {
     public register(injector: IInjector): void {
@@ -18,5 +19,6 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new FormEditorModule());
         injector.bindModule(new InputEditorModule());
         injector.bindModule(new SubmitEditorModule());
+        injector.bindModule(new TextInputEditorModule());
     }
 }
