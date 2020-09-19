@@ -1,11 +1,11 @@
 import { LocalStyles } from "@paperbits/common/styles";
 
 /**
- * Password input widget model.
+ * Text input widget model.
  */
-export class PasswordInputModel {
+export class UrlInputModel {
     /**
-     * Input label.
+     * Text input label.
      */
     public label: string;
 
@@ -15,7 +15,12 @@ export class PasswordInputModel {
     public name: string;
 
     /**
-     * Input placeholder.
+     * Text input initial value.
+     */
+    public value: string;
+
+    /**
+     * Text input placeholder.
      */
     public placeholder: string;
 
@@ -35,14 +40,15 @@ export class PasswordInputModel {
     public maxLength: number;
 
     /**
-     * Input local styles.
+     * Text input local styles.
      */
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "Password";
-        this.name = "password";
-        this.placeholder = "e.g. P@ssw0rd";
+        this.label = "URL";
+        this.name = "url";
+        this.value = "";
+        this.placeholder = "e.g. https://www.example.com";
         this.styles = { appearance: "components/formControl/default" };
     }
 }

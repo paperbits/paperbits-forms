@@ -17,5 +17,4 @@ export * from "./dateInput";
 export * from "./timeInput";
 export * from "./numberInput";
 export * from "./rangeInput";
-export * from "./urlInput";
 export * from "./inputModelBinder";

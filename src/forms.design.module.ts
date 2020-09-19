@@ -15,6 +15,7 @@ import { TextInputEditorModule } from "./text-input/ko";
 import { PasswordInputDesignModule } from "./password-input/ko";
 import { EmailInputDesignModule } from "./email-input/ko";
 import { SearchInputDesignModule } from "./search-input/ko";
+import { UrlInputDesignModule } from "./url-input/ko";
 
 
 export class FormsDesignModule implements IInjectorModule {
@@ -27,5 +28,6 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new PasswordInputDesignModule());
         injector.bindModule(new EmailInputDesignModule());
         injector.bindModule(new SearchInputDesignModule());
+        injector.bindModule(new UrlInputDesignModule());
     }
 }

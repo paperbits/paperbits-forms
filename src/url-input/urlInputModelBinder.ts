@@ -1,23 +1,24 @@
 import { IModelBinder } from "@paperbits/common/editing";
-import { PasswordInputModel } from "./passwordInputModel";
+import { UrlInputModel } from "./urlInputModel";
 import { Contract } from "@paperbits/common";
-import { PasswordInputContract } from "./passwordInputContract";
+import { UrlInputContract } from "./urlInputContract";
 
 
-export class PasswordInputModelBinder implements IModelBinder<PasswordInputModel>  {
+export class UrlInputModelBinder implements IModelBinder<UrlInputModel>  {
     public canHandleContract(contract: Contract): boolean {
-        return contract.type === "input:password";
+        return contract.type === "input:url";
     }
 
     public canHandleModel(model: Object): boolean {
-        return model instanceof PasswordInputModel;
+        return model instanceof UrlInputModel;
     }
 
-    public async contractToModel(contract: PasswordInputContract): Promise<PasswordInputModel> {
-        const model = new PasswordInputModel();
+    public async contractToModel(contract: UrlInputContract): Promise<UrlInputModel> {
+        const model = new UrlInputModel();
         model.label = contract.label;
         model.placeholder = contract.placeholder;
         model.name = contract.name;
+        model.value = contract.value;
         model.readonly = contract.readonly;
         model.required = contract.required;
         model.maxLength = contract.maxLength;
@@ -26,11 +27,12 @@ export class PasswordInputModelBinder implements IModelBinder<PasswordInputModel
         return model;
     }
 
-    public modelToContract(model: PasswordInputModel): Contract {
-        const contract: PasswordInputContract = {
-            type: "input:password",
+    public modelToContract(model: UrlInputModel): Contract {
+        const contract: UrlInputContract = {
+            type: "input:url",
             label: model.label,
             name: model.name,
+            value: model.value,
             readonly: model.readonly,
             required: model.required,
             maxLength: model.maxLength,

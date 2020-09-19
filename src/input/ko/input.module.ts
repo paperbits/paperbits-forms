@@ -19,8 +19,7 @@ import {
     DateInputModel,
     TimeInputModel,
     NumberInputModel,
-    RangeInputModel,
-    UrlInputModel
+    RangeInputModel
 } from "..";
 
 export class InputModule implements IInjectorModule {
@@ -35,7 +34,6 @@ export class InputModule implements IInjectorModule {
         inputModelBinder.registerInput("input:time", TimeInputModel);
         inputModelBinder.registerInput("input:number", NumberInputModel);
         inputModelBinder.registerInput("input:range", RangeInputModel);
-        inputModelBinder.registerInput("input:url", UrlInputModel);
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
@@ -48,7 +46,6 @@ export class InputModule implements IInjectorModule {
         inputViewModelBinder.registerInput("Time picker", TimeInputModel);
         inputViewModelBinder.registerInput("Number input", NumberInputModel);
         inputViewModelBinder.registerInput("Range picker", RangeInputModel);
-        inputViewModelBinder.registerInput("URL input", UrlInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 
         injector.bindToCollection("autostart", InputBindingHandler);
