@@ -14,6 +14,8 @@ import { SubmitEditorModule } from "./submit/ko/submitEditor.module";
 import { TextInputEditorModule } from "./text-input/ko";
 import { PasswordInputDesignModule } from "./password-input/ko";
 import { EmailInputDesignModule } from "./email-input/ko";
+import { SearchInputDesignModule } from "./search-input/ko";
+
 
 export class FormsDesignModule implements IInjectorModule {
     public register(injector: IInjector): void {
@@ -24,5 +26,6 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new TextInputEditorModule());
         injector.bindModule(new PasswordInputDesignModule());
         injector.bindModule(new EmailInputDesignModule());
+        injector.bindModule(new SearchInputDesignModule());
     }
 }

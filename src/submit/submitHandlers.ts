@@ -6,8 +6,9 @@ export class SubmitHandlers implements IWidgetHandler {
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
             name: "submit",
+            category: "Forms",
             displayName: "Submit form button",
-            iconClass: "paperbits-submit-2",
+            iconClass: "paperbits-form",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new SubmitModel();

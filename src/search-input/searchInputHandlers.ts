@@ -1,17 +1,17 @@
 ﻿import { IWidgetOrder, IWidgetHandler } from "@paperbits/common/editing";
-import { EmailInputModel } from "./emailInputModel";
+import { SearchInputModel } from "./searchInputModel";
 
 
-export class EmailInputHandlers implements IWidgetHandler {
+export class SearchInputHandlers implements IWidgetHandler {
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
-            name: "input:email",
+            name: "input:search",
             category: "Forms",
-            displayName: "Email input",
+            displayName: "Search input",
             iconClass: "paperbits-form",
             requires: ["form", "html", "js"],
             createModel: async () => {
-                return new EmailInputModel();
+                return new SearchInputModel();
             }
         };
 

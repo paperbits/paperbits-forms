@@ -8,7 +8,6 @@
 export * from "./inputContract";
 export * from "./inputHandlers";
 export * from "./inputModel";
-export * from "./resetInput";
 export * from "./selectInput";
 export * from "./radioInput";
 export * from "./checkboxInput";
@@ -18,6 +17,5 @@ export * from "./dateInput";
 export * from "./timeInput";
 export * from "./numberInput";
 export * from "./rangeInput";
-export * from "./searchInput";
 export * from "./urlInput";
 export * from "./inputModelBinder";

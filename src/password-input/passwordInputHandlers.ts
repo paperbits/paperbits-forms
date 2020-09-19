@@ -6,8 +6,9 @@ export class PasswordInputHandlers implements IWidgetHandler {
     public async getWidgetOrder(): Promise<IWidgetOrder> {
         const widgetOrder: IWidgetOrder = {
             name: "input:password",
+            category: "Forms",
             displayName: "Password input",
-            iconClass: "paperbits-passwordInput-2",
+            iconClass: "paperbits-form",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new PasswordInputModel();

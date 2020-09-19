@@ -12,6 +12,7 @@ import { SubmitModule } from "./submit/ko/submit.module";
 import { TextInputModule } from "./text-input/ko";
 import { PasswordInputModule } from "./password-input/ko";
 import { EmailInputModule } from "./email-input/ko";
+import { SearchInputModule } from "./search-input/ko";
 
 export class FormsModule implements IInjectorModule {
     public register(injector: IInjector): void {
@@ -21,5 +22,6 @@ export class FormsModule implements IInjectorModule {
         injector.bindModule(new TextInputModule());
         injector.bindModule(new PasswordInputModule());
         injector.bindModule(new EmailInputModule());
+        injector.bindModule(new SearchInputModule());
     }
 }

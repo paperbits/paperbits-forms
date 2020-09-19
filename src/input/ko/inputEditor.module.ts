@@ -9,7 +9,6 @@ import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { InputEditor } from "./inputEditor";
 import { InputHandlers } from "../inputHandlers";
 import {
-    ResetInputModel,
     SelectInputModel,
     RadioInputModel,
     CheckboxInputModel,
@@ -19,14 +18,12 @@ import {
     TimeInputModel,
     NumberInputModel,
     RangeInputModel,
-    UrlInputModel,
-    SearchInputModel
+    UrlInputModel
 } from "..";
 
 export class InputEditorModule implements IInjectorModule {
     public register(injector: IInjector): void {
         injector.bind("inputEditor", InputEditor);
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ResetInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SelectInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RadioInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new CheckboxInputModel()));
@@ -36,7 +33,6 @@ export class InputEditorModule implements IInjectorModule {
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TimeInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new NumberInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RangeInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SearchInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new UrlInputModel()));
     }
 }

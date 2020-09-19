@@ -11,7 +11,6 @@ import { GenericInputViewModelBinder } from "./inputViewModelBinder";
 import { InputBindingHandler } from "./inputBindingHandler";
 
 import {
-    ResetInputModel,
     SelectInputModel,
     RadioInputModel,
     CheckboxInputModel,
@@ -21,14 +20,12 @@ import {
     TimeInputModel,
     NumberInputModel,
     RangeInputModel,
-    UrlInputModel,
-    SearchInputModel
+    UrlInputModel
 } from "..";
 
 export class InputModule implements IInjectorModule {
     public register(injector: IInjector): void {
         const inputModelBinder = new GenericInputModelBinder();
-        inputModelBinder.registerInput("input:reset", ResetInputModel);
         inputModelBinder.registerInput("input:select", SelectInputModel);
         inputModelBinder.registerInput("input:radio", RadioInputModel);
         inputModelBinder.registerInput("input:checkbox", CheckboxInputModel);
@@ -38,12 +35,10 @@ export class InputModule implements IInjectorModule {
         inputModelBinder.registerInput("input:time", TimeInputModel);
         inputModelBinder.registerInput("input:number", NumberInputModel);
         inputModelBinder.registerInput("input:range", RangeInputModel);
-        inputModelBinder.registerInput("input:search", SearchInputModel);
         inputModelBinder.registerInput("input:url", UrlInputModel);
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
-        inputViewModelBinder.registerInput("Reset", ResetInputModel);
         inputViewModelBinder.registerInput("Select", SelectInputModel);
         inputViewModelBinder.registerInput("Radio group", RadioInputModel);
         inputViewModelBinder.registerInput("Check box", CheckboxInputModel);
@@ -53,7 +48,6 @@ export class InputModule implements IInjectorModule {
         inputViewModelBinder.registerInput("Time picker", TimeInputModel);
         inputViewModelBinder.registerInput("Number input", NumberInputModel);
         inputViewModelBinder.registerInput("Range picker", RangeInputModel);
-        inputViewModelBinder.registerInput("Search input", SearchInputModel);
         inputViewModelBinder.registerInput("URL input", UrlInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 

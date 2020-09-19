@@ -7,7 +7,8 @@ export class TextInputHandlers implements IWidgetHandler {
         const widgetOrder: IWidgetOrder = {
             name: "input:text",
             displayName: "Text input",
-            iconClass: "paperbits-textInput-2",
+            category: "Forms",
+            iconClass: "paperbits-form",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new TextInputModel();
