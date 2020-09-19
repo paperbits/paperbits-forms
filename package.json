@@ -22,6 +22,7 @@
     "dependencies": {
         "@paperbits/common": "0.1.322",
         "@paperbits/core": "0.1.322",
+        "@paperbits/styles": "0.1.322",
         "knockout": "^3.5.1",
         "knockout.validation": "^2.0.4"
     },

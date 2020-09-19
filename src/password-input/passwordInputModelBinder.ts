@@ -6,7 +6,6 @@ import { PasswordInputContract } from "./passwordInputContract";
 
 export class PasswordInputModelBinder implements IModelBinder<PasswordInputModel>  {
     public canHandleContract(contract: Contract): boolean {
-        console.log(contract.type);
         return contract.type === "input:password";
     }
 

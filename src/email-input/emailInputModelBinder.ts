@@ -1,22 +1,23 @@
 import { IModelBinder } from "@paperbits/common/editing";
-import { TextInputModel } from "./textInputModel";
+import { EmailInputModel } from "./emailInputModel";
 import { Contract } from "@paperbits/common";
-import { TextInputContract } from "./textInputContract";
+import { EmailInputContract } from "./emailInputContract";
 
 
-export class TextInputModelBinder implements IModelBinder<TextInputModel>  {
+export class EmailInputModelBinder implements IModelBinder<EmailInputModel>  {
     public canHandleContract(contract: Contract): boolean {
-        return contract.type === "input:text";
+        return contract.type === "input:email";
     }
 
     public canHandleModel(model: Object): boolean {
-        return model instanceof TextInputModel;
+        return model instanceof EmailInputModel;
     }
 
-    public async contractToModel(contract: TextInputContract): Promise<TextInputModel> {
-        const model = new TextInputModel();
+    public async contractToModel(contract: EmailInputContract): Promise<EmailInputModel> {
+        const model = new EmailInputModel();
         model.label = contract.label;
         model.placeholder = contract.placeholder;
+        model.name = contract.name;
         model.value = contract.value;
         model.readonly = contract.readonly;
         model.required = contract.required;
@@ -26,10 +27,11 @@ export class TextInputModelBinder implements IModelBinder<TextInputModel>  {
         return model;
     }
 
-    public modelToContract(model: TextInputModel): Contract {
-        const contract: TextInputContract = {
-            type: "input:text",
+    public modelToContract(model: EmailInputModel): Contract {
+        const contract: EmailInputContract = {
+            type: "input:email",
             label: model.label,
+            name: model.name,
             value: model.value,
             readonly: model.readonly,
             required: model.required,

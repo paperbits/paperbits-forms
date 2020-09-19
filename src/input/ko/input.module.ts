@@ -19,7 +19,6 @@ import {
     ColorInputModel,
     DateInputModel,
     TimeInputModel,
-    EmailInputModel,
     NumberInputModel,
     RangeInputModel,
     UrlInputModel,
@@ -37,7 +36,6 @@ export class InputModule implements IInjectorModule {
         inputModelBinder.registerInput("input:color", ColorInputModel);
         inputModelBinder.registerInput("input:date", DateInputModel);
         inputModelBinder.registerInput("input:time", TimeInputModel);
-        inputModelBinder.registerInput("input:email", EmailInputModel);
         inputModelBinder.registerInput("input:number", NumberInputModel);
         inputModelBinder.registerInput("input:range", RangeInputModel);
         inputModelBinder.registerInput("input:search", SearchInputModel);
@@ -53,7 +51,6 @@ export class InputModule implements IInjectorModule {
         inputViewModelBinder.registerInput("Color picker", ColorInputModel);
         inputViewModelBinder.registerInput("Date picker", DateInputModel);
         inputViewModelBinder.registerInput("Time picker", TimeInputModel);
-        inputViewModelBinder.registerInput("Email input", EmailInputModel);
         inputViewModelBinder.registerInput("Number input", NumberInputModel);
         inputViewModelBinder.registerInput("Range picker", RangeInputModel);
         inputViewModelBinder.registerInput("Search input", SearchInputModel);

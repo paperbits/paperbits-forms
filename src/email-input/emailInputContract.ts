@@ -3,11 +3,11 @@ import { HyperlinkContract } from "@paperbits/common/editing";
 
 
 /**
- * Password input data contract.
+ * Email input data contract.
  */
-export interface PasswordInputContract extends Contract {
+export interface EmailInputContract extends Contract {
     /**
-     * Label on the password input.
+     * Label on the email input.
      */
     label: string;
 
@@ -42,7 +42,7 @@ export interface PasswordInputContract extends Contract {
     maxLength: number;
 
     /**
-     * Password input local styles.
+     * Email input local styles.
      */
     styles?: any;
 

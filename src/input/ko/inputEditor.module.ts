@@ -17,7 +17,6 @@ import {
     ColorInputModel,
     DateInputModel,
     TimeInputModel,
-    EmailInputModel,
     NumberInputModel,
     RangeInputModel,
     UrlInputModel,
@@ -35,7 +34,6 @@ export class InputEditorModule implements IInjectorModule {
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ColorInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new DateInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TimeInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new EmailInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new NumberInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RangeInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SearchInputModel()));
