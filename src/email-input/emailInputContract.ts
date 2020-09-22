@@ -17,7 +17,7 @@ export interface EmailInputContract extends Contract {
     placeholder: string;
 
     /**
-     * Field name.
+     * Field name. Used in form submission.
      */
     name: string;
 

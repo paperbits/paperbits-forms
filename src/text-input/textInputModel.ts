@@ -46,7 +46,7 @@ export class TextInputModel {
 
     constructor() {
         this.label = "Label";
-        this.name = "firsName";
+        this.name = "firstName";
         this.value = "";
         this.placeholder = "e.g. First name";
         this.styles = { appearance: "components/formControl/default" };

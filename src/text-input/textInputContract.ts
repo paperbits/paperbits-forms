@@ -17,7 +17,12 @@ export interface TextInputContract extends Contract {
     placeholder: string;
 
     /**
-     * Initial value.
+     * Field name. Used in form submission.
+     */
+    name: string;
+
+    /**
+     * Initial field value.
      */
     value: string;
 
