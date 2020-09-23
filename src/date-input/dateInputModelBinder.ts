@@ -1,42 +1,38 @@
 import { IModelBinder } from "@paperbits/common/editing";
-import { SearchInputModel } from "./searchInputModel";
+import { DateInputModel } from "./dateInputModel";
 import { Contract } from "@paperbits/common";
-import { SearchInputContract } from "./searchInputContract";
+import { DateInputContract } from "./dateInputContract";
 
 
-export class SearchInputModelBinder implements IModelBinder<SearchInputModel>  {
+export class DateInputModelBinder implements IModelBinder<DateInputModel>  {
     public canHandleContract(contract: Contract): boolean {
-        return contract.type === "input:search";
+        return contract.type === "input:date";
     }
 
     public canHandleModel(model: Object): boolean {
-        return model instanceof SearchInputModel;
+        return model instanceof DateInputModel;
     }
 
-    public async contractToModel(contract: SearchInputContract): Promise<SearchInputModel> {
-        const model = new SearchInputModel();
+    public async contractToModel(contract: DateInputContract): Promise<DateInputModel> {
+        const model = new DateInputModel();
         model.label = contract.label;
-        model.placeholder = contract.placeholder;
         model.name = contract.name;
         model.value = contract.value;
         model.readonly = contract.readonly;
         model.required = contract.required;
-        model.maxLength = contract.maxLength;
         model.styles = contract.styles || { appearance: "components/formControl/default" };
 
         return model;
     }
 
-    public modelToContract(model: SearchInputModel): Contract {
-        const contract: SearchInputContract = {
-            type: "input:search",
+    public modelToContract(model: DateInputModel): Contract {
+        const contract: DateInputContract = {
+            type: "input:date",
             label: model.label,
             name: model.name,
             value: model.value,
             readonly: model.readonly,
             required: model.required,
-            maxLength: model.maxLength,
-            placeholder: model.placeholder,
             styles: model.styles
         };
 

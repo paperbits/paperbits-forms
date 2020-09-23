@@ -14,7 +14,8 @@ import { SubmitEditorModule } from "./submit/ko/submitEditor.module";
 import { TextInputEditorModule } from "./text-input/ko";
 import { PasswordInputDesignModule } from "./password-input/ko";
 import { EmailInputDesignModule } from "./email-input/ko";
-import { SearchInputDesignModule } from "./search-input/ko";
+import { DateInputDesignModule } from "./date-input/ko";
+import { TimeInputDesignModule } from "./time-input/ko";
 import { UrlInputDesignModule } from "./url-input/ko";
 import { NumberInputDesignModule } from "./number-input/ko";
 
@@ -28,7 +29,8 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new TextInputEditorModule());
         injector.bindModule(new PasswordInputDesignModule());
         injector.bindModule(new EmailInputDesignModule());
-        injector.bindModule(new SearchInputDesignModule());
+        injector.bindModule(new DateInputDesignModule());
+        injector.bindModule(new TimeInputDesignModule());
         injector.bindModule(new UrlInputDesignModule());
         injector.bindModule(new NumberInputDesignModule());
     }

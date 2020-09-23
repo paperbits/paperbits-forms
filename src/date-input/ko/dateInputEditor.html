@@ -4,7 +4,7 @@
             Label
             <button class="btn btn-info" type="button" data-bind="tooltip: 'Input label'"></button>
         </label>
-        <input type="text" class="form-control" placeholder="e.g. Password" data-bind="textInput: label" />
+        <input type="text" class="form-control" placeholder="e.g. Date" data-bind="textInput: label" maxlength="256" />
     </div>
 
     <div class="form-group">
@@ -12,23 +12,15 @@
             Field name
             <button class="btn btn-info" type="button" data-bind="tooltip: 'Field name'"></button>
         </label>
-        <input type="text" class="form-control" placeholder="e.g. firstName"  data-bind="textInput: name" />
+        <input type="text" class="form-control" placeholder="e.g. firstName"  data-bind="textInput: name" maxlength="256" />
     </div>
 
     <div class="form-group">
         <label class="form-label">
-            Placeholder
-            <button class="btn btn-info" type="button" data-bind="tooltip: 'Placeholder'"></button>
+            Initial value
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Initial value'"></button>
         </label>
-        <input type="text" class="form-control" placeholder="e.g. P@ssw0rd" data-bind="textInput: placeholder" />
-    </div>
-
-    <div class="form-group">
-        <label class="form-label">
-            Limit max length to
-            <button class="btn btn-info" type="button" data-bind="tooltip: 'Limit max length to'"></button>
-        </label>
-        <input type="number" min="0" placeholder="Unlimited" class="form-control" data-bind="value: maxLength" />
+        <input type="date" class="form-control" data-bind="textInput: value" />
     </div>
 
     <div class="form-group">

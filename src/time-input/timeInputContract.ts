@@ -3,18 +3,13 @@ import { HyperlinkContract } from "@paperbits/common/editing";
 
 
 /**
- * Search input data contract.
+ * Time input data contract.
  */
-export interface SearchInputContract extends Contract {
+export interface TimeInputContract extends Contract {
     /**
-     * Label on the search input.
+     * Label on the time input.
      */
     label: string;
-
-    /**
-     * Placeholder.
-     */
-    placeholder: string;
 
     /**
      * Field name. Used in form submission.
@@ -37,12 +32,7 @@ export interface SearchInputContract extends Contract {
     required: boolean;
 
     /**
-     * Maximum allowed number of characters.
-     */
-    maxLength: number;
-
-    /**
-     * Search input local styles.
+     * Time input local styles.
      */
     styles?: any;
 

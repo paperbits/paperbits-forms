@@ -3,7 +3,7 @@ import { LocalStyles } from "@paperbits/common/styles";
 /**
  * Text input widget model.
  */
-export class SearchInputModel {
+export class DateInputModel {
     /**
      * Text input label.
      */
@@ -20,11 +20,6 @@ export class SearchInputModel {
     public value: string;
 
     /**
-     * Text input placeholder.
-     */
-    public placeholder: string;
-
-    /**
      * Indicates that field is readonly.
      */
     public readonly: boolean;
@@ -35,20 +30,14 @@ export class SearchInputModel {
     public required: boolean;
 
     /**
-     * Maximum allowed number of characters.
-     */
-    public maxLength: number;
-
-    /**
      * Text input local styles.
      */
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "Search input";
-        this.name = "search";
-        this.value = "";
-        this.placeholder = "Search website";
+        this.label = "Date input";
+        this.name = "date";
+        this.value = null;
         this.styles = { appearance: "components/formControl/default" };
     }
 }

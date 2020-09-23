@@ -1,0 +1,7 @@
+<div class="form-group">
+    <!-- ko if: label -->
+    <label data-bind="text: label"></label>
+    <!-- /ko -->
+    <input type="time"
+        data-bind="styled: styles, attr: { placeholder: placeholder, name: name, value: value, required: required, readonly: readonly }" />
+</div>

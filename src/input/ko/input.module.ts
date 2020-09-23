@@ -16,8 +16,6 @@ import {
     CheckboxInputModel,
     TextareaInputModel,
     ColorInputModel,
-    DateInputModel,
-    TimeInputModel,
     RangeInputModel
 } from "..";
 
@@ -29,8 +27,6 @@ export class InputModule implements IInjectorModule {
         inputModelBinder.registerInput("input:checkbox", CheckboxInputModel);
         inputModelBinder.registerInput("input:textarea", TextareaInputModel);
         inputModelBinder.registerInput("input:color", ColorInputModel);
-        inputModelBinder.registerInput("input:date", DateInputModel);
-        inputModelBinder.registerInput("input:time", TimeInputModel);
         inputModelBinder.registerInput("input:range", RangeInputModel);
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
@@ -40,8 +36,6 @@ export class InputModule implements IInjectorModule {
         inputViewModelBinder.registerInput("Check box", CheckboxInputModel);
         inputViewModelBinder.registerInput("Multiline text input", TextareaInputModel);
         inputViewModelBinder.registerInput("Color picker", ColorInputModel);
-        inputViewModelBinder.registerInput("Date picker", DateInputModel);
-        inputViewModelBinder.registerInput("Time picker", TimeInputModel);
         inputViewModelBinder.registerInput("Range picker", RangeInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 

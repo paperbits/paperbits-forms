@@ -1,20 +1,20 @@
-import { SearchInput } from "./searchInput";
+import { TimeInput } from "./timeInput";
 import { ViewModelBinder } from "@paperbits/common/widgets";
-import { SearchInputModel } from "../searchInputModel";
+import { TimeInputModel } from "../timeInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
 
 
-export class SearchInputViewModelBinder implements ViewModelBinder<SearchInputModel, SearchInput>  {
+export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel, TimeInput>  {
     constructor(
         private readonly eventManager: EventManager,
         private readonly styleCompiler: StyleCompiler
     ) { }
 
-    public async modelToViewModel(model: SearchInputModel, viewModel?: SearchInput, bindingContext?: Bag<any>): Promise<SearchInput> {
+    public async modelToViewModel(model: TimeInputModel, viewModel?: TimeInput, bindingContext?: Bag<any>): Promise<TimeInput> {
         if (!viewModel) {
-            viewModel = new SearchInput();
+            viewModel = new TimeInput();
         }
 
         viewModel.label(model.label);
@@ -22,30 +22,28 @@ export class SearchInputViewModelBinder implements ViewModelBinder<SearchInputMo
         viewModel.value(model.value);
         viewModel.readonly(model.readonly);
         viewModel.required(model.required);
-        viewModel.maxLength(model.maxLength);
-        viewModel.placeholder(model.placeholder);
 
         if (model.styles) {
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
         viewModel["widgetBinding"] = {
-            displayName: "Search input",
+            displayName: "Time input",
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
             flow: "inline",
-            editor: "search-input-editor",
+            editor: "time-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
-                this.eventManager.dispatchEvent("onContentUpdate");
+                this.eventManager.dispatchEvent("onContentUptime");
             }
         };
 
         return viewModel;
     }
 
-    public canHandleModel(model: SearchInputModel): boolean {
-        return model instanceof SearchInputModel;
+    public canHandleModel(model: TimeInputModel): boolean {
+        return model instanceof TimeInputModel;
     }
 }

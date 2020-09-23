@@ -1,14 +1,14 @@
 import * as ko from "knockout";
-import template from "./searchInput.html";
+import template from "./timeInput.html";
 import { Component } from "@paperbits/common/ko/decorators";
 import { StyleModel } from "@paperbits/common/styles";
 
 
 @Component({
-    selector: "search-input",
+    selector: "time-input",
     template: template
 })
-export class SearchInput {
+export class TimeInput {
     public readonly label: ko.Observable<string>;
     public readonly name: ko.Observable<string>;
     public readonly value: ko.Observable<string>;
@@ -20,10 +20,10 @@ export class SearchInput {
 
 
     constructor() {
-        this.label = ko.observable<string>("Search input");
+        this.label = ko.observable<string>("Time input");
         this.name = ko.observable<string>();
         this.value = ko.observable<string>();
-        this.placeholder = ko.observable<string>("Search input");
+        this.placeholder = ko.observable<string>("Time input");
         this.readonly = ko.observable<boolean>();
         this.required = ko.observable<boolean>();
         this.maxLength = ko.observable<number>();

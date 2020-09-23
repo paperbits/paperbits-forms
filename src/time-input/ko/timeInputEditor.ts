@@ -1,15 +1,15 @@
 import * as ko from "knockout";
-import template from "./searchInputEditor.html";
+import template from "./timeInputEditor.html";
 import { StyleService } from "@paperbits/styles";
-import { SearchInputModel } from "../searchInputModel";
+import { TimeInputModel } from "../timeInputModel";
 import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
 
 
 @Component({
-    selector: "search-input-editor",
+    selector: "time-input-editor",
     template: template
 })
-export class SearchInputEditor {
+export class TimeInputEditor {
     public readonly label: ko.Observable<string>;
     public readonly name: ko.Observable<string>;
     public readonly value: ko.Observable<string>;
@@ -34,20 +34,18 @@ export class SearchInputEditor {
     }
 
     @Param()
-    public model: SearchInputModel;
+    public model: TimeInputModel;
 
     @Event()
-    public onChange: (model: SearchInputModel) => void;
+    public onChange: (model: TimeInputModel) => void;
 
     @OnMounted()
     public async initialize(): Promise<void> {
         this.label(this.model.label);
         this.name(this.model.name);
         this.value(this.model.value);
-        this.placeholder(this.model.placeholder);
         this.required(this.model.required);
         this.readonly(this.model.readonly);
-        this.maxLength(this.model.maxLength);
 
         if (this.model.styles) {
             const variations = await this.styleService.getComponentVariations("formControl");
@@ -61,8 +59,6 @@ export class SearchInputEditor {
         this.value.subscribe(this.applyChanges);
         this.required.subscribe(this.applyChanges);
         this.readonly.subscribe(this.applyChanges);
-        this.maxLength.subscribe(this.applyChanges);
-        this.placeholder.subscribe(this.applyChanges);
     }
 
     private applyChanges(): void {
@@ -71,8 +67,6 @@ export class SearchInputEditor {
         this.model.value = this.value();
         this.model.readonly = this.readonly();
         this.model.required = this.required();
-        this.model.maxLength = this.maxLength();
-        this.model.placeholder = this.placeholder();
 
         this.model.styles = {
             appearance: this.appearanceStyle()

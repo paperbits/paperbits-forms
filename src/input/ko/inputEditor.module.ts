@@ -14,8 +14,6 @@ import {
     CheckboxInputModel,
     TextareaInputModel,
     ColorInputModel,
-    DateInputModel,
-    TimeInputModel,
     RangeInputModel
 } from "..";
 
@@ -27,8 +25,6 @@ export class InputEditorModule implements IInjectorModule {
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new CheckboxInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TextareaInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ColorInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new DateInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new TimeInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RangeInputModel()));
     }
 }

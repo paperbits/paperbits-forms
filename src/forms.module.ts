@@ -12,7 +12,8 @@ import { SubmitModule } from "./submit/ko/submit.module";
 import { TextInputModule } from "./text-input/ko";
 import { PasswordInputModule } from "./password-input/ko";
 import { EmailInputModule } from "./email-input/ko";
-import { SearchInputModule } from "./search-input/ko";
+import { DateInputModule } from "./date-input/ko";
+import { TimeInputModule } from "./time-input/ko";
 import { UrlInputModule } from "./url-input/ko";
 import { NumberInputModule } from "./number-input/ko";
 
@@ -24,7 +25,8 @@ export class FormsModule implements IInjectorModule {
         injector.bindModule(new TextInputModule());
         injector.bindModule(new PasswordInputModule());
         injector.bindModule(new EmailInputModule());
-        injector.bindModule(new SearchInputModule());
+        injector.bindModule(new DateInputModule());
+        injector.bindModule(new TimeInputModule());
         injector.bindModule(new UrlInputModule());
         injector.bindModule(new NumberInputModule());
     }
