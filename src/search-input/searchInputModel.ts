@@ -45,7 +45,7 @@ export class SearchInputModel {
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "Search";
+        this.label = "Search input";
         this.name = "search";
         this.value = "";
         this.placeholder = "Search website";

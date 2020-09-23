@@ -40,7 +40,7 @@ export class PasswordInputModel {
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "Password";
+        this.label = "Password input";
         this.name = "password";
         this.placeholder = "e.g. P@ssw0rd";
         this.styles = { appearance: "components/formControl/default" };

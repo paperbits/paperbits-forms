@@ -3,7 +3,7 @@ import { LocalStyles } from "@paperbits/common/styles";
 /**
  * Text input widget model.
  */
-export class EmailInputModel {
+export class NumberInputModel {
     /**
      * Text input label.
      */
@@ -17,7 +17,7 @@ export class EmailInputModel {
     /**
      * Text input initial value.
      */
-    public value: string;
+    public value: number;
 
     /**
      * Text input placeholder.
@@ -35,9 +35,14 @@ export class EmailInputModel {
     public required: boolean;
 
     /**
-     * Maximum allowed number of characters.
+     * Minimum value the field can accept.
      */
-    public maxLength: number;
+    public min: number;
+
+    /**
+     * Maximum value the field can accept.
+     */
+    public max: number;
 
     /**
      * Text input local styles.
@@ -45,10 +50,10 @@ export class EmailInputModel {
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "Email input";
-        this.name = "email";
-        this.value = "";
-        this.placeholder = "e.g. P@ssw0rd";
+        this.label = "Number input";
+        this.name = "quantity";
+        this.value = null;
+        this.placeholder = "e.g. 100";
         this.styles = { appearance: "components/formControl/default" };
     }
 }

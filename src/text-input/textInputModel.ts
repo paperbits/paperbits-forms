@@ -45,7 +45,7 @@ export class TextInputModel {
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "Label";
+        this.label = "Text input";
         this.name = "firstName";
         this.value = "";
         this.placeholder = "e.g. First name";

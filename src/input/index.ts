@@ -15,6 +15,5 @@ export * from "./textareaInput";
 export * from "./colorInput";
 export * from "./dateInput";
 export * from "./timeInput";
-export * from "./numberInput";
 export * from "./rangeInput";
 export * from "./inputModelBinder";

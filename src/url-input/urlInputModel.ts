@@ -45,7 +45,7 @@ export class UrlInputModel {
     public styles: LocalStyles;
 
     constructor() {
-        this.label = "URL";
+        this.label = "URL input";
         this.name = "url";
         this.value = "";
         this.placeholder = "e.g. https://www.example.com";
