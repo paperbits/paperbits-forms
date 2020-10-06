@@ -18,6 +18,7 @@ import { DateInputDesignModule } from "./date-input/ko";
 import { TimeInputDesignModule } from "./time-input/ko";
 import { UrlInputDesignModule } from "./url-input/ko";
 import { NumberInputDesignModule } from "./number-input/ko";
+import { MultilineInputDesignModule } from "./multiline-input/ko";
 
 
 export class FormsDesignModule implements IInjectorModule {
@@ -33,5 +34,6 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new TimeInputDesignModule());
         injector.bindModule(new UrlInputDesignModule());
         injector.bindModule(new NumberInputDesignModule());
+        injector.bindModule(new MultilineInputDesignModule());
     }
 }
