@@ -19,6 +19,7 @@ import { TimeInputDesignModule } from "./time-input/ko";
 import { UrlInputDesignModule } from "./url-input/ko";
 import { NumberInputDesignModule } from "./number-input/ko";
 import { MultilineInputDesignModule } from "./multiline-input/ko";
+import { CheckboxDesignModule } from "./checkbox/ko";
 
 
 export class FormsDesignModule implements IInjectorModule {
@@ -35,5 +36,6 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new UrlInputDesignModule());
         injector.bindModule(new NumberInputDesignModule());
         injector.bindModule(new MultilineInputDesignModule());
+        injector.bindModule(new CheckboxDesignModule());
     }
 }

@@ -11,8 +11,6 @@ import { InputHandlers } from "../inputHandlers";
 import {
     SelectInputModel,
     RadioInputModel,
-    CheckboxInputModel,
-    ColorInputModel,
     RangeInputModel
 } from "..";
 
@@ -21,8 +19,6 @@ export class InputEditorModule implements IInjectorModule {
         injector.bind("inputEditor", InputEditor);
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SelectInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RadioInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new CheckboxInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new ColorInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RangeInputModel()));
     }
 }

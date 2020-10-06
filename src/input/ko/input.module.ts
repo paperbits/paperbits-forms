@@ -13,8 +13,6 @@ import { InputBindingHandler } from "./inputBindingHandler";
 import {
     SelectInputModel,
     RadioInputModel,
-    CheckboxInputModel,
-    ColorInputModel,
     RangeInputModel
 } from "..";
 
@@ -23,16 +21,12 @@ export class InputModule implements IInjectorModule {
         const inputModelBinder = new GenericInputModelBinder();
         inputModelBinder.registerInput("input:select", SelectInputModel);
         inputModelBinder.registerInput("input:radio", RadioInputModel);
-        inputModelBinder.registerInput("input:checkbox", CheckboxInputModel);
-        inputModelBinder.registerInput("input:color", ColorInputModel);
         inputModelBinder.registerInput("input:range", RangeInputModel);
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
         inputViewModelBinder.registerInput("Select", SelectInputModel);
         inputViewModelBinder.registerInput("Radio group", RadioInputModel);
-        inputViewModelBinder.registerInput("Check box", CheckboxInputModel);
-        inputViewModelBinder.registerInput("Color picker", ColorInputModel);
         inputViewModelBinder.registerInput("Range picker", RangeInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 

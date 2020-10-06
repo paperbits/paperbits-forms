@@ -17,6 +17,7 @@ import { TimeInputModule } from "./time-input/ko";
 import { UrlInputModule } from "./url-input/ko";
 import { NumberInputModule } from "./number-input/ko";
 import { MultilineInputModule } from "./multiline-input/ko";
+import { CheckboxModule } from "./checkbox/ko";
 
 export class FormsModule implements IInjectorModule {
     public register(injector: IInjector): void {
@@ -31,5 +32,6 @@ export class FormsModule implements IInjectorModule {
         injector.bindModule(new UrlInputModule());
         injector.bindModule(new NumberInputModule());
         injector.bindModule(new MultilineInputModule());
+        injector.bindModule(new CheckboxModule());
     }
 }

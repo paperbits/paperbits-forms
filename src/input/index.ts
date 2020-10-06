@@ -10,7 +10,5 @@ export * from "./inputHandlers";
 export * from "./inputModel";
 export * from "./selectInput";
 export * from "./radioInput";
-export * from "./checkboxInput";
-export * from "./colorInput";
 export * from "./rangeInput";
 export * from "./inputModelBinder";
