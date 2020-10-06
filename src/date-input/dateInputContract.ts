@@ -1,5 +1,4 @@
 import { Contract } from "@paperbits/common";
-import { HyperlinkContract } from "@paperbits/common/editing";
 
 
 /**
@@ -35,14 +34,4 @@ export interface DateInputContract extends Contract {
      * Date input local styles.
      */
     styles?: any;
-
-    /**
-     * Keys of user roles.
-     */
-    roles?: string[];
-    
-    /**
-     * Assigned hyperlink.
-     */
-    hyperlink?: HyperlinkContract;
 }
