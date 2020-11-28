@@ -32,7 +32,7 @@ export class DateInputViewModelBinder implements ViewModelBinder<DateInputModel,
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "date-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

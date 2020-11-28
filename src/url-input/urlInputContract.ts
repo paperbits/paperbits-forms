@@ -2,7 +2,7 @@ import { Contract } from "@paperbits/common";
 
 
 /**
- * Url input data contract.
+ * URL input data contract.
  */
 export interface UrlInputContract extends Contract {
     /**
@@ -41,7 +41,7 @@ export interface UrlInputContract extends Contract {
     maxLength: number;
 
     /**
-     * Url input local styles.
+     * URL input local styles.
      */
     styles?: any;
 }

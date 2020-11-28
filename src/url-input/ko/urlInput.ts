@@ -20,10 +20,10 @@ export class UrlInput {
 
 
     constructor() {
-        this.label = ko.observable<string>("Url input");
+        this.label = ko.observable<string>("URL input");
         this.name = ko.observable<string>();
         this.value = ko.observable<string>();
-        this.placeholder = ko.observable<string>("Url input");
+        this.placeholder = ko.observable<string>("URL input");
         this.readonly = ko.observable<boolean>();
         this.required = ko.observable<boolean>();
         this.maxLength = ko.observable<number>();

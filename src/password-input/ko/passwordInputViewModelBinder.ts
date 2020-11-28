@@ -33,7 +33,7 @@ export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInp
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "password-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

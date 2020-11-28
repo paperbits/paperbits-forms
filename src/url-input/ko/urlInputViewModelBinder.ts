@@ -30,11 +30,11 @@ export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, U
         }
 
         viewModel["widgetBinding"] = {
-            displayName: "Url input",
+            displayName: "URL input",
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "url-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

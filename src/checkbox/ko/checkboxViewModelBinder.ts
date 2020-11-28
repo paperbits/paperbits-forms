@@ -31,7 +31,7 @@ export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, C
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "checkbox-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

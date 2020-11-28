@@ -32,7 +32,7 @@ export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel,
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "time-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

@@ -34,7 +34,7 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "text-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

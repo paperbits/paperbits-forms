@@ -34,7 +34,7 @@ export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputMode
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "email-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

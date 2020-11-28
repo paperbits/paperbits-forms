@@ -33,7 +33,7 @@ export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineI
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "multiline-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

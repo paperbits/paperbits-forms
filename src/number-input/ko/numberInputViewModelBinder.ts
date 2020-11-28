@@ -35,7 +35,7 @@ export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputMo
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: "block",
             editor: "number-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
