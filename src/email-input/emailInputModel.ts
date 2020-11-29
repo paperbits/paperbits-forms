@@ -48,7 +48,7 @@ export class EmailInputModel {
         this.label = "Email input";
         this.name = "email";
         this.value = "";
-        this.placeholder = "e.g. P@ssw0rd";
+        this.placeholder = "e.g. john.doe@contoso.com";
         this.styles = { appearance: "components/formControl/default" };
     }
 }

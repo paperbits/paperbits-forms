@@ -23,7 +23,7 @@ export class MultilineInput {
         this.label = ko.observable<string>("Multi-line input");
         this.name = ko.observable<string>();
         this.value = ko.observable<string>();
-        this.placeholder = ko.observable<string>("e.g. Description");
+        this.placeholder = ko.observable<string>();
         this.readonly = ko.observable<boolean>();
         this.required = ko.observable<boolean>();
         this.maxLength = ko.observable<number>();
