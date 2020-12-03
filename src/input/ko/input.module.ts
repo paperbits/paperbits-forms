@@ -12,8 +12,7 @@ import { InputBindingHandler } from "./inputBindingHandler";
 
 import {
     SelectInputModel,
-    RadioInputModel,
-    RangeInputModel
+    RadioInputModel
 } from "..";
 
 export class InputModule implements IInjectorModule {
@@ -21,13 +20,11 @@ export class InputModule implements IInjectorModule {
         const inputModelBinder = new GenericInputModelBinder();
         inputModelBinder.registerInput("input:select", SelectInputModel);
         inputModelBinder.registerInput("input:radio", RadioInputModel);
-        inputModelBinder.registerInput("input:range", RangeInputModel);
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
         inputViewModelBinder.registerInput("Select", SelectInputModel);
         inputViewModelBinder.registerInput("Radio group", RadioInputModel);
-        inputViewModelBinder.registerInput("Range picker", RangeInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 
         injector.bindToCollection("autostart", InputBindingHandler);

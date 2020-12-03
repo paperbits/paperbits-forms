@@ -10,8 +10,7 @@ import { InputEditor } from "./inputEditor";
 import { InputHandlers } from "../inputHandlers";
 import {
     SelectInputModel,
-    RadioInputModel,
-    RangeInputModel
+    RadioInputModel
 } from "..";
 
 export class InputEditorModule implements IInjectorModule {
@@ -19,6 +18,5 @@ export class InputEditorModule implements IInjectorModule {
         injector.bind("inputEditor", InputEditor);
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SelectInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RadioInputModel()));
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RangeInputModel()));
     }
 }

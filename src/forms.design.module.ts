@@ -20,6 +20,7 @@ import { UrlInputDesignModule } from "./url-input/ko";
 import { NumberInputDesignModule } from "./number-input/ko";
 import { MultilineInputDesignModule } from "./multiline-input/ko";
 import { CheckboxDesignModule } from "./checkbox/ko";
+import { RangeInputDesignModule } from "./range-input/ko";
 
 
 export class FormsDesignModule implements IInjectorModule {
@@ -37,5 +38,6 @@ export class FormsDesignModule implements IInjectorModule {
         injector.bindModule(new NumberInputDesignModule());
         injector.bindModule(new MultilineInputDesignModule());
         injector.bindModule(new CheckboxDesignModule());
+        injector.bindModule(new RangeInputDesignModule());
     }
 }

@@ -1,0 +1,47 @@
+<div class="form" data-bind="scrollable: true">
+    <div class="form-group">
+        <label class="form-label">
+            Label
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Input label'"></button>
+        </label>
+        <input type="text" class="form-control" placeholder="e.g. Range" data-bind="textInput: label" maxlength="256" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Field name
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Field name'"></button>
+        </label>
+        <input type="text" class="form-control" placeholder="e.g. range"  data-bind="textInput: name" maxlength="256" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Min value
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Min value'"></button>
+        </label>
+        <input type="number" class="form-control" placeholder="e.g. 0"  data-bind="textInput: minValue"/>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Max value
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Max value'"></button>
+        </label>
+        <input type="number" class="form-control" placeholder="e.g. 100"  data-bind="textInput: maxValue" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Initial value
+            <button class="btn btn-info" type="button" data-bind="tooltip: 'Initial value'"></button>
+        </label>
+        <input type="number" class="form-control" placeholder="e.g. 50"  data-bind="textInput: value, attr: { min: minValue, max: maxValue }" />
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            <input name="required" type="checkbox" data-bind="checked: readonly" />Make readonly
+        </label>
+    </div>
+</div>

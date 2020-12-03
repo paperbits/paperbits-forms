@@ -1,0 +1,6 @@
+<div class="form-group">
+    <!-- ko if: label -->
+    <label data-bind="text: label"></label>
+    <!-- /ko -->
+    <input type="range" class="block" data-bind="styled: styles, attr: { name: name, value: value, min: minValue, max: maxValue, readonly: readonly }" />
+</div>
