@@ -9,7 +9,7 @@ import * as ko from "knockout";
 import template from "./formEditor.html";
 import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
 import { FormModel } from "../formModel";
-import { OptionItem, InputModel } from "../../input";
+
 
 @Component({
     selector: "form-editor",
@@ -27,7 +27,6 @@ export class FormEditor {
     public itemNameToAdd: ko.Observable<string>;
     public itemValueToAdd: ko.Observable<string>;
     public selectedItems: ko.ObservableArray<string>;
-    public hiddenInputs: ko.ObservableArray<OptionItem>;
 
     constructor() {
         this.formAction = ko.observable<string>();
@@ -49,7 +48,6 @@ export class FormEditor {
         this.itemNameToAdd = ko.observable("");
         this.itemValueToAdd = ko.observable("");
         this.selectedItems = ko.observableArray([]);
-        this.hiddenInputs = ko.observableArray([]);
     }
 
     @Param()
@@ -67,44 +65,5 @@ export class FormEditor {
         this.encType(this.model.encType || "application/x-www-form-urlencoded");
         this.identifier(this.model.identifier);
         this.isInline(this.model.isInline);
-
-        if (this.model.widgets && this.model.widgets.length > 0) {
-            const hiddens = this.model.widgets.filter(widget => widget.inputType === "hidden");
-            if (hiddens.length > 0) {
-                this.hiddenInputs(
-                    hiddens.map<OptionItem>(input => {
-                        return { itemName: <string>input.getInputProperty("inputName").propertyValue, itemValue: input.getInputProperty("inputValue").propertyValue };
-                    })
-                );
-            }
-        }
-    }
-
-    public addItem(): void {
-        if (this.itemNameToAdd() !== "" && this.itemValueToAdd() !== "" &&
-            !this.hiddenInputs().find((item) => item.itemName === this.itemNameToAdd())) {
-
-            const newItem = { itemName: this.itemNameToAdd(), itemValue: this.itemValueToAdd() };
-            const hiddenInputModel = new InputModel("hidden");
-            hiddenInputModel.setProperty("inputName", newItem.itemName);
-            hiddenInputModel.setProperty("inputValue", newItem.itemValue);
-            this.model.widgets.push(hiddenInputModel);
-            this.hiddenInputs.push(newItem);
-            this.onChange(this.model);
-        }
-        this.itemNameToAdd("");
-        this.itemValueToAdd("");
-    }
-
-    public deleteItem(): void {
-        if (this.selectedItems().length > 0) {
-            const removed = this.hiddenInputs.remove((item) => this.selectedItems().findIndex(selectedName => selectedName === item.itemName) !== -1);
-            removed.map(item => {
-                const modelToRemove = this.model.widgets.find(hidden => item.itemName === hidden.getInputProperty("inputName").propertyValue);
-                this.model.widgets.remove(modelToRemove);
-            });
-            this.onChange(this.model);
-            this.selectedItems([]);
-        }
     }
 }
