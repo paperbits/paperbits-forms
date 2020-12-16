@@ -8,6 +8,5 @@
 export * from "./inputContract";
 export * from "./inputHandlers";
 export * from "./inputModel";
-export * from "./selectInput";
 export * from "./radioInput";
 export * from "./inputModelBinder";

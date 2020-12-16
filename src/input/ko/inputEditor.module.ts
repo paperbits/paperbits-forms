@@ -9,14 +9,12 @@ import { IInjectorModule, IInjector } from "@paperbits/common/injection";
 import { InputEditor } from "./inputEditor";
 import { InputHandlers } from "../inputHandlers";
 import {
-    SelectInputModel,
     RadioInputModel
 } from "..";
 
 export class InputEditorModule implements IInjectorModule {
     public register(injector: IInjector): void {
         injector.bind("inputEditor", InputEditor);
-        injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new SelectInputModel()));
         injector.bindInstanceToCollection("widgetHandlers", new InputHandlers(new RadioInputModel()));
     }
 }

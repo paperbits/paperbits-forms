@@ -11,19 +11,16 @@ import { GenericInputViewModelBinder } from "./inputViewModelBinder";
 import { InputBindingHandler } from "./inputBindingHandler";
 
 import {
-    SelectInputModel,
     RadioInputModel
 } from "..";
 
 export class InputModule implements IInjectorModule {
     public register(injector: IInjector): void {
         const inputModelBinder = new GenericInputModelBinder();
-        inputModelBinder.registerInput("input:select", SelectInputModel);
         inputModelBinder.registerInput("input:radio", RadioInputModel);
         injector.bindInstanceToCollection("modelBinders", inputModelBinder);
 
         const inputViewModelBinder = new GenericInputViewModelBinder(injector.resolve("eventManager"));
-        inputViewModelBinder.registerInput("Select", SelectInputModel);
         inputViewModelBinder.registerInput("Radio group", RadioInputModel);
         injector.bindInstanceToCollection("viewModelBinders", inputViewModelBinder);
 

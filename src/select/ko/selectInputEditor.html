@@ -1,0 +1,95 @@
+<div class="form" data-bind="scrollable: true">
+    <div class="form-group form-group-collapsible">
+        <label class="form-label">
+            <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#sourceCollapse'"
+                aria-label="Toggle 'main' section"></a>
+            <b>Main</b>
+        </label>
+        <div id="sourceCollapse" class="collapse form-group-collapse">
+            <div class="form-group">
+                <label class="form-label">
+                    Label
+                    <button class="btn btn-info" type="button" data-bind="tooltip: 'Input label'"></button>
+                </label>
+                <input type="text" class="form-control" placeholder="e.g. Password" data-bind="textInput: label" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    Field name
+                    <button class="btn btn-info" type="button" data-bind="tooltip: 'Field name'"></button>
+                </label>
+                <input type="text" class="form-control" placeholder="e.g. firstName" data-bind="textInput: name" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    Placeholder
+                    <button class="btn btn-info" type="button" data-bind="tooltip: 'Placeholder'"></button>
+                </label>
+                <input type="text" class="form-control" placeholder="e.g. P@ssw0rd"
+                    data-bind="textInput: placeholder" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <input name="required" type="checkbox" data-bind="checked: required" />Make required
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <input name="required" type="checkbox" data-bind="checked: readonly" />Make readonly
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group form-group-collapsible">
+        <label class="form-label">
+            <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#optionsCollapse'"></a>
+            <b>Options/Values</b>
+        </label>
+        <div id="optionsCollapse" class="collapse form-group-collapse">
+            <label class="form-label">Add item:</label>
+            <input class="form-control" type="text" placeholder="name"
+                data-bind='value: $component.itemNameToAdd, valueUpdate: "afterkeydown"' />
+            <input class="form-control" type="text" placeholder="value"
+                data-bind='value:$component.itemValueToAdd, valueUpdate: "afterkeydown"' />
+            <button class="btn"
+                data-bind="click: $component.addItem, enable: $component.itemNameToAdd().length > 0 && $component.itemValueToAdd().length > 0">
+                <i class="paperbits-icon paperbits-circle-add"></i> Add
+            </button>
+
+            <label class="form-label">Options:</label>
+            <select class="form-control" multiple="multiple" height="5" data-bind="options: options, optionsText: function(item) { return item.label+ ' - ' + item.value },
+                            optionsValue: 'value', selectedOptions: $component.selectedItems">
+            </select>
+
+            <div data-bind="visible: $component.selectedItems().length > 0 ">
+                <button class="btn" data-bind="click: $component.upItem">Up</button>
+                <button class="btn" data-bind="click: $component.downItem">Down</button>
+                <button class="btn" data-bind="click: $component.deleteItem">Delete</button>
+                <button class="btn" data-bind="click: $component.setSelectedItemDefault">Set selected</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group form-group-collapsible">
+        <label class="form-label">
+            <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#stylesCollapse'"
+                aria-label="Toggle 'Styling' section"></a>
+            <b>Styling</b>
+        </label>
+        <div id="stylesCollapse" class="collapse form-group-collapse">
+            <div class="form-group">
+                <label for="appearanceStyle" class="form-label">
+                    Appearance
+                    <button class="btn btn-info" type="button"
+                        data-bind="tooltip: 'Predefined appearance from style guide.'"></button>
+                </label>
+                <select id="appearanceStyle" class="form-control"
+                    data-bind="options: appearanceStyles, value: appearanceStyle, optionsText: 'displayName', optionsValue: 'key'"></select>
+            </div>
+        </div>
+    </div>
+</div>

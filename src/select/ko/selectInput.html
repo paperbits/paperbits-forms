@@ -1,0 +1,8 @@
+<div class="form-group">
+    <!-- ko if: label -->
+    <label data-bind="text: label"></label>
+    <!-- /ko -->
+
+    <select data-bind="styled: styles, options: options, value: value, optionsText: 'label', optionsValue: 'value', attr: { required: required, readonly: readonly }">
+    </select>
+</div>
