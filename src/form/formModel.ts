@@ -8,10 +8,10 @@
 export class FormModel {
     public widgets: any[];
     public formAction: string;
-    public formMethod?: "get" | "post";
-    public formTarget?: "_self" | "_blank" | "_parent" | "_top";
+    public formMethod?: string;
+    public formTarget?: string;
     public acceptCharset?: string;
-    public encType?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
+    public encType?: string;
     public identifier: string;
     public formName?: string;
     public description?: string;

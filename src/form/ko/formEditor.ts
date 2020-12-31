@@ -8,6 +8,7 @@
 import * as ko from "knockout";
 import template from "./formEditor.html";
 import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
+import { ChangeRateLimit } from "@paperbits/common/ko/consts";
 import { FormModel } from "../formModel";
 
 
@@ -24,10 +25,6 @@ export class FormEditor {
     public readonly identifier?: ko.Observable<string>;
     public readonly isInline?: ko.Observable<boolean>;
 
-    public itemNameToAdd: ko.Observable<string>;
-    public itemValueToAdd: ko.Observable<string>;
-    public selectedItems: ko.ObservableArray<string>;
-
     constructor() {
         this.formAction = ko.observable<string>();
         this.formMethod = ko.observable<string>();
@@ -36,18 +33,6 @@ export class FormEditor {
         this.encType = ko.observable<string>();
         this.identifier = ko.observable<string>();
         this.isInline = ko.observable<boolean>();
-
-        this.formAction.subscribe(((newValue) => { this.model.formAction = newValue; this.onChange(this.model); }).bind(this));
-        this.formMethod.subscribe(((newValue) => { this.model.formMethod = newValue; this.onChange(this.model); }).bind(this));
-        this.formTarget.subscribe(((newValue) => { this.model.formTarget = newValue; this.onChange(this.model); }).bind(this));
-        this.acceptCharset.subscribe(((newValue) => { this.model.acceptCharset = newValue; this.onChange(this.model); }).bind(this));
-        this.encType.subscribe(((newValue) => { this.model.encType = newValue; this.onChange(this.model); }).bind(this));
-        this.identifier.subscribe(((newValue) => { this.model.identifier = newValue; this.onChange(this.model); }).bind(this));
-        this.isInline.subscribe(((newValue) => { this.model.isInline = newValue; this.onChange(this.model); }).bind(this));
-
-        this.itemNameToAdd = ko.observable("");
-        this.itemValueToAdd = ko.observable("");
-        this.selectedItems = ko.observableArray([]);
     }
 
     @Param()
@@ -65,5 +50,45 @@ export class FormEditor {
         this.encType(this.model.encType || "application/x-www-form-urlencoded");
         this.identifier(this.model.identifier);
         this.isInline(this.model.isInline);
+
+        this.formAction
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+
+        this.formMethod
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+
+        this.formTarget
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+
+        this.acceptCharset
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+
+        this.encType
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+
+        this.identifier
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+
+        this.isInline
+            .extend(ChangeRateLimit)
+            .subscribe(this.applyChanges);
+    }
+
+    private applyChanges(): void {
+        this.model.formAction = this.formAction();
+        this.model.formMethod = this.formMethod();
+        this.model.formTarget = this.formTarget();
+        this.model.acceptCharset = this.acceptCharset();
+        this.model.encType = this.encType();
+        this.model.identifier = this.identifier();
+        this.model.isInline = this.isInline();
+
+        this.onChange(this.model);
     }
 }
