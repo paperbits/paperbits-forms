@@ -55,7 +55,7 @@
                 data-bind='value: $component.itemNameToAdd, valueUpdate: "afterkeydown"' />
             <input class="form-control" type="text" placeholder="value"
                 data-bind='value:$component.itemValueToAdd, valueUpdate: "afterkeydown"' />
-            <button class="btn"
+            <button class="btn btn-default"
                 data-bind="click: $component.addItem, enable: $component.itemNameToAdd().length > 0 && $component.itemValueToAdd().length > 0">
                 <i class="paperbits-icon paperbits-circle-add"></i> Add
             </button>
@@ -66,10 +66,10 @@
             </select>
 
             <div data-bind="visible: $component.selectedItems().length > 0 ">
-                <button class="btn" data-bind="click: $component.upItem">Up</button>
-                <button class="btn" data-bind="click: $component.downItem">Down</button>
-                <button class="btn" data-bind="click: $component.deleteItem">Delete</button>
-                <button class="btn" data-bind="click: $component.setSelectedItemDefault">Set selected</button>
+                <button class="btn btn-default" data-bind="click: $component.upItem">Up</button>
+                <button class="btn btn-default" data-bind="click: $component.downItem">Down</button>
+                <button class="btn btn-default" data-bind="click: $component.deleteItem">Delete</button>
+                <button class="btn btn-default" data-bind="click: $component.setSelectedItemDefault">Set selected</button>
             </div>
         </div>
     </div>
