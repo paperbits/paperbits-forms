@@ -57,7 +57,7 @@
                 data-bind='value:$component.itemValueToAdd, valueUpdate: "afterkeydown"' />
             <button class="btn btn-default"
                 data-bind="click: $component.addItem, enable: $component.itemNameToAdd().length > 0 && $component.itemValueToAdd().length > 0">
-                <i class="paperbits-icon paperbits-circle-add"></i> Add
+                <i aria-hidden="true" class="paperbits-icon paperbits-circle-add"></i> Add
             </button>
 
             <label class="form-label">Options:</label>
