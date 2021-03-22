@@ -1,4 +1,5 @@
 import { Contract } from "@paperbits/common";
+import { LocalStyles } from "@paperbits/common/styles";
 
 
 /**
@@ -28,5 +29,5 @@ export interface CheckboxContract extends Contract {
     /**
      * Checkbox local styles.
      */
-    styles?: any;
+    styles?: LocalStyles;
 }

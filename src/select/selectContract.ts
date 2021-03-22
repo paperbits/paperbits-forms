@@ -1,4 +1,5 @@
 import { Contract } from "@paperbits/common";
+import { LocalStyles } from "@paperbits/common/styles";
 import { SelectInputOption } from "./ko/selectInputOption";
 
 
@@ -44,5 +45,5 @@ export interface SelectContract extends Contract {
     /**
      * Password input local styles.
      */
-    styles?: any;
+    styles?: LocalStyles;
 }

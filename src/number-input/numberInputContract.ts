@@ -1,4 +1,5 @@
 import { Contract } from "@paperbits/common";
+import { LocalStyles } from "@paperbits/common/styles";
 
 
 /**
@@ -48,5 +49,5 @@ export interface NumberInputContract extends Contract {
     /**
      * Number input local styles.
      */
-    styles?: any;
+    styles?: LocalStyles;
 }

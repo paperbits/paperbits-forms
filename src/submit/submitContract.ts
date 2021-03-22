@@ -1,4 +1,5 @@
 import { Contract } from "@paperbits/common";
+import { LocalStyles } from "@paperbits/common/styles";
 
 
 /**
@@ -13,5 +14,5 @@ export interface SubmitContract extends Contract {
     /**
      * Submit local styles.
      */
-    styles?: any;
+    styles?: LocalStyles;
 }

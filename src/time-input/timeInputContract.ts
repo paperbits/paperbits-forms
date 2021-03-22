@@ -1,4 +1,5 @@
 import { Contract } from "@paperbits/common";
+import { LocalStyles } from "@paperbits/common/styles";
 
 
 /**
@@ -33,5 +34,5 @@ export interface TimeInputContract extends Contract {
     /**
      * Time input local styles.
      */
-    styles?: any;
+    styles?: LocalStyles;
 }
