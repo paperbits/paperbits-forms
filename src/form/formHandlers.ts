@@ -58,6 +58,7 @@ export class FormHandlers implements IWidgetHandler {
             color: "#4c5866",
             hoverCommands: [{
                 color: "#607d8b",
+                iconClass: "paperbits-simple-add",
                 position: context.half,
                 tooltip: "Add widget",
                 component: {
@@ -102,6 +103,7 @@ export class FormHandlers implements IWidgetHandler {
         if (context.model.widgets.length === 0) {
             contextualEditor.hoverCommands.push({
                 color: "#607d8b",
+                iconClass: "paperbits-simple-add",
                 position: "center",
                 tooltip: "Add widget",
                 component: {
