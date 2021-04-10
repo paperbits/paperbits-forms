@@ -8,7 +8,7 @@ export class SubmitHandlers implements IWidgetHandler {
             name: "submit",
             category: "Forms",
             displayName: "Submit form button",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-submit-form-button",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new SubmitModel();

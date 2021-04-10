@@ -8,7 +8,7 @@ export class TimeInputHandlers implements IWidgetHandler {
             name: "input:time",
             category: "Forms",
             displayName: "Time input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-time-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new TimeInputModel();

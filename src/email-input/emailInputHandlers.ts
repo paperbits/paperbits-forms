@@ -8,7 +8,7 @@ export class EmailInputHandlers implements IWidgetHandler {
             name: "input:email",
             category: "Forms",
             displayName: "Email input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-email-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new EmailInputModel();

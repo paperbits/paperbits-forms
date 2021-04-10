@@ -8,7 +8,7 @@ export class DateInputHandlers implements IWidgetHandler {
             name: "input:date",
             category: "Forms",
             displayName: "Date input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-date-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new DateInputModel();

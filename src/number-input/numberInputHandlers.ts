@@ -8,7 +8,7 @@ export class NumberInputHandlers implements IWidgetHandler {
             name: "input:number",
             category: "Forms",
             displayName: "Number input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-number-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new NumberInputModel();

@@ -8,7 +8,7 @@ export class CheckboxHandlers implements IWidgetHandler {
             name: "input:checkbox",
             category: "Forms",
             displayName: "Checkbox",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-checkbox",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new CheckboxModel();

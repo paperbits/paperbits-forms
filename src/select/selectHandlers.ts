@@ -8,7 +8,7 @@ export class SelectHandlers implements IWidgetHandler {
             name: "input:select",
             category: "Forms",
             displayName: "Select input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-select-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new SelectInputModel();

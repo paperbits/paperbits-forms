@@ -8,7 +8,7 @@ export class MultilineInputHandlers implements IWidgetHandler {
             name: "input:multiline",
             category: "Forms",
             displayName: "Multi-line input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-multi-line-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new MultilineInputModel();

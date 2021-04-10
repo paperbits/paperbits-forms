@@ -8,7 +8,7 @@ export class PasswordInputHandlers implements IWidgetHandler {
             name: "input:password",
             category: "Forms",
             displayName: "Password input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-password-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new PasswordInputModel();

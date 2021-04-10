@@ -8,7 +8,7 @@ export class UrlInputHandlers implements IWidgetHandler {
             name: "input:url",
             category: "Forms",
             displayName: "URL input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-url-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new UrlInputModel();

@@ -8,7 +8,7 @@ export class RangeInputHandlers implements IWidgetHandler {
             name: "input:range",
             category: "Forms",
             displayName: "Range input",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-range-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
                 return new RangeInputModel();

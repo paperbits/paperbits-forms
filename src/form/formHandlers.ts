@@ -22,7 +22,7 @@ export class FormHandlers implements IWidgetHandler {
             name: "form",
             displayName: "Form",
             category: "Forms",
-            iconClass: "paperbits-form",
+            iconClass: "widget-icon widget-icon-form",
             requires: ["html", "js", "interaction"],
             createModel: async () => {
                 const firstNameModel = new TextInputModel();
@@ -58,7 +58,7 @@ export class FormHandlers implements IWidgetHandler {
             color: "#4c5866",
             hoverCommands: [{
                 color: "#607d8b",
-                iconClass: "paperbits-simple-add",
+                iconClass: "paperbits-icon paperbits-simple-add",
                 position: context.half,
                 tooltip: "Add widget",
                 component: {
@@ -91,7 +91,7 @@ export class FormHandlers implements IWidgetHandler {
             },
             selectCommands: [{
                 tooltip: "Edit form",
-                iconClass: "paperbits-edit-72",
+                iconClass: "paperbits-icon paperbits-edit-72",
                 position: "top right",
                 color: "#4c5866",
                 callback: () => {
@@ -103,7 +103,7 @@ export class FormHandlers implements IWidgetHandler {
         if (context.model.widgets.length === 0) {
             contextualEditor.hoverCommands.push({
                 color: "#607d8b",
-                iconClass: "paperbits-simple-add",
+                iconClass: "paperbits-icon paperbits-simple-add",
                 position: "center",
                 tooltip: "Add widget",
                 component: {
