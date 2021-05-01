@@ -53,7 +53,7 @@ export class FormHandlers implements IWidgetHandler {
         return !["section", "row", "column", "form"].includes(dragSession.sourceBinding.name);
     }
 
-    public getContextualEditor(context: WidgetContext): IContextCommandSet {
+    public getContextCommands(context: WidgetContext): IContextCommandSet {
         const contextualEditor: IContextCommandSet = {
             color: "#4c5866",
             hoverCommands: [{
