@@ -75,7 +75,7 @@ export class FormHandlers implements IWidgetHandler {
                             context.parentBinding.model.widgets.splice(index, 0, newWidgetModel);
                             context.parentBinding.applyChanges();
 
-                            this.viewManager.clearContextualEditors();
+                            this.viewManager.clearContextualCommands();
                         }
                     }
                 }
@@ -86,7 +86,7 @@ export class FormHandlers implements IWidgetHandler {
                 callback: () => {
                     context.parentModel.widgets.remove(context.model);
                     context.parentBinding.applyChanges();
-                    this.viewManager.clearContextualEditors();
+                    this.viewManager.clearContextualCommands();
                 }
             },
             selectCommands: [{
@@ -113,7 +113,7 @@ export class FormHandlers implements IWidgetHandler {
                         onSelect: (widgetModel: WidgetModel) => {
                             context.model.widgets.push(widgetModel);
                             context.binding.applyChanges();
-                            this.viewManager.clearContextualEditors();
+                            this.viewManager.clearContextualCommands();
                         }
                     }
                 }
