@@ -4,6 +4,7 @@ import { UrlInputModel } from "../urlInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, UrlInput>  {
@@ -34,7 +35,7 @@ export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, U
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "url-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

@@ -1,4 +1,5 @@
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { ViewModelBinder } from "@paperbits/common/widgets";
@@ -35,7 +36,7 @@ export class SelectViewModelBinder implements ViewModelBinder<SelectInputModel, 
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "select-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

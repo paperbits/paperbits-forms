@@ -4,6 +4,7 @@ import { NumberInputModel } from "../numberInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputModel, NumberInput>  {
@@ -35,7 +36,7 @@ export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputMo
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "number-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

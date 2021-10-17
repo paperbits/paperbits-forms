@@ -4,6 +4,7 @@ import { PasswordInputModel } from "../passwordInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInputModel, PasswordInput>  {
@@ -33,7 +34,7 @@ export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInp
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "password-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

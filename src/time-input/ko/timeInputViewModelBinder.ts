@@ -4,6 +4,7 @@ import { TimeInputModel } from "../timeInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel, TimeInput>  {
@@ -32,7 +33,7 @@ export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel,
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "time-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

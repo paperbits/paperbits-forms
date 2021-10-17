@@ -4,6 +4,7 @@ import { EmailInputModel } from "../emailInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputModel, EmailInput>  {
@@ -34,7 +35,7 @@ export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputMode
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "email-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

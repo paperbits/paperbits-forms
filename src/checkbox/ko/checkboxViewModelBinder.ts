@@ -4,6 +4,7 @@ import { CheckboxModel } from "../checkboxModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, Checkbox>  {
@@ -31,7 +32,7 @@ export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, C
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "checkbox-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

@@ -4,6 +4,7 @@ import { MultilineInputModel } from "../multilineInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineInputModel, MultilineInput>  {
@@ -33,7 +34,7 @@ export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineI
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "multiline-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

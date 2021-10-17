@@ -4,6 +4,7 @@ import { SubmitModel } from "../submitModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class SubmitViewModelBinder implements ViewModelBinder<SubmitModel, Submit>  {
@@ -28,7 +29,7 @@ export class SubmitViewModelBinder implements ViewModelBinder<SubmitModel, Submi
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "inline",
+            flow: ComponentFlow.Inline,
             editor: "submit-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);

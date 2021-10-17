@@ -4,6 +4,7 @@ import { RangeInputModel } from "../rangeInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputModel, RangeInput>  {
@@ -29,7 +30,7 @@ export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputMode
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
-            flow: "block",
+            flow: ComponentFlow.Block,
             editor: "range-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
