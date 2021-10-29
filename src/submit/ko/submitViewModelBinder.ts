@@ -1,7 +1,7 @@
 import { Submit } from "./submit";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { SubmitModel } from "../submitModel";
-import { EventManager } from "@paperbits/common/events";
+import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
 import { ComponentFlow } from "@paperbits/common/editing";
@@ -33,7 +33,7 @@ export class SubmitViewModelBinder implements ViewModelBinder<SubmitModel, Submi
             editor: "submit-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
-                this.eventManager.dispatchEvent("onContentUpdate");
+                this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
 

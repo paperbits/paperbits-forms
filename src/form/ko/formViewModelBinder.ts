@@ -11,7 +11,7 @@ import { FormViewModel } from "./formViewModel";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
-import { EventManager } from "@paperbits/common/events";
+import { EventManager, Events } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
 
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
@@ -55,7 +55,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
             provides: ["form"],
             applyChanges: async () => {
                 await this.modelToViewModel(model, formViewModel, bindingContext);
-                this.eventManager.dispatchEvent("onContentUpdate");
+                this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
 

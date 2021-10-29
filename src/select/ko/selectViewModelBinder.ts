@@ -1,6 +1,6 @@
 import { Bag } from "@paperbits/common";
 import { ComponentFlow } from "@paperbits/common/editing";
-import { EventManager } from "@paperbits/common/events";
+import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { SelectInputModel } from "../selectInputModel";
@@ -40,7 +40,7 @@ export class SelectViewModelBinder implements ViewModelBinder<SelectInputModel, 
             editor: "select-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
-                this.eventManager.dispatchEvent("onContentUpdate");
+                this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
 

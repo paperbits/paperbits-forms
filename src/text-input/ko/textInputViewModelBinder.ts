@@ -1,7 +1,7 @@
 import { TextInput } from "./textInput";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { TextInputModel } from "../textInputModel";
-import { EventManager } from "@paperbits/common/events";
+import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
 import { ComponentFlow } from "@paperbits/common/editing";
@@ -39,7 +39,7 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
             editor: "text-input-editor",
             applyChanges: async () => {
                 await this.modelToViewModel(model, viewModel, bindingContext);
-                this.eventManager.dispatchEvent("onContentUpdate");
+                this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
 
