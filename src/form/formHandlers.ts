@@ -50,7 +50,7 @@ export class FormHandlers implements IWidgetHandler {
     }
 
     public canAccept(dragSession: DragSession): boolean {
-        return !["section", "row", "column", "form"].includes(dragSession.sourceBinding.name);
+        return !["section"].includes(dragSession.sourceBinding.name);
     }
 
     public getContextCommands(context: WidgetContext): IContextCommandSet {

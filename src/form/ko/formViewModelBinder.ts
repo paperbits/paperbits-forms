@@ -13,6 +13,8 @@ import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelec
 import { FormHandlers } from "../formHandlers";
 import { EventManager, Events } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
+import { ComponentFlow } from "@paperbits/common/editing";
+import { PlaceholderViewModel } from "@paperbits/core/placeholder/ko/placeholderViewModel";
 
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
@@ -34,6 +36,10 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
             viewModels.push(widgetViewModel);
         }
 
+        if (viewModels.length === 0) {
+            viewModels.push(new PlaceholderViewModel("Form", ["form"]));
+        }
+
         formViewModel.widgets(viewModels);
         formViewModel.formAction(model.formAction);
         formViewModel.formMethod(model.formMethod || "get");
@@ -44,12 +50,14 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
         formViewModel.formName(model.formName);
         formViewModel.description(model.description);
         formViewModel.isInline(model.isInline);
+        
 
         const binding = {
             name: "form",
             displayName: "Form",
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
+            flow: ComponentFlow.Block,
             editor: "form-editor",
             handler: FormHandlers,
             provides: ["form"],
