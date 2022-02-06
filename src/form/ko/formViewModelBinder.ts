@@ -37,7 +37,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
         }
 
         if (viewModels.length === 0) {
-            viewModels.push(new PlaceholderViewModel("Form", ["form"]));
+            viewModels.push(new PlaceholderViewModel("Form"));
         }
 
         formViewModel.widgets(viewModels);
