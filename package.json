@@ -1,6 +1,6 @@
 {
     "name": "@paperbits/forms",
-    "version": "0.1.488",
+    "version": "0.1.489",
     "description": "Paperbits components for form builder.",
     "author": "Paperbits",
     "license": "Commercial",
@@ -20,9 +20,9 @@
         "not ie < 11"
     ],
     "dependencies": {
-        "@paperbits/common": "0.1.488",
-        "@paperbits/core": "0.1.488",
-        "@paperbits/styles": "0.1.488",
+        "@paperbits/common": "0.1.489",
+        "@paperbits/core": "0.1.489",
+        "@paperbits/styles": "0.1.489",
         "knockout": "^3.5.1",
         "knockout.validation": "^2.0.4"
     },
