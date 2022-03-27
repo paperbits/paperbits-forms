@@ -57,6 +57,7 @@ export class FormHandlers implements IWidgetHandler {
         const contextualEditor: IContextCommandSet = {
             color: "#4c5866",
             hoverCommands: [{
+                controlType: "toolbox-button",
                 color: "#607d8b",
                 iconClass: "paperbits-icon paperbits-simple-add",
                 position: context.half,
@@ -81,6 +82,7 @@ export class FormHandlers implements IWidgetHandler {
                 }
             }],
             deleteCommand: {
+                controlType: "toolbox-button",
                 tooltip: "Delete form",
                 color: "#4c5866",
                 callback: () => {
@@ -90,8 +92,8 @@ export class FormHandlers implements IWidgetHandler {
                 }
             },
             selectCommands: [{
-                tooltip: "Edit form",
-                iconClass: "paperbits-icon paperbits-edit-72",
+                controlType: "toolbox-button",
+                tooltip: "Form settings",
                 position: "top right",
                 color: "#4c5866",
                 callback: () => {
@@ -102,6 +104,7 @@ export class FormHandlers implements IWidgetHandler {
 
         if (context.model.widgets.length === 0) {
             contextualEditor.hoverCommands.push({
+                controlType: "toolbox-button",
                 color: "#607d8b",
                 iconClass: "paperbits-icon paperbits-simple-add",
                 position: "center",

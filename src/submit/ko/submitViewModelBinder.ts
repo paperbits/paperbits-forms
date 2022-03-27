@@ -25,7 +25,7 @@ export class SubmitViewModelBinder implements ViewModelBinder<SubmitModel, Submi
         }
 
         viewModel["widgetBinding"] = {
-            displayName: "Submit",
+            displayName: "Form submit",
             readonly: bindingContext ? bindingContext.readonly : false,
             model: model,
             draggable: true,
