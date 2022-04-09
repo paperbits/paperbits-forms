@@ -93,12 +93,14 @@ export class FormHandlers implements IWidgetHandler {
             },
             selectCommands: [{
                 controlType: "toolbox-button",
-                tooltip: "Form settings",
+                displayName: "Edit form",
                 position: "top right",
-                color: "#4c5866",
                 callback: () => {
                     this.viewManager.openWidgetEditor(context.binding);
                 }
+            },
+            {
+                controlType: "toolbox-splitter"
             }]
         };
 

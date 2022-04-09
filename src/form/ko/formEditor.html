@@ -1,73 +1,72 @@
-<div class="form" data-bind="scrollable: true">
-    <div class="form-group form-group-collapsible">
-        <label class="form-label">
-            <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#mainCollapse'" aria-label="Toggle 'Main' section"></a>
-            <b>Main</b>
-        </label>
-        <div id="mainCollapse" class="collapse form-group-collapse">
-            <label for="formAction" class="form-label">Submit URL</label>
-            <input type="text" id="formAction" class="form-control" placeholder="e.g. /submit"
-                data-bind="textInput: formAction" maxlength="1000" spellcheck="false" />
+<div class="form-group form-group-collapsible">
+    <label class="form-label">
+        <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#mainCollapse'"
+            aria-label="Toggle 'Main' section"></a>
+        <b>Main</b>
+    </label>
+    <div id="mainCollapse" class="collapse form-group-collapse">
+        <label for="formAction" class="form-label">Submit URL</label>
+        <input type="text" id="formAction" class="form-control" placeholder="e.g. /submit"
+            data-bind="textInput: formAction" maxlength="1000" spellcheck="false" />
 
-            <label class="form-label">Method</label>
-            <div class="form-group">
-                <label class="form-label">
-                    <input name="formMethod" type="radio" value="get" data-bind="checked: formMethod" />Get
-                </label>
-                <label class="form-label">
-                    <input name="formMethod" type="radio" value="post" data-bind="checked: formMethod" />Post
-                </label>
-            </div>
-            <!-- ko if: formMethod() === 'post' -->
-            <label class="form-label">Encoding for Post</label>
-            <div class="form-group">
-                <label class="form-label">
-                    <input name="encType" type="radio" value="application/x-www-form-urlencoded"
-                        data-bind="checked: encType" />application/x-www-form-urlencoded
-                </label>
-                <label class="form-label">
-                    <input name="encType" type="radio" value="multipart/form-data"
-                        data-bind="checked: encType" />multipart/form-data
-                </label>
-                <label class="form-label">
-                    <input name="encType" type="radio" value="text/plain" data-bind="checked: encType" />text/plain
-                </label>
-            </div>
-            <!-- /ko -->
-
-            <label class="form-label">Target</label>
-            <div class="form-group">
-                <label class="form-label">
-                    <input name="formTarget" type="radio" value="_self" data-bind="checked: formTarget" />Same window
-                </label>
-                <label class="form-label">
-                    <input name="formTarget" type="radio" value="_blank" data-bind="checked: formTarget" />Blank window
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group form-group-collapsible">
-        <label class="form-label">
-            <a href="#" class="form-group-toggle" title="Toggle section"
-                data-bind="collapse: '#miscellaneousCollapse'" aria-label="Toggle 'Miscellaneous' section"></a>
-            <b>Miscellaneous</b>
-        </label>
-        <div id="miscellaneousCollapse" class="collapse form-group-collapse">
-            <div class="form-group">
-                <label for="identifier" class="form-label">Form identifier</label>
-                <input type="text" id="identifier" class="form-control" data-bind="textInput: identifier" placeholder="e.g. paymentForm"
-                    maxlength="100" />
-            </div>
-            <div class="form-group">
-                <label for="acceptCharset" class="form-label">Character encodings</label>
-                <input type="text" id="acceptCharset" class="form-control" data-bind="textInput: acceptCharset" placeholder="e.g. application/x-www-form-urlencoded"
-                    maxlength="1000" />
-            </div>
-
+        <label class="form-label">Method</label>
+        <div class="form-group">
             <label class="form-label">
-                <input class="form-check-input" type="checkbox" data-bind="checked: isInline" />Is inline
+                <input name="formMethod" type="radio" value="get" data-bind="checked: formMethod" />Get
+            </label>
+            <label class="form-label">
+                <input name="formMethod" type="radio" value="post" data-bind="checked: formMethod" />Post
             </label>
         </div>
+        <!-- ko if: formMethod() === 'post' -->
+        <label class="form-label">Encoding for Post</label>
+        <div class="form-group">
+            <label class="form-label">
+                <input name="encType" type="radio" value="application/x-www-form-urlencoded"
+                    data-bind="checked: encType" />application/x-www-form-urlencoded
+            </label>
+            <label class="form-label">
+                <input name="encType" type="radio" value="multipart/form-data"
+                    data-bind="checked: encType" />multipart/form-data
+            </label>
+            <label class="form-label">
+                <input name="encType" type="radio" value="text/plain" data-bind="checked: encType" />text/plain
+            </label>
+        </div>
+        <!-- /ko -->
+
+        <label class="form-label">Target</label>
+        <div class="form-group">
+            <label class="form-label">
+                <input name="formTarget" type="radio" value="_self" data-bind="checked: formTarget" />Same window
+            </label>
+            <label class="form-label">
+                <input name="formTarget" type="radio" value="_blank" data-bind="checked: formTarget" />Blank window
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group form-group-collapsible">
+    <label class="form-label">
+        <a href="#" class="form-group-toggle" title="Toggle section" data-bind="collapse: '#miscellaneousCollapse'"
+            aria-label="Toggle 'Miscellaneous' section"></a>
+        <b>Miscellaneous</b>
+    </label>
+    <div id="miscellaneousCollapse" class="collapse form-group-collapse">
+        <div class="form-group">
+            <label for="identifier" class="form-label">Form identifier</label>
+            <input type="text" id="identifier" class="form-control" data-bind="textInput: identifier"
+                placeholder="e.g. paymentForm" maxlength="100" />
+        </div>
+        <div class="form-group">
+            <label for="acceptCharset" class="form-label">Character encodings</label>
+            <input type="text" id="acceptCharset" class="form-control" data-bind="textInput: acceptCharset"
+                placeholder="e.g. application/x-www-form-urlencoded" maxlength="1000" />
+        </div>
+
+        <label class="form-label">
+            <input class="form-check-input" type="checkbox" data-bind="checked: isInline" />Is inline
+        </label>
     </div>
 </div>
