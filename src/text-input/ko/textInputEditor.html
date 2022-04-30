@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="form-label">
         Label
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Input label'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Input label'"></button>
     </label>
     <input type="text" class="form-control" placeholder="e.g. First name" data-bind="textInput: label"
         maxlength="256" />
@@ -10,7 +10,7 @@
 <div class="form-group">
     <label class="form-label">
         Field name
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Field name'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Field name'"></button>
     </label>
     <input type="text" class="form-control" placeholder="e.g. firstName" data-bind="textInput: name" maxlength="256" />
 </div>
@@ -18,7 +18,7 @@
 <div class="form-group">
     <label class="form-label">
         Initial value
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Initial value'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Initial value'"></button>
     </label>
     <input type="text" class="form-control" placeholder="e.g. 100" data-bind="textInput: value" />
 </div>
@@ -26,7 +26,7 @@
 <div class="form-group">
     <label class="form-label">
         Placeholder
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Placeholder'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Placeholder'"></button>
     </label>
     <input type="text" class="form-control" placeholder="e.g. First name" data-bind="textInput: placeholder"
         maxlength="256" />
@@ -35,7 +35,7 @@
 <div class="form-group">
     <label class="form-label">
         Limit max length to
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Limit max length to'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Limit max length to'"></button>
     </label>
     <input type="number" min="0" placeholder="Unlimited" class="form-control" data-bind="value: maxLength" />
 </div>
@@ -55,7 +55,7 @@
 <div class="form-group">
     <label for="appearanceStyle" class="form-label">
         Appearance
-        <button class="btn btn-info" type="button"
+        <button class="btn btn-info" role="tooltip"
             data-bind="tooltip: 'Predefined appearance from style guide.'"></button>
     </label>
     <!-- <div class="input-group">
@@ -69,7 +69,7 @@
 <!-- <div class="form-group">
         <label for="sizeStyle" class="form-label">
             Size
-            <button class="btn btn-info" type="button" data-bind="tooltip: 'Predefined size from style guide.'"></button>
+            <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Predefined size from style guide.'"></button>
         </label>
         <select id="sizeStyle" class="form-control" data-bind="options: sizeStyles, value: sizeStyle, optionsText: 'displayName', optionsValue: 'key'"></select>
     </div> -->

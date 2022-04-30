@@ -1,7 +1,7 @@
 <div class="form-group">
     <label class="form-label">
         Label
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Input label'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Input label'"></button>
     </label>
     <input type="text" class="form-control" placeholder="e.g. Date" data-bind="textInput: label" maxlength="256" />
 </div>
@@ -9,7 +9,7 @@
 <div class="form-group">
     <label class="form-label">
         Field name
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Field name'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Field name'"></button>
     </label>
     <input type="text" class="form-control" placeholder="e.g. firstName" data-bind="textInput: name" maxlength="256" />
 </div>
@@ -17,7 +17,7 @@
 <div class="form-group">
     <label class="form-label">
         Initial value
-        <button class="btn btn-info" type="button" data-bind="tooltip: 'Initial value'"></button>
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Initial value'"></button>
     </label>
     <input type="date" class="form-control" data-bind="textInput: value" />
 </div>
@@ -37,7 +37,7 @@
 <div class="form-group">
     <label for="appearanceStyle" class="form-label">
         Appearance
-        <button class="btn btn-info" type="button"
+        <button class="btn btn-info" role="tooltip"
             data-bind="tooltip: 'Predefined appearance from style guide.'"></button>
     </label>
     <select id="appearanceStyle" class="form-control"
