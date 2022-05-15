@@ -2,16 +2,12 @@ import { RangeInput } from "./rangeInput";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { RangeInputModel } from "../rangeInputModel";
 import { EventManager } from "@paperbits/common/events";
-import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
 import { ComponentFlow } from "@paperbits/common/editing";
 
 
 export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputModel, RangeInput>  {
-    constructor(
-        private readonly eventManager: EventManager,
-        private readonly styleCompiler: StyleCompiler
-    ) { }
+    constructor(private readonly eventManager: EventManager) { }
 
     public async modelToViewModel(model: RangeInputModel, viewModel?: RangeInput, bindingContext?: Bag<any>): Promise<RangeInput> {
         if (!viewModel) {
@@ -27,7 +23,7 @@ export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputMode
 
         viewModel["widgetBinding"] = {
             displayName: "Range input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

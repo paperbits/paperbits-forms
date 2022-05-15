@@ -32,7 +32,7 @@ export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputMode
 
         viewModel["widgetBinding"] = {
             displayName: "Email input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

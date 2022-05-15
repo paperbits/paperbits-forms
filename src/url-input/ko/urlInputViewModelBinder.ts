@@ -32,7 +32,7 @@ export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, U
 
         viewModel["widgetBinding"] = {
             displayName: "URL input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

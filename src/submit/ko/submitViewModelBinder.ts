@@ -26,7 +26,7 @@ export class SubmitViewModelBinder implements ViewModelBinder<SubmitModel, Submi
 
         viewModel["widgetBinding"] = {
             displayName: "Form submit",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Inline,

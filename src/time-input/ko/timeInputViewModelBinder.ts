@@ -30,7 +30,7 @@ export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel,
 
         viewModel["widgetBinding"] = {
             displayName: "Time input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

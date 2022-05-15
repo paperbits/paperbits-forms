@@ -30,7 +30,7 @@ export class DateInputViewModelBinder implements ViewModelBinder<DateInputModel,
 
         viewModel["widgetBinding"] = {
             displayName: "Date input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

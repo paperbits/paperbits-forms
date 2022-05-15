@@ -31,7 +31,7 @@ export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInp
 
         viewModel["widgetBinding"] = {
             displayName: "Password input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

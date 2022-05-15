@@ -29,7 +29,7 @@ export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, C
 
         viewModel["widgetBinding"] = {
             displayName: "Checkbox",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

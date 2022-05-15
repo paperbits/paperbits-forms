@@ -32,7 +32,7 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
 
         viewModel["widgetBinding"] = {
             displayName: "Text input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

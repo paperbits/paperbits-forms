@@ -33,7 +33,7 @@ export class SelectViewModelBinder implements ViewModelBinder<SelectInputModel, 
 
         viewModel["widgetBinding"] = {
             displayName: "Select input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

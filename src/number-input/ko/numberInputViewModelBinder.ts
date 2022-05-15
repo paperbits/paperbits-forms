@@ -33,7 +33,7 @@ export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputMo
 
         viewModel["widgetBinding"] = {
             displayName: "Number input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,

@@ -55,7 +55,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
         const binding = {
             name: "form",
             displayName: "Form",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             flow: ComponentFlow.Block,
             editor: "form-editor",

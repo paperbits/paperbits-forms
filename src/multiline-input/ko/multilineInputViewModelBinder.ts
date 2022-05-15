@@ -31,7 +31,7 @@ export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineI
 
         viewModel["widgetBinding"] = {
             displayName: "Multi-line input",
-            readonly: bindingContext ? bindingContext.readonly : false,
+            layer: bindingContext?.layer,
             model: model,
             draggable: true,
             flow: ComponentFlow.Block,
