@@ -4,7 +4,7 @@ import { TextInputModel } from "../textInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel, TextInput>  {
@@ -30,7 +30,7 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<TextInputModel, TextInput> = {
             displayName: "Text input",
             layer: bindingContext?.layer,
             model: model,
@@ -42,6 +42,8 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

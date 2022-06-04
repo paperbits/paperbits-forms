@@ -3,7 +3,7 @@ import { ViewModelBinder } from "@paperbits/common/widgets";
 import { RangeInputModel } from "../rangeInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputModel, RangeInput>  {
@@ -21,7 +21,7 @@ export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputMode
         viewModel.value(model.value);
         viewModel.readonly(model.readonly);
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<RangeInputModel, RangeInput> = {
             displayName: "Range input",
             layer: bindingContext?.layer,
             model: model,
@@ -33,6 +33,8 @@ export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputMode
                 this.eventManager.dispatchEvent("onContentUprange");
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

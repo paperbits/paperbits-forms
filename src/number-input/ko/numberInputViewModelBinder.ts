@@ -4,7 +4,7 @@ import { NumberInputModel } from "../numberInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputModel, NumberInput>  {
@@ -31,7 +31,7 @@ export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputMo
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<NumberInputModel, NumberInputModel> = {
             displayName: "Number input",
             layer: bindingContext?.layer,
             model: model,
@@ -43,6 +43,8 @@ export class NumberInputViewModelBinder implements ViewModelBinder<NumberInputMo
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;        
 
         return viewModel;
     }

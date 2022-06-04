@@ -4,7 +4,7 @@ import { UrlInputModel } from "../urlInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, UrlInput>  {
@@ -30,7 +30,7 @@ export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, U
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<UrlInputModel, UrlInput> = {
             displayName: "URL input",
             layer: bindingContext?.layer,
             model: model,
@@ -42,6 +42,8 @@ export class UrlInputViewModelBinder implements ViewModelBinder<UrlInputModel, U
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

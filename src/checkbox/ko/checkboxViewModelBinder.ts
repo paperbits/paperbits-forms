@@ -4,7 +4,7 @@ import { CheckboxModel } from "../checkboxModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, Checkbox>  {
@@ -27,7 +27,7 @@ export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, C
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<CheckboxModel, Checkbox> = {
             displayName: "Checkbox",
             layer: bindingContext?.layer,
             model: model,
@@ -39,6 +39,8 @@ export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, C
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

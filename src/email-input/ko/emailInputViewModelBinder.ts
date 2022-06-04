@@ -4,7 +4,7 @@ import { EmailInputModel } from "../emailInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputModel, EmailInput>  {
@@ -30,7 +30,7 @@ export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputMode
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<EmailInputModel, EmailInput> = {
             displayName: "Email input",
             layer: bindingContext?.layer,
             model: model,
@@ -42,6 +42,8 @@ export class EmailInputViewModelBinder implements ViewModelBinder<EmailInputMode
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

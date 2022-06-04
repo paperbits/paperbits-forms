@@ -4,7 +4,7 @@ import { TimeInputModel } from "../timeInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel, TimeInput>  {
@@ -28,7 +28,7 @@ export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel,
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<TimeInputModel, TimeInput> = {
             displayName: "Time input",
             layer: bindingContext?.layer,
             model: model,
@@ -40,6 +40,8 @@ export class TimeInputViewModelBinder implements ViewModelBinder<TimeInputModel,
                 this.eventManager.dispatchEvent("onContentUptime");
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

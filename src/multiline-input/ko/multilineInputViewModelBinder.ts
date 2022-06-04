@@ -4,7 +4,7 @@ import { MultilineInputModel } from "../multilineInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineInputModel, MultilineInput>  {
@@ -29,7 +29,7 @@ export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineI
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<MultilineInputModel, MultilineInput> = {
             displayName: "Multi-line input",
             layer: bindingContext?.layer,
             model: model,
@@ -41,6 +41,8 @@ export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineI
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }

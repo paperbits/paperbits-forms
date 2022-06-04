@@ -4,7 +4,7 @@ import { PasswordInputModel } from "../passwordInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
+import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
 
 
 export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInputModel, PasswordInput>  {
@@ -29,7 +29,7 @@ export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInp
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));
         }
 
-        viewModel["widgetBinding"] = {
+        const binding: IWidgetBinding<PasswordInputModel, PasswordInput> = {
             displayName: "Password input",
             layer: bindingContext?.layer,
             model: model,
@@ -41,6 +41,8 @@ export class PasswordInputViewModelBinder implements ViewModelBinder<PasswordInp
                 this.eventManager.dispatchEvent(Events.ContentUpdate);
             }
         };
+
+        viewModel["widgetBinding"] = binding;
 
         return viewModel;
     }
