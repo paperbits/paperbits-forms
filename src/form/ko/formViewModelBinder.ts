@@ -8,7 +8,7 @@
 import "@paperbits/common/extensions";
 import { FormModel } from "../formModel";
 import { FormViewModel } from "./formViewModel";
-import { ViewModelBinder } from "@paperbits/common/widgets";
+import { IWidgetService, ViewModelBinder } from "@paperbits/common/widgets";
 import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelector";
 import { FormHandlers } from "../formHandlers";
 import { EventManager, Events } from "@paperbits/common/events";
@@ -19,7 +19,8 @@ import { PlaceholderViewModel } from "@paperbits/core/placeholder/ko/placeholder
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
         private readonly viewModelBinderSelector: ViewModelBinderSelector,
-        private readonly eventManager: EventManager
+        private readonly eventManager: EventManager,
+        private readonly widgetService: IWidgetService
     ) { }
 
     public async modelToViewModel(model: FormModel, viewModel?: FormViewModel, bindingContext?: Bag<any>): Promise<FormViewModel> {
@@ -27,20 +28,27 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
             viewModel = new FormViewModel();
         }
 
-        const viewModels = [];
+        const promises = model.widgets.map(widgetModel => {
+            const definition = this.widgetService.getWidgetDefinitionForModel(widgetModel);
 
-        for (const widgetModel of model.widgets) {
+            if (definition) {
+                const bindingPromise = this.widgetService.createWidgetBinding(definition, widgetModel, bindingContext);
+                return bindingPromise;
+            }
+
+            // legacy binding resolution
             const widgetViewModelBinder = this.viewModelBinderSelector.getViewModelBinderByModel(widgetModel);
-            const widgetViewModel = await widgetViewModelBinder.modelToViewModel(widgetModel, null, bindingContext);
+            const bindingPromise = widgetViewModelBinder.modelToViewModel(widgetModel, null, bindingContext);
+            return bindingPromise;
+        });
 
-            viewModels.push(widgetViewModel);
+        const widgetViewModels = await Promise.all(promises);
+
+        if (widgetViewModels.length === 0) {
+            widgetViewModels.push(new PlaceholderViewModel("Form"));
         }
 
-        if (viewModels.length === 0) {
-            viewModels.push(new PlaceholderViewModel("Form"));
-        }
-
-        viewModel.widgets(viewModels);
+        viewModel.widgets(widgetViewModels);
         viewModel.formAction(model.formAction);
         viewModel.formMethod(model.formMethod || "get");
         viewModel.formTarget(model.formTarget || "_self");

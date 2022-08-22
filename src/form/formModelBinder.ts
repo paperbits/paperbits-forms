@@ -6,13 +6,18 @@
  */
 
 import { FormModel } from "./formModel";
-import { IModelBinder } from "@paperbits/common/editing";
-import { ModelBinderSelector } from "@paperbits/common/widgets";
+import { ContainerModelBinder, IModelBinder } from "@paperbits/common/editing";
+import { IWidgetService, ModelBinderSelector } from "@paperbits/common/widgets";
 import { FormContract } from "./formContract";
 import { Contract, Bag } from "@paperbits/common";
 
-export class FormModelBinder implements IModelBinder<FormModel> {
-    constructor(private readonly modelBinderSelector: ModelBinderSelector) { }
+export class FormModelBinder extends ContainerModelBinder implements IModelBinder<FormModel> {
+    constructor(
+        protected readonly widgetService: IWidgetService,
+        protected modelBinderSelector: ModelBinderSelector
+    ) {
+        super(widgetService, modelBinderSelector);
+    }
 
     public canHandleContract(contract: Contract): boolean {
         return contract.type === "form";
@@ -22,51 +27,36 @@ export class FormModelBinder implements IModelBinder<FormModel> {
         return model instanceof FormModel;
     }
 
-    public async contractToModel(node: FormContract, bindingContext?: Bag<any>): Promise<FormModel> {
+    public async contractToModel(contract: FormContract, bindingContext?: Bag<any>): Promise<FormModel> {
         const model = new FormModel();
-        model.formAction    = node.formAction;
-        model.formMethod    = <any>node.formMethod;
-        model.formTarget    = <any>node.formTarget;
-        model.acceptCharset = node.acceptCharset;
-        model.encType       = <any>node.encType;
-        model.identifier    = node.identifier;
-        model.formName      = node.formName;
-        model.description   = node.description;
-        model.isInline      = node.isInline;
+        model.formAction = contract.formAction;
+        model.formMethod = <any>contract.formMethod;
+        model.formTarget = <any>contract.formTarget;
+        model.acceptCharset = contract.acceptCharset;
+        model.encType = <any>contract.encType;
+        model.identifier = contract.identifier;
+        model.formName = contract.formName;
+        model.description = contract.description;
+        model.isInline = contract.isInline;
+        model.widgets = await this.getChildModels(contract.nodes, bindingContext);
 
-        if (node.nodes) {
-            const modelPromises = node.nodes.map(async (contract: Contract) => {
-                const modelBinder = this.modelBinderSelector.getModelBinderByContract<any>(contract);
-                return await modelBinder.contractToModel(contract, bindingContext);
-            });
-    
-            model.widgets = await Promise.all<any>(modelPromises);
-        } else {
-            model.widgets = [];
-        }
-        
         return model;
     }
 
     public modelToContract(model: FormModel): FormContract {
         const contract: FormContract = {
             type: "form",
-            formAction   : model.formAction,
-            formMethod   : model.formMethod,
-            formTarget   : model.formTarget,
+            formAction: model.formAction,
+            formMethod: model.formMethod,
+            formTarget: model.formTarget,
             acceptCharset: model.acceptCharset,
-            encType      : model.encType,
-            identifier   : model.identifier,
-            formName     : model.formName,
-            description  : model.description,
-            isInline     : model.isInline,
-            nodes: []
+            encType: model.encType,
+            identifier: model.identifier,
+            formName: model.formName,
+            description: model.description,
+            isInline: model.isInline,
+            nodes: this.getChildContracts(model.widgets),
         };
-
-        model.widgets.forEach(widgetModel => {
-            const modelBinder = this.modelBinderSelector.getModelBinderByModel(widgetModel);
-            contract.nodes.push(modelBinder.modelToContract(widgetModel));
-        });
 
         return contract;
     }
