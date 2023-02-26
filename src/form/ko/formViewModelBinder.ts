@@ -14,7 +14,7 @@ import { FormHandlers } from "../formHandlers";
 import { EventManager, Events } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
 import { ComponentFlow } from "@paperbits/common/editing";
-import { PlaceholderViewModel } from "@paperbits/core/placeholder/ko/placeholderViewModel";
+import { Placeholder } from "@paperbits/core/placeholder/ko/placeholder";
 
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(
@@ -45,7 +45,7 @@ export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewM
         const widgetViewModels = await Promise.all(promises);
 
         if (widgetViewModels.length === 0) {
-            widgetViewModels.push(new PlaceholderViewModel("Form"));
+            widgetViewModels.push(new Placeholder("Form"));
         }
 
         viewModel.widgets(widgetViewModels);
