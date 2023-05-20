@@ -9,6 +9,7 @@ import { IWidgetOrder, IWidgetHandler, WidgetContext } from "@paperbits/common/e
 import { FormModel } from "./formModel";
 import { ViewManager, IContextCommandSet } from "@paperbits/common/ui";
 import { DragSession } from "@paperbits/common/ui/draggables";
+import { deleteWidgetCommand, openHelpArticleCommand, openWidgetEditorCommand, splitter, switchToParentCommand } from "@paperbits/common/ui/commands";
 import { WidgetModel } from "@paperbits/common/widgets";
 import { SubmitModel } from "../submit/submitModel";
 import { TextInputModel } from "../text-input";
@@ -91,17 +92,10 @@ export class FormHandlers implements IWidgetHandler {
                     this.viewManager.clearContextualCommands();
                 }
             },
-            selectCommands: [{
-                controlType: "toolbox-button",
-                displayName: "Edit form",
-                position: "top right",
-                callback: () => {
-                    this.viewManager.openWidgetEditor(context.binding);
-                }
-            },
-            {
-                controlType: "toolbox-splitter"
-            }]
+            selectCommands: [
+                openWidgetEditorCommand(context, "Edit form"),
+                splitter(),
+                switchToParentCommand(context)]
         };
 
         if (context.model.widgets.length === 0) {
