@@ -3,6 +3,7 @@
     <label data-bind="text: label"></label>
     <!-- /ko -->
 
-    <select data-bind="styled: styles, options: options, value: value, optionsText: 'label', optionsValue: 'value', attr: { required: required, readonly: readonly }">
+    <select data-bind="styled: styles, attr: { required: required, readonly: readonly }, foreach: options">
+        <option data-bind="attr: { value: value }"> <!--ko text: label--><!--/ko--></option>
     </select>
 </div>
