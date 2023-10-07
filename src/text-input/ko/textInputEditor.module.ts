@@ -13,12 +13,12 @@ export class TextInputEditorModule implements IInjectorModule {
             key: "formControl",
             name: "components_formControl",
             groupName: "Form controls",
-            selectorTemplate: `<a role="button" data-bind="css: classNames" style="display: inline-block">Button</a>`,
+            selectorTemplate: null,
             styleTemplate: styleTemplate
         };
         
         injector.bindInstanceToCollection("styleGroups", styleGroup);
-        // injector.bindInstanceToCollection("styleHandlers", FormControlStyleHandler);
+        injector.bindInstanceToCollection("styleHandlers", FormControlStyleHandler);
     }
 }
 
