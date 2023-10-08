@@ -50,7 +50,7 @@ export class UrlInputEditor {
         this.maxLength(this.model.maxLength);
 
         if (this.model.styles) {
-            const variations = await this.styleService.getComponentVariations("formControl");
+            const variations = await this.styleService.getComponentVariations("formGroup");
             this.appearanceStyles(variations.filter(x => x.category === "appearance"));
             this.appearanceStyle(<string>this.model.styles?.appearance);
         }

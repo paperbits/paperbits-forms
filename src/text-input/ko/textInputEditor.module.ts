@@ -10,15 +10,15 @@ export class TextInputEditorModule implements IInjectorModule {
         injector.bindToCollection("widgetHandlers", TextInputHandlers, "textInputHandler");
 
         const styleGroup: IStyleGroup = {
-            key: "formControl",
-            name: "components_formControl",
+            key: "formGroup",
+            name: "components_formGroup",
             groupName: "Form controls",
             selectorTemplate: null,
             styleTemplate: styleTemplate
         };
-        
+
         injector.bindInstanceToCollection("styleGroups", styleGroup);
-        injector.bindInstanceToCollection("styleHandlers", FormControlStyleHandler);
+        injector.bindInstanceToCollection("styleHandlers", FormGroupStyleHandler);
     }
 }
 
@@ -26,29 +26,45 @@ export class TextInputEditorModule implements IInjectorModule {
 const getFormLabelStyle = (key: string): VariationContract => {
     return {
         key: key,
-        displayName: "Label",
-        typography: {
-            colorKey: "colors/default"
-        }
+        displayName: "Label"
     };
 };
 
-const getFormControlStyle = (key: string): any => {
+const getFormControlStyle = (key: string): VariationContract => {
     return {
-        default: {
-            displayName: "Form control",
-            key: key,
-            category: "appearance",
-            components: {
-                formLabel: {
-                    default: getFormLabelStyle(`${key}/components/formLabel/default`),
-                }
+        key: key,
+        displayName: "Form control"
+    };
+};
+
+const getFormControlFeedbackStyle = (key: string): VariationContract => {
+    return {
+        key: key,
+        displayName: "Validation error"
+    };
+};
+
+const getFormGroupStyle = (key: string): VariationContract => {
+    return {
+        displayName: "Form group",
+        key: key,
+        category: "appearance",
+        components: {
+            formLabel: {
+                default: getFormLabelStyle(`${key}/components/formLabel/default`),
+            },
+            formControl: {
+                default: getFormControlStyle(`${key}/components/formControl/default`),
             }
         }
     };
 };
 
-const getDefaultStyle = (key: string = `components/formControl/default`) => {
+const getDefaultStyle = (key: string = `components/formGroup/default`): VariationContract => {
+    if (!key.startsWith("components/formGroup")) {
+        return null;
+    }
+
     const regex = /components\/(\w*)\/(\w*)/gm;
 
     let matches;
@@ -69,18 +85,21 @@ const getDefaultStyle = (key: string = `components/formControl/default`) => {
     const component = components[components.length - 1];
 
     switch (component) {
-        case "formControl":
-            return getFormControlStyle(key);
+        case "formGroup":
+            return getFormGroupStyle(key);
         case "formLabel":
             return getFormLabelStyle(key);
+        case "formControl":
+            return getFormControlStyle(key);
+        case "invalidFeedback":
+            return getFormControlFeedbackStyle(key);
         default:
+            debugger;
             return null;
     }
 };
 
-export const FormControlStyleHandler: StyleHandler = {
-    key: "formControl",
+export const FormGroupStyleHandler: StyleHandler = {
+    key: "formGroup",
     getDefaultStyle: getDefaultStyle
 };
-
-//  data-bind="styleableGlobal: variation.key + '/components/formLabel/default'"

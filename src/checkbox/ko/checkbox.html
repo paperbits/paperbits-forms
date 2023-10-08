@@ -1,8 +1,8 @@
-<div class="form-group">
+<div class="form-group" data-bind="styled: styles">
     <input type="checkbox"
         data-bind="attr: { name: name, required: required, readonly: readonly }, checked: value" />
 
     <!-- ko if: label -->
-    <label data-bind="text: label"></label>
+    <label class="form-label" data-bind="text: label"></label>
     <!-- /ko -->
 </div>

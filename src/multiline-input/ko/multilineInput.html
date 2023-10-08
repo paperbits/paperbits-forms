@@ -1,8 +1,8 @@
-<div class="form-group">
+<div class="form-group" data-bind="styled: styles">
     <!-- ko if: label -->
-    <label data-bind="text: label"></label>
+    <label class="form-label" data-bind="text: label"></label>
     <!-- /ko -->
-    <textarea
-        data-bind="styled: styles, attr: { placeholder: placeholder, name: name, value: value, required: required, readonly: readonly, maxLength: maxLength }"></textarea>
+    <textarea class="form-control"
+        data-bind="attr: { placeholder: placeholder, name: name, value: value, required: required, readonly: readonly, maxLength: maxLength }"></textarea>
 
 </div>
