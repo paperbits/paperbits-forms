@@ -1,8 +1,11 @@
-<div class="form-group">
-    <label class="form-label" aria-hidden="true" tabindex="-1">
+<div data-bind="stylePreview: variation.key" class="form-group">
+    <label class="form-label" aria-hidden="true" tabindex="-1"
+        data-bind="styleableGlobal: variation.key + '/components/formLabel/default'">
         Label
     </label>
-    <input type="text" class="form-control no-pointer-events" value="Input value"
-        data-bind="stylePreview: variation.key" tabindex="-1"
-        aria-hidden="true" />
+    <div class="input-group" data-bind="styleableGlobal: variation.key + '/components/formControl/default'">
+        <input type="text" class="form-control no-pointer-events" value="Input value"
+         tabindex="-1" aria-hidden="true" />
+    </div>
+    <div class="invalid-feedback" data-bind="styleableGlobal: variation.key + '/components/invalidFeedback/default'">The field is required</div>
 </div>
