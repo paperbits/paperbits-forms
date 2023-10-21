@@ -42,6 +42,11 @@ export interface TextInputContract extends Contract {
     maxLength: number;
 
     /**
+     * Invalid feedback message.
+     */
+    invalidFeedback: string;
+
+    /**
      * TextInput local styles.
      */
     styles?: LocalStyles;

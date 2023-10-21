@@ -1,7 +1,6 @@
-<form data-bind="css: { 'form-inline': isInline() },
+<form class="needs-validation" novalidate data-bind="css: { 'form-inline': isInline() },
                         attr: { action: formAction, method: formMethod, target: formTarget, id: identifier,
                         'accept-charset': acceptCharset, enctype: encType }">
-
     <!-- ko foreach: { data: widgets, as: 'widget' } -->
     <!-- ko if: widget.wrapped -->
     <div data-bind="widget: widget"></div>

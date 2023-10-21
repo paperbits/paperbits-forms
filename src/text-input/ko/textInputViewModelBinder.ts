@@ -25,6 +25,7 @@ export class TextInputViewModelBinder implements ViewModelBinder<TextInputModel,
         viewModel.required(model.required);
         viewModel.maxLength(model.maxLength);
         viewModel.placeholder(model.placeholder);
+        viewModel.invalidFeedback(model.invalidFeedback);
 
         if (model.styles) {
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));

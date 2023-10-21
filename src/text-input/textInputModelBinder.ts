@@ -22,6 +22,7 @@ export class TextInputModelBinder implements IModelBinder<TextInputModel>  {
         model.readonly = contract.readonly;
         model.required = contract.required;
         model.maxLength = contract.maxLength;
+        model.invalidFeedback = contract.invalidFeedback;
         model.styles = contract.styles || { appearance: "components/formControl/default" };
 
         return model;
@@ -37,6 +38,7 @@ export class TextInputModelBinder implements IModelBinder<TextInputModel>  {
             required: model.required,
             maxLength: model.maxLength,
             placeholder: model.placeholder,
+            invalidFeedback: model.invalidFeedback,
             styles: model.styles
         };
 

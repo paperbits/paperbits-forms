@@ -1,9 +1,8 @@
 import * as ko from "knockout";
 import template from "./textInputEditor.html";
 import { StyleService } from "@paperbits/styles";
-import { TextInputModel } from "../textInputModel";
 import { Component, OnMounted, Param, Event } from "@paperbits/common/ko/decorators";
-
+import { TextInputModel } from "../textInputModel";
 
 @Component({
     selector: "text-input-editor",
@@ -17,6 +16,7 @@ export class TextInputEditor {
     public readonly required: ko.Observable<boolean>;
     public readonly readonly: ko.Observable<boolean>;
     public readonly maxLength: ko.Observable<number>;
+    public readonly invalidFeedback: ko.Observable<string>;
 
     public readonly appearanceStyle: ko.Observable<string>;
     public readonly appearanceStyles: ko.ObservableArray<any>;
@@ -29,6 +29,7 @@ export class TextInputEditor {
         this.readonly = ko.observable<boolean>();
         this.maxLength = ko.observable<number>();
         this.placeholder = ko.observable<string>();
+        this.invalidFeedback = ko.observable<string>();
         this.appearanceStyles = ko.observableArray();
         this.appearanceStyle = ko.observable();
     }
@@ -48,12 +49,12 @@ export class TextInputEditor {
         this.required(this.model.required);
         this.readonly(this.model.readonly);
         this.maxLength(this.model.maxLength);
+        this.invalidFeedback(this.model.invalidFeedback);
 
-        if (this.model.styles) {
-            const variations = await this.styleService.getComponentVariations("formGroup");
-            this.appearanceStyles(variations.filter(x => x.category === "appearance"));
-            this.appearanceStyle(<string>this.model.styles?.appearance);
-        }
+        const variations = await this.styleService.getComponentVariations("formGroup");
+        console.log(variations);
+        this.appearanceStyles(variations.filter(x => x.category === "appearance"));
+        this.appearanceStyle(<string>this.model.styles?.appearance);
 
         this.appearanceStyle.subscribe(this.applyChanges);
         this.label.subscribe(this.applyChanges);
@@ -63,6 +64,7 @@ export class TextInputEditor {
         this.readonly.subscribe(this.applyChanges);
         this.maxLength.subscribe(this.applyChanges);
         this.placeholder.subscribe(this.applyChanges);
+        this.invalidFeedback.subscribe(this.applyChanges);
     }
 
     private applyChanges(): void {
@@ -73,6 +75,7 @@ export class TextInputEditor {
         this.model.required = this.required();
         this.model.maxLength = this.maxLength();
         this.model.placeholder = this.placeholder();
+        this.model.invalidFeedback = this.invalidFeedback();
 
         this.model.styles = {
             appearance: this.appearanceStyle()

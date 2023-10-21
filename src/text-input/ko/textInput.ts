@@ -17,7 +17,7 @@ export class TextInput {
     public readonly readonly: ko.Observable<boolean>;
     public readonly required: ko.Observable<boolean>;
     public readonly maxLength: ko.Observable<number>;
-
+    public readonly invalidFeedback: ko.Observable<string>;
 
     constructor() {
         this.label = ko.observable<string>("Text input");
@@ -27,6 +27,7 @@ export class TextInput {
         this.readonly = ko.observable<boolean>();
         this.required = ko.observable<boolean>();
         this.maxLength = ko.observable<number>();
+        this.invalidFeedback = ko.observable<string>();
         this.styles = ko.observable<StyleModel>();
     }
 }

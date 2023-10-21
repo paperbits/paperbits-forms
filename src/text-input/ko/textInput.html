@@ -4,4 +4,7 @@
     <!-- /ko -->
     <input type="text" class="form-control"
         data-bind="attr: { placeholder: placeholder, name: name, value: value, required: required, readonly: readonly, maxLength: maxLength }" />
+    <!-- ko if: invalidFeedback -->
+    <div class="invalid-feedback" data-bind="text: invalidFeedback"></div>
+    <!-- /ko -->
 </div>

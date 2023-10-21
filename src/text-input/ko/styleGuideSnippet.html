@@ -3,9 +3,10 @@
         data-bind="styleableGlobal: variation.key + '/components/formLabel/default'">
         Label
     </label>
-    <div class="input-group" data-bind="styleableGlobal: variation.key + '/components/formControl/default'">
-        <input type="text" class="form-control no-pointer-events" value="Input value"
-         tabindex="-1" aria-hidden="true" />
+    <input type="text" class="form-control" value="Input value"
+        data-bind="styleableGlobal: variation.key + '/components/formControl/default'" tabindex="-1"
+        aria-hidden="true" />
+    <div class="invalid-feedback" data-bind="styleableGlobal: variation.key + '/components/invalidFeedback/default'">
+        The field is required
     </div>
-    <div class="invalid-feedback" data-bind="styleableGlobal: variation.key + '/components/invalidFeedback/default'">The field is required</div>
 </div>

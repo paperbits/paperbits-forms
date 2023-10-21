@@ -44,11 +44,17 @@ export class TextInputModel {
      */
     public styles: LocalStyles;
 
+    /**
+     * Invalid feedback message.
+     */
+    public invalidFeedback: string;
+
     constructor() {
         this.label = "Text input";
         this.name = "firstName";
         this.value = "";
         this.placeholder = "e.g. First name";
+        this.invalidFeedback = "";
         this.styles = { appearance: "components/formControl/default" };
     }
 }

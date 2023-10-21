@@ -31,12 +31,14 @@ export class FormHandlers implements IWidgetHandler {
                 firstNameModel.name = "firstName";
                 firstNameModel.placeholder = "e.g. John";
                 firstNameModel.required = true;
+                firstNameModel.invalidFeedback = "Invalid value";
 
                 const lastNameModel = new TextInputModel();
                 lastNameModel.label = "Last name";
                 lastNameModel.name = "lastName";
                 lastNameModel.placeholder = "e.g. Doe";
                 lastNameModel.required = true;
+                lastNameModel.invalidFeedback = "Invalid value";
 
                 const formModel = new FormModel();
                 formModel.widgets.push(firstNameModel);

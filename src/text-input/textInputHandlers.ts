@@ -11,7 +11,9 @@ export class TextInputHandlers implements IWidgetHandler {
             iconClass: "widget-icon widget-icon-text-input",
             requires: ["form", "html", "js"],
             createModel: async () => {
-                return new TextInputModel();
+                const model = new TextInputModel();
+                model.invalidFeedback = "Invalid value";
+                return model;
             }
         };
 
