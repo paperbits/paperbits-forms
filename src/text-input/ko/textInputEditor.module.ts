@@ -12,7 +12,7 @@ export class TextInputEditorModule implements IInjectorModule {
         const styleGroup: IStyleGroup = {
             key: "formGroup",
             name: "components_formGroup",
-            groupName: "Forms",
+            groupName: "Form",
             styleTemplate: styleTemplate
         };
 
