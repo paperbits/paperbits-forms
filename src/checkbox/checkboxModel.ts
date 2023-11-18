@@ -25,6 +25,11 @@ export class CheckboxModel {
     public required: boolean;
 
     /**
+     * Invalid feedback message.
+     */
+    public invalidFeedback: string;
+
+    /**
      * Input local styles.
      */
     public styles: LocalStyles;
@@ -32,6 +37,7 @@ export class CheckboxModel {
     constructor() {
         this.label = "Checkbox";
         this.name = "checkbox";
-        this.styles = { appearance: "components/formControl/default" };
+        this.invalidFeedback = "";
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

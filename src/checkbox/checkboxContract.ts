@@ -27,6 +27,11 @@ export interface CheckboxContract extends Contract {
     required: boolean;
 
     /**
+     * Invalid feedback message.
+     */
+    invalidFeedback: string;
+
+    /**
      * Checkbox local styles.
      */
     styles?: LocalStyles;

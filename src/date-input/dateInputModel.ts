@@ -38,6 +38,6 @@ export class DateInputModel {
         this.label = "Date input";
         this.name = "date";
         this.value = null;
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

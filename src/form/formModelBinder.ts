@@ -6,12 +6,12 @@
  */
 
 import { FormModel } from "./formModel";
-import { ContainerModelBinder, IModelBinder } from "@paperbits/common/editing";
+import { CollectionModelBinder, IModelBinder } from "@paperbits/common/editing";
 import { IWidgetService, ModelBinderSelector } from "@paperbits/common/widgets";
 import { FormContract } from "./formContract";
 import { Contract, Bag } from "@paperbits/common";
 
-export class FormModelBinder extends ContainerModelBinder implements IModelBinder<FormModel> {
+export class FormModelBinder extends CollectionModelBinder implements IModelBinder<FormModel> {
     constructor(
         protected readonly widgetService: IWidgetService,
         protected modelBinderSelector: ModelBinderSelector

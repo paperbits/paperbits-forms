@@ -49,6 +49,6 @@ export class UrlInputModel {
         this.name = "url";
         this.value = "";
         this.placeholder = "e.g. https://www.example.com";
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

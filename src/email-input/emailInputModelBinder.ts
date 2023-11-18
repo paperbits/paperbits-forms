@@ -22,7 +22,7 @@ export class EmailInputModelBinder implements IModelBinder<EmailInputModel>  {
         model.readonly = contract.readonly;
         model.required = contract.required;
         model.maxLength = contract.maxLength;
-        model.styles = contract.styles || { appearance: "components/formControl/default" };
+        model.styles = contract.styles || { appearance: "components/formGroup/default" };
 
         return model;
     }

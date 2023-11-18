@@ -42,6 +42,6 @@ export class MultilineInputModel {
     constructor() {
         this.label = "Multi-line input";
         this.name = "multiline";
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

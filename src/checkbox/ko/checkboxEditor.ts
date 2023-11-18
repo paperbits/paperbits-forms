@@ -13,10 +13,9 @@ export class CheckboxEditor {
     public readonly label: ko.Observable<string>;
     public readonly name: ko.Observable<string>;
     public readonly value: ko.Observable<string>;
-    public readonly placeholder: ko.Observable<string>;
     public readonly required: ko.Observable<boolean>;
     public readonly readonly: ko.Observable<boolean>;
-    public readonly maxLength: ko.Observable<number>;
+    public readonly invalidFeedback: ko.Observable<string>;
 
     public readonly appearanceStyle: ko.Observable<string>;
     public readonly appearanceStyles: ko.ObservableArray<any>;
@@ -26,8 +25,7 @@ export class CheckboxEditor {
         this.name = ko.observable<string>();
         this.required = ko.observable<boolean>();
         this.readonly = ko.observable<boolean>();
-        this.maxLength = ko.observable<number>();
-        this.placeholder = ko.observable<string>();
+        this.invalidFeedback = ko.observable<string>();
         this.appearanceStyles = ko.observableArray();
         this.appearanceStyle = ko.observable();
     }
@@ -44,6 +42,7 @@ export class CheckboxEditor {
         this.name(this.model.name);
         this.required(this.model.required);
         this.readonly(this.model.readonly);
+        this.invalidFeedback(this.model.invalidFeedback);
 
         if (this.model.styles) {
             const variations = await this.styleService.getComponentVariations("formGroup");
@@ -56,8 +55,7 @@ export class CheckboxEditor {
         this.name.subscribe(this.applyChanges);
         this.required.subscribe(this.applyChanges);
         this.readonly.subscribe(this.applyChanges);
-        this.maxLength.subscribe(this.applyChanges);
-        this.placeholder.subscribe(this.applyChanges);
+        this.invalidFeedback.subscribe(this.applyChanges);
     }
 
     private applyChanges(): void {
@@ -65,6 +63,7 @@ export class CheckboxEditor {
         this.model.name = this.name();
         this.model.readonly = this.readonly();
         this.model.required = this.required();
+        this.model.invalidFeedback = this.invalidFeedback();
 
         this.model.styles = {
             appearance: this.appearanceStyle()

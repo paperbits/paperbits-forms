@@ -43,6 +43,6 @@ export class PasswordInputModel {
         this.label = "Password input";
         this.name = "password";
         this.placeholder = "e.g. P@ssw0rd";
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

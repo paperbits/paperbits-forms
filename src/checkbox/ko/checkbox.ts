@@ -15,6 +15,7 @@ export class Checkbox {
     public readonly styles: ko.Observable<StyleModel>;
     public readonly readonly: ko.Observable<boolean>;
     public readonly required: ko.Observable<boolean>;
+    public readonly invalidFeedback: ko.Observable<string>;
 
 
     constructor() {
@@ -23,6 +24,7 @@ export class Checkbox {
         this.value = ko.observable<boolean>();
         this.readonly = ko.observable<boolean>();
         this.required = ko.observable<boolean>();
+        this.invalidFeedback = ko.observable<string>();
         this.styles = ko.observable<StyleModel>();
     }
 }

@@ -22,7 +22,7 @@ export class SelectModelBinder implements IModelBinder<SelectInputModel>  {
         model.required = contract.required;
         model.options = contract.options;
         model.value = contract.value;
-        model.styles = contract.styles || { appearance: "components/formControl/default" };
+        model.styles = contract.styles || { appearance: "components/formGroup/default" };
 
         return model;
     }

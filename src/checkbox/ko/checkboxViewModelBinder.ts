@@ -4,7 +4,8 @@ import { CheckboxModel } from "../checkboxModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
+import { IWidgetBinding } from "@paperbits/common/editing";
+import { ComponentFlow } from "@paperbits/common/components";
 
 
 export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, Checkbox>  {
@@ -22,6 +23,7 @@ export class CheckboxViewModelBinder implements ViewModelBinder<CheckboxModel, C
         viewModel.name(model.name);
         viewModel.readonly(model.readonly);
         viewModel.required(model.required);
+        viewModel.invalidFeedback(model.invalidFeedback);
 
         if (model.styles) {
             viewModel.styles(await this.styleCompiler.getStyleModelAsync(model.styles, bindingContext?.styleManager));

@@ -4,7 +4,8 @@ import { MultilineInputModel } from "../multilineInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
+import { IWidgetBinding } from "@paperbits/common/editing";
+import { ComponentFlow } from "@paperbits/common/components";
 
 
 export class MultilineInputViewModelBinder implements ViewModelBinder<MultilineInputModel, MultilineInput>  {

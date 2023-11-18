@@ -1,10 +1,11 @@
 import { Bag } from "@paperbits/common";
-import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
+import { IWidgetBinding } from "@paperbits/common/editing";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { ViewModelBinder } from "@paperbits/common/widgets";
 import { SelectInputModel } from "../selectInputModel";
 import { SelectInput } from "./selectInput";
+import { ComponentFlow } from "@paperbits/common/components";
 
 
 

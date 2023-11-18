@@ -55,6 +55,6 @@ export class SelectInputModel {
             { label: "Option 3", value: "option3" }
         ];
         this.value = null;
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

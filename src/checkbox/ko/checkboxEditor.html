@@ -25,3 +25,12 @@
         <input name="required" type="checkbox" data-bind="checked: readonly" />Make readonly
     </label>
 </div>
+
+<div class="form-group">
+    <label class="form-label">
+        Invalid value message
+        <button class="btn btn-info" role="tooltip" data-bind="tooltip: 'Message shown when the input is invalid state'"></button>
+    </label>
+    <input type="text" class="form-control" placeholder="e.g. Invalid value" data-bind="textInput: invalidFeedback"
+        maxlength="250" />
+</div>

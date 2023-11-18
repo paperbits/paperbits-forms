@@ -4,7 +4,8 @@ import { DateInputModel } from "../dateInputModel";
 import { EventManager, Events } from "@paperbits/common/events";
 import { StyleCompiler } from "@paperbits/common/styles";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
+import { IWidgetBinding } from "@paperbits/common/editing";
+import { ComponentFlow } from "@paperbits/common/components";
 
 
 export class DateInputViewModelBinder implements ViewModelBinder<DateInputModel, DateInput>  {

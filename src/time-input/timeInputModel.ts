@@ -38,6 +38,6 @@ export class TimeInputModel {
         this.label = "Time input";
         this.name = "time";
         this.value = "";
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

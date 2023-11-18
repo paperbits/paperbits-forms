@@ -11,7 +11,9 @@ export class CheckboxHandlers implements IWidgetHandler {
             iconClass: "widget-icon widget-icon-checkbox",
             requires: ["form", "html", "js"],
             createModel: async () => {
-                return new CheckboxModel();
+                const model = new CheckboxModel();
+                model.invalidFeedback = "Invalid value";
+                return model;
             }
         };
 

@@ -54,6 +54,6 @@ export class NumberInputModel {
         this.name = "quantity";
         this.value = null;
         this.placeholder = "e.g. 100";
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

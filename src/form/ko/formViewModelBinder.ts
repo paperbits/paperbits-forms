@@ -13,8 +13,8 @@ import { ViewModelBinderSelector } from "@paperbits/core/ko/viewModelBinderSelec
 import { FormHandlers } from "../formHandlers";
 import { EventManager, Events } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow } from "@paperbits/common/editing";
 import { Placeholder } from "@paperbits/core/placeholder/ko/placeholder";
+import { ComponentFlow } from "@paperbits/common/components";
 
 export class FormViewModelBinder implements ViewModelBinder<FormModel, FormViewModel> {
     constructor(

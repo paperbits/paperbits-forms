@@ -23,7 +23,7 @@ export class NumberInputModelBinder implements IModelBinder<NumberInputModel>  {
         model.required = contract.required;
         model.min = contract.min;
         model.max = contract.max;
-        model.styles = contract.styles || { appearance: "components/formControl/default" };
+        model.styles = contract.styles || { appearance: "components/formGroup/default" };
 
         return model;
     }

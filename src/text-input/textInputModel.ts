@@ -55,6 +55,6 @@ export class TextInputModel {
         this.value = "";
         this.placeholder = "e.g. First name";
         this.invalidFeedback = "";
-        this.styles = { appearance: "components/formControl/default" };
+        this.styles = { appearance: "components/formGroup/default" };
     }
 }

@@ -3,7 +3,8 @@ import { ViewModelBinder } from "@paperbits/common/widgets";
 import { RangeInputModel } from "../rangeInputModel";
 import { EventManager } from "@paperbits/common/events";
 import { Bag } from "@paperbits/common";
-import { ComponentFlow, IWidgetBinding } from "@paperbits/common/editing";
+import { IWidgetBinding } from "@paperbits/common/editing";
+import { ComponentFlow } from "@paperbits/common/components";
 
 
 export class RangeInputViewModelBinder implements ViewModelBinder<RangeInputModel, RangeInput>  {

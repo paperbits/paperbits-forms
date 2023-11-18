@@ -20,7 +20,7 @@ export class DateInputModelBinder implements IModelBinder<DateInputModel>  {
         model.value = contract.value;
         model.readonly = contract.readonly;
         model.required = contract.required;
-        model.styles = contract.styles || { appearance: "components/formControl/default" };
+        model.styles = contract.styles || { appearance: "components/formGroup/default" };
 
         return model;
     }

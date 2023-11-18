@@ -19,7 +19,8 @@ export class CheckboxModelBinder implements IModelBinder<CheckboxModel>  {
         model.name = contract.name;
         model.readonly = contract.readonly;
         model.required = contract.required;
-        model.styles = contract.styles || { appearance: "components/formControl/default" };
+        model.invalidFeedback = contract.invalidFeedback;
+        model.styles = contract.styles || { appearance: "components/formGroup/default" };
 
         return model;
     }
@@ -31,6 +32,7 @@ export class CheckboxModelBinder implements IModelBinder<CheckboxModel>  {
             name: model.name,
             readonly: model.readonly,
             required: model.required,
+            invalidFeedback: model.invalidFeedback,
             styles: model.styles
         };
 
