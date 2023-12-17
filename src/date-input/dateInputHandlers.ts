@@ -2,9 +2,9 @@
 import { DateInputModel } from "./dateInputModel";
 
 
-export class DateInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class DateInputHandlers implements IWidgetHandler<DateInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<DateInputModel>> {
+        const widgetOrder: IWidgetOrder<DateInputModel> = {
             name: "input:date",
             category: "Forms",
             displayName: "Date input",

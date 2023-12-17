@@ -2,9 +2,9 @@
 import { TimeInputModel } from "./timeInputModel";
 
 
-export class TimeInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class TimeInputHandlers implements IWidgetHandler<TimeInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<TimeInputModel>> {
+        const widgetOrder: IWidgetOrder<TimeInputModel> = {
             name: "input:time",
             category: "Forms",
             displayName: "Time input",

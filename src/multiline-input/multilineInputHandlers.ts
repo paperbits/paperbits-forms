@@ -2,9 +2,9 @@
 import { MultilineInputModel } from "./multilineInputModel";
 
 
-export class MultilineInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class MultilineInputHandlers implements IWidgetHandler<MultilineInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<MultilineInputModel>> {
+        const widgetOrder: IWidgetOrder<MultilineInputModel> = {
             name: "input:multiline",
             category: "Forms",
             displayName: "Multi-line input",

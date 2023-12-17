@@ -2,9 +2,9 @@
 import { TextInputModel } from "./textInputModel";
 
 
-export class TextInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class TextInputHandlers implements IWidgetHandler<TextInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<TextInputModel>> {
+        const widgetOrder: IWidgetOrder<TextInputModel> = {
             name: "input:text",
             displayName: "Text input",
             category: "Forms",

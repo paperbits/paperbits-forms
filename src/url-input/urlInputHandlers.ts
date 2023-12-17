@@ -2,9 +2,9 @@
 import { UrlInputModel } from "./urlInputModel";
 
 
-export class UrlInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class UrlInputHandlers implements IWidgetHandler<UrlInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<UrlInputModel>> {
+        const widgetOrder: IWidgetOrder<UrlInputModel> = {
             name: "input:url",
             category: "Forms",
             displayName: "URL input",

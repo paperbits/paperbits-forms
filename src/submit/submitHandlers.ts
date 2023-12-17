@@ -2,9 +2,9 @@
 import { SubmitModel } from "./submitModel";
 
 
-export class SubmitHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class SubmitHandlers implements IWidgetHandler<SubmitModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<SubmitModel>> {
+        const widgetOrder: IWidgetOrder<SubmitModel> = {
             name: "submit",
             category: "Forms",
             displayName: "Submit form button",

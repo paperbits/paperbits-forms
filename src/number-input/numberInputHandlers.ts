@@ -2,9 +2,9 @@
 import { NumberInputModel } from "./numberInputModel";
 
 
-export class NumberInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class NumberInputHandlers implements IWidgetHandler<NumberInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<NumberInputModel>> {
+        const widgetOrder: IWidgetOrder<NumberInputModel> = {
             name: "input:number",
             category: "Forms",
             displayName: "Number input",

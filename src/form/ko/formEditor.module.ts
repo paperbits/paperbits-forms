@@ -13,6 +13,6 @@ import { FormHandlers } from "../formHandlers";
 export class FormEditorModule implements IInjectorModule {
     public register(injector: IInjector): void {
         injector.bind("formEditor", FormEditor);
-        injector.bindToCollection<IWidgetHandler>("widgetHandlers", FormHandlers, "formHandler");
+        injector.bindToCollection("widgetHandlers", FormHandlers, "formHandler");
     }
 }

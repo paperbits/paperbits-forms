@@ -2,9 +2,9 @@
 import { EmailInputModel } from "./emailInputModel";
 
 
-export class EmailInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class EmailInputHandlers implements IWidgetHandler<EmailInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<EmailInputModel>> {
+        const widgetOrder: IWidgetOrder<EmailInputModel> = {
             name: "input:email",
             category: "Forms",
             displayName: "Email input",

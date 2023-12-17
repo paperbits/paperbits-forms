@@ -2,9 +2,9 @@
 import { CheckboxModel } from "./checkboxModel";
 
 
-export class CheckboxHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class CheckboxHandlers implements IWidgetHandler<CheckboxModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<CheckboxModel>> {
+        const widgetOrder: IWidgetOrder<CheckboxModel> = {
             name: "input:checkbox",
             category: "Forms",
             displayName: "Checkbox",

@@ -15,11 +15,11 @@ import { SubmitModel } from "../submit/submitModel";
 import { TextInputModel } from "../text-input";
 
 
-export class FormHandlers implements IWidgetHandler {
+export class FormHandlers implements IWidgetHandler<FormModel> {
     constructor(private readonly viewManager: ViewManager) { }
 
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+    public async getWidgetOrder(): Promise<IWidgetOrder<FormModel>> {
+        const widgetOrder: IWidgetOrder<FormModel> = {
             name: "form",
             displayName: "Form",
             category: "Forms",

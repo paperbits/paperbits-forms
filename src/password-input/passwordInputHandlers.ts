@@ -2,9 +2,9 @@
 import { PasswordInputModel } from "./passwordInputModel";
 
 
-export class PasswordInputHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class PasswordInputHandlers implements IWidgetHandler<PasswordInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<PasswordInputModel>> {
+        const widgetOrder: IWidgetOrder<PasswordInputModel> = {
             name: "input:password",
             category: "Forms",
             displayName: "Password input",

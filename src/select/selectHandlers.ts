@@ -2,9 +2,9 @@
 import { SelectInputModel } from "./selectInputModel";
 
 
-export class SelectHandlers implements IWidgetHandler {
-    public async getWidgetOrder(): Promise<IWidgetOrder> {
-        const widgetOrder: IWidgetOrder = {
+export class SelectHandlers implements IWidgetHandler<SelectInputModel> {
+    public async getWidgetOrder(): Promise<IWidgetOrder<SelectInputModel>> {
+        const widgetOrder: IWidgetOrder<SelectInputModel> = {
             name: "input:select",
             category: "Forms",
             displayName: "Select input",
