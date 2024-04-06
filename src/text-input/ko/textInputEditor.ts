@@ -52,7 +52,6 @@ export class TextInputEditor {
         this.invalidFeedback(this.model.invalidFeedback);
 
         const variations = await this.styleService.getComponentVariations("formGroup");
-        console.log(variations);
         this.appearanceStyles(variations.filter(x => x.category === "appearance"));
         this.appearanceStyle(<string>this.model.styles?.appearance);
 
